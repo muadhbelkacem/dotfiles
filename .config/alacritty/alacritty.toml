@@ -1,0 +1,22 @@
+[window]
+opacity = 0.9  # Adjust value from 0.0 (fully transparent) to 1.0 (opaque)
+padding = { x = 8, y = 8}
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font Mono" }
+bold = { family = "JetBrainsMono Nerd Font Mono" }
+italic = { family = "JetBrainsMono Nerd Font Mono" }
+bold_italic = { family = "JetBrainsMono Nerd Font Mono"}
+size = 10.5
+
+[keyboard]
+bindings = [
+  { key = "J", mods = "Control", action = "ScrollLineDown" },
+  { key = "K", mods = "Control", action = "ScrollLineUp" },
+]
+
+#[terminal.shell]
+#program = "/bin/bash"  # or your preferred shell
+#args = ["-l", "-c", "tmux"]
+
+

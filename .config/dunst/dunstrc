@@ -1,0 +1,41 @@
+[global]
+    font = JetBrains Mono 10
+    frame_width = 2
+    frame_color = "#3A3A3A"
+    corner_radius = 10
+    transparency = 15
+    padding = 10
+    horizontal_padding = 10
+    icon_corner_radius = 8
+    progress_bar_corner_radius = 8
+    progress_bar = true
+    progress_bar_height = 6
+    progress_bar_frame_width = 0
+    progress_bar_corners = all
+    separator_color = frame
+    gap_size = 4
+    alignment = left
+    vertical_alignment = center
+    width = (0, 400)
+    height = (0, 300)
+    origin = top-right
+    offset = (20, 40)
+    format = "<b>%s</b>\n%b"
+
+[urgency_low]
+    background = "#1E1E2E"
+    foreground = "#A6ADC8"
+    frame_color = "#313244"
+    timeout = 6
+
+[urgency_normal]
+    background = "#1E1E2E"
+    foreground = "#b57ae9"
+    frame_color = "#b57ae9"
+    timeout = 8
+
+[urgency_critical]
+    background = "#1E1E2E"
+    foreground = "#F38BA8"
+    frame_color = "#F38BA8"
+    timeout = 0
