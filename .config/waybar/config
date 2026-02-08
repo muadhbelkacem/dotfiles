@@ -54,7 +54,6 @@
             "8": "8",
             "9": "9",
             "urgent": "󰀨",
-            "active": "󰮯",
             "default": "󰊠"
         }
     },
@@ -140,11 +139,11 @@
     },
 
     "network": {
-        "format-wifi": "󰖩",
-        "format-ethernet": "󰈀",
+        "format-wifi": "󰖩 {essid}",
+        "format-ethernet": "󰈀 {ifname}",
         "tooltip-format": "󰖩 {essid} ({signalStrength}%)\n󰈀 {ifname} via {gwaddr}",
         "format-linked": "󰈀 {ifname} (No IP)",
-        "format-disconnected": "󰖪",
+        "format-disconnected": "󰖪 Disconnected",
         "format-alt": "󰈀 {ifname}: {ipaddr}/{cidr}",
         "on-click": "nm-connection-editor"
     },
