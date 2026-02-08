@@ -22,8 +22,6 @@
     ],
     "modules-right": [
         "tray",
-        "cpu",
-        "memory",
         "backlight",
         "pulseaudio",
         "network",
@@ -53,8 +51,6 @@
             "7": "7",
             "8": "8",
             "9": "9",
-            "urgent": "󰀨",
-            "default": "󰊠"
         }
     },
 
@@ -101,20 +97,6 @@
                 "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
             }
         }
-    },
-
-    "cpu": {
-        "interval": 5,
-        "format": "󰻠 {usage}%",
-        "max-length": 10,
-        "on-click": "kitty -e btop"
-    },
-
-    "memory": {
-        "interval": 10,
-        "format": "󰍛 {percentage}%",
-        "max-length": 10,
-        "on-click": "kitty -e btop"
     },
 
     "backlight": {
