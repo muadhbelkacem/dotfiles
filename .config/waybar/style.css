@@ -81,6 +81,7 @@ window#waybar {
 #battery,
 #custom-power,
 #custom-launcher,
+#custom-kill,
 #window {
     padding: 0 12px;
     border-radius: 15px;
@@ -95,7 +96,8 @@ window#waybar {
 #pulseaudio:hover,
 #network:hover,
 #battery:hover,
-#custom-launcher:hover {
+#custom-launcher:hover,
+#custom-kill:hover {
     background-color: @bg-hover;
 }
 
@@ -117,6 +119,18 @@ window#waybar {
     color: @blue;
     font-weight: 500;
     margin-left: 10px;
+}
+
+/* Kill button */
+#custom-kill {
+    color: @red;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+#custom-kill:hover {
+    background-color: @red;
+    color: #ffffff;
 }
 
 /* Right Side Modules Styling */

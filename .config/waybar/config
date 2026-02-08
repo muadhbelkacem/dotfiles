@@ -14,7 +14,8 @@
     "modules-left": [
         "custom/launcher",
         "hyprland/workspaces",
-        "hyprland/window"
+        "hyprland/window",
+        "custom/kill"
     ],
     "modules-center": [
         "clock"
@@ -71,6 +72,12 @@
             "": "󰣆 Hyprland"
         },
         "max-length": 45
+    },
+
+    "custom/kill": {
+        "format": "󰅖",
+        "on-click": "hyprctl dispatch killactive",
+        "tooltip": false
     },
 
     "tray": {
