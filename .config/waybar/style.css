@@ -1,0 +1,125 @@
+/* Modern & Polished Waybar Style - Tokyo Night Theme */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: #c0caf5;
+}
+
+/* Module Base Styling */
+#workspaces,
+#window,
+#clock,
+#tray,
+#cpu,
+#memory,
+#backlight,
+#pulseaudio,
+#network,
+#battery,
+#custom-power {
+    background-color: #1a1b26;
+    padding: 0px 12px;
+    margin: 4px 4px;
+    border-radius: 12px;
+    border: 1px solid #24283b;
+}
+
+/* Workspaces */
+#workspaces {
+    background-color: #1a1b26;
+    margin-left: 0;
+    padding: 0 4px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    color: #565f89;
+    border-radius: 10px;
+    margin: 4px 2px;
+    transition: all 0.3s cubic-bezier(.55,-0.04,.91,.94);
+}
+
+#workspaces button:hover {
+    background: #24283b;
+    color: #bb9af7;
+    box-shadow: inset 0 0 0 1px #414868;
+}
+
+#workspaces button.active {
+    color: #7aa2f7;
+    background-color: #24283b;
+    box-shadow: inset 0 0 0 1px #7aa2f7;
+}
+
+#workspaces button.urgent {
+    color: #f7768e;
+    background-color: #24283b;
+    box-shadow: inset 0 0 0 1px #f7768e;
+}
+
+/* Center Module (Clock) */
+#clock {
+    color: #7aa2f7;
+    background-color: #1a1b26;
+    font-weight: bold;
+    padding: 0 16px;
+}
+
+/* Window Title */
+#window {
+    background-color: transparent;
+    border: none;
+    color: #9ab1e1;
+    font-weight: 500;
+}
+
+/* Right Side Modules */
+#cpu { color: #bb9af7; }
+#memory { color: #e0af68; }
+#backlight { color: #73daca; }
+#pulseaudio { color: #7aa2f7; }
+#network { color: #b4f9f8; }
+#battery { color: #9ece6a; }
+
+#battery.warning { color: #e0af68; }
+#battery.critical:not(.charging) {
+    color: #f7768e;
+    animation: blink 0.5s steps(12) infinite alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #f7768e;
+        color: #1a1b26;
+    }
+}
+
+#tray {
+    margin-left: 4px;
+}
+
+#custom-power {
+    color: #f7768e;
+    padding: 0 15px;
+    margin-right: 0;
+}
+
+/* Tooltips */
+tooltip {
+    background: #1a1b26;
+    border: 1px solid #24283b;
+    border-radius: 12px;
+}
+
+tooltip label {
+    color: #c0caf5;
+    padding: 8px;
+}
