@@ -14,7 +14,6 @@
     "modules-left": [
         "custom/launcher",
         "hyprland/workspaces",
-        "hyprland/window",
         "custom/kill"
     ],
     "modules-center": [
@@ -52,21 +51,6 @@
             "8": "8",
             "9": "9"
         }
-    },
-
-    "hyland/window": {
-        "format": "<span>{title}</span>",
-        "separate-outputs": true,
-        "rewrite": {
-            "(.*) — Mozilla Firefox": "󰈹 $1",
-            "(.*) - Visual Studio Code": "󰨞 $1",
-            "(.*) - Discord": " $1",
-            "(.*) - Foot": "󰞷 $1",
-            "(.*) - fish": "󰞷 $1",
-            "(.+) - (.*)": "$1",
-            "": "󰣆 Hyprland"
-        },
-        "max-length": 45
     },
 
     "custom/kill": {
