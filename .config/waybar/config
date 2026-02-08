@@ -50,11 +50,11 @@
             "6": "6",
             "7": "7",
             "8": "8",
-            "9": "9",
+            "9": "9"
         }
     },
 
-    "hyprland/window": {
+    "hyland/window": {
         "format": "<span>{title}</span>",
         "separate-outputs": true,
         "rewrite": {
@@ -126,8 +126,7 @@
         "tooltip-format": "󰖩 {essid} ({signalStrength}%)\n󰈀 {ifname} via {gwaddr}",
         "format-linked": "󰈀 {ifname} (No IP)",
         "format-disconnected": "󰖪 Disconnected",
-        "format-alt": "󰈀 {ifname}: {ipaddr}/{cidr}",
-        "on-click": "nm-connection-editor"
+        "on-click": "networkmanager_dmenu"
     },
 
     "pulseaudio": {
