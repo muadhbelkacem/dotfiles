@@ -12,6 +12,7 @@
     "margin-right": 12,
 
     "modules-left": [
+        "custom/launcher",
         "hyprland/workspaces",
         "hyprland/window"
     ],
@@ -28,6 +29,12 @@
         "battery",
         "custom/power"
     ],
+
+    "custom/launcher": {
+        "format": "󰣆",
+        "on-click": "rofi -show drun",
+        "tooltip": false
+    },
 
     "hyprland/workspaces": {
         "disable-scroll": true,

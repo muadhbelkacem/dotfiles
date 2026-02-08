@@ -3,7 +3,7 @@
  * Refined Glassmorphism with Depth and Vibrant Accents
  */
 
-@define-color bg rgba(26, 27, 38, 0.8);
+@define-color bg rgba(26, 27, 28, 0.8);
 @define-color bg-hover rgba(42, 44, 61, 0.9);
 @define-color fg #c0caf5;
 @define-color blue #7aa2f7;
@@ -80,6 +80,7 @@ window#waybar {
 #network,
 #battery,
 #custom-power,
+#custom-launcher,
 #window {
     padding: 0 12px;
     border-radius: 15px;
@@ -93,8 +94,16 @@ window#waybar {
 #backlight:hover,
 #pulseaudio:hover,
 #network:hover,
-#battery:hover {
+#battery:hover,
+#custom-launcher:hover {
     background-color: @bg-hover;
+}
+
+/* Launcher */
+#custom-launcher {
+    color: @blue;
+    font-size: 18px;
+    margin-right: 10px;
 }
 
 /* Center Module (Clock) */
