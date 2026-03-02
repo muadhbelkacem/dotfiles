@@ -14,27 +14,30 @@ keys = [
         lazy.widget["keyboardlayout"].next_keyboard(),
         desc="Next keyboard layout.",
     ),
+
+    # Volume control
     Key(
-        ["mod4"],
-        "0",
+        [mod],
+        "o",
         lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
         desc="Increase volume",
     ),
     Key(
-        ["mod4"],
-        "9",
+        [mod, "shift"],
+        "o",
         lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
         desc="Decrease volume",
     ),
+    # Brightness control
     Key(
         [mod],
-        "equal",
+        "p",
         lazy.spawn("brightnessctl set 5%+"),
         desc="Increase screen brightness",
     ),
     Key(
-        [mod],
-        "minus",
+        [mod, "shift"],
+        "p",
         lazy.spawn("brightnessctl set 5%-"),
         desc="Decrease screen brightness",
     ),
@@ -79,7 +82,6 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [mod],
         "f",
@@ -92,9 +94,12 @@ keys = [
         lazy.window.toggle_floating(),
         desc="Toggle floating on the focused window",
     ),
+    # Rofi
+    Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Open rofi"),
+    # Qtile
     Key([mod], "x", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "c", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "a", lazy.spawn("rofi -show drun"), desc="Open rofi"),
+    Key([mod, "shift"], "w", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod, "shift"], "e", lazy.shutdown(), desc="Shutdown Qtile"),
 ]
 for vt in range(1, 8):
     keys.append(
