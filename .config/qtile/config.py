@@ -1,6 +1,3 @@
-import os
-import subprocess
-from libqtile import hook
 from modules.keys import keys
 from modules.groups import groups
 from modules.layouts import layouts
@@ -8,13 +5,6 @@ from modules.screens import screens
 from modules.widget_defaults import widget_defaults
 from modules.floating_layout import floating_layout
 from modules.mouse import mouse
-
-
-@hook.subscribe.startup_once
-def autostart():
-    home = os.path.expanduser("~")
-    subprocess.Popen([home + "/.config/qtile/autostart.sh"])
-
 
 keys = keys
 groups = groups
