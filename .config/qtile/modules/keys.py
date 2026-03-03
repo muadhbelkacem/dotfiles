@@ -4,6 +4,8 @@ from libqtile.lazy import lazy
 from .constants import mod, terminal
 
 keys = [
+    Key([mod], "Right", lazy.screen.next_group()),
+    Key([mod], "Left", lazy.screen.prev_group()),
     Key([mod], "s", lazy.group["scratchpad"].dropdown_toggle("term1")),
     Key([mod, "shift"], "s", lazy.group["scratchpad"].dropdown_toggle("term2")),
     Key([mod], "m", lazy.spawn("slock"), desc="Lock screen with slock"),
