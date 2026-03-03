@@ -8,6 +8,7 @@ keys = [
     Key([mod, "shift"], "s", lazy.group["scratchpad"].dropdown_toggle("term2")),
     Key([mod], "n", lazy.group["scratchpad"].dropdown_toggle("note")),
     Key([mod], "m", lazy.spawn("slock"), desc="Lock screen with slock"),
+    Key([mod], "e", lazy.spawn("alacritty -e yazi"), desc="Launch file manager"),
     Key(
         [mod],
         "space",
