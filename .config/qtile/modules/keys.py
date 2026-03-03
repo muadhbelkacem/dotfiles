@@ -6,9 +6,9 @@ from .constants import mod, terminal
 keys = [
     Key([mod], "s", lazy.group["scratchpad"].dropdown_toggle("term1")),
     Key([mod, "shift"], "s", lazy.group["scratchpad"].dropdown_toggle("term2")),
-    Key([mod], "n", lazy.group["scratchpad"].dropdown_toggle("note")),
     Key([mod], "m", lazy.spawn("slock"), desc="Lock screen with slock"),
-    Key([mod], "e", lazy.spawn("alacritty -e yazi"), desc="Launch file manager"),
+    Key([mod], "e", lazy.spawn("alacritty -e yazi"), desc="Open file manager"),
+    Key([mod], "y", lazy.group["scratchpad"].dropdown_toggle("file_manager")),
     Key(
         [mod],
         "space",
@@ -100,7 +100,7 @@ keys = [
     # Qtile
     Key([mod], "x", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "shift"], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod, "shift"], "e", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod, "control"], "w", lazy.shutdown(), desc="Shutdown Qtile"),
 ]
 for vt in range(1, 8):
     keys.append(
