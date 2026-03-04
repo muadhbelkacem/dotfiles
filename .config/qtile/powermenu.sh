@@ -2,7 +2,7 @@
 
 options="🔒 Lock\n♻️ Reboot\n🛑 Shutdown\n🚪 Logout\n❌ Cancel"
 
-chosen=$(echo -e "$options" | rofi -dmenu -p "Power Menu")
+chosen=$(echo -e "$options" | rofi -dmenu -p "Power Menu" -i)
 
 case "$chosen" in
     "🔒 Lock") slock ;;

@@ -9,6 +9,6 @@ wallpaper_loop() {
 }
 
 wallpaper_loop &
-alacritty -e htop &
+rofi -show drun &
 polybar &
 exec qtile start
