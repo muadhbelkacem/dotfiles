@@ -10,5 +10,4 @@ wallpaper_loop() {
 
 wallpaper_loop &
 rofi -show drun &
-polybar &
 exec qtile start
