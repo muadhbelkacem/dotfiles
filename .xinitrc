@@ -10,4 +10,4 @@ wallpaper_loop() {
 
 wallpaper_loop &
 rofi -show drun &
-exec qtile start
+exec awesome
