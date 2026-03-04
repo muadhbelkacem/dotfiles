@@ -4,7 +4,7 @@ touchegg &
 wallpaper_loop() {
     while true; do
         feh --no-fehbg --randomize --bg-fill ~/wallpapers/*
-        sleep 60
+        sleep 500
     done
 }
 
