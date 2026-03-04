@@ -9,7 +9,7 @@ screens = [
             widgets,
             24,
             background=background_color,
-            margin=[5, 5, 0, 5],
+            margin=0,
         ),
     ),
 ]
