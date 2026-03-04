@@ -121,6 +121,35 @@ local function wrap_widget(widget, bg_color)
     )
 end
 
+local function toggle_scratchpad(class, cmd)
+    local screen = awful.screen.focused()
+    local tag = screen.selected_tag
+    local scratch_client = nil
+    for _, c in ipairs(client.get()) do
+        if c.class == class then
+            scratch_client = c
+            break
+        end
+    end
+
+    if scratch_client then
+        if scratch_client.first_tag ~= tag then
+            scratch_client:move_to_tag(tag)
+            scratch_client.minimized = false
+            scratch_client:raise()
+            client.focus = scratch_client
+        else
+            scratch_client.minimized = not scratch_client.minimized
+            if not scratch_client.minimized then
+                scratch_client:raise()
+                client.focus = scratch_client
+            end
+        end
+    else
+        awful.spawn(cmd)
+    end
+end
+
 -- }}}
 
 -- {{{ Menu
@@ -333,37 +362,10 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey,           }, "z",
-        function ()
-            local scratchpad_class = "scratchpad"
-            local screen = awful.screen.focused()
-            local tag = screen.selected_tag
-            local scratch_client = nil
-            for _, c in ipairs(client.get()) do
-                if c.class == scratchpad_class then
-                    scratch_client = c
-                    break
-                end
-            end
-
-            if scratch_client then
-                if scratch_client.first_tag ~= tag then
-                    scratch_client:move_to_tag(tag)
-                    scratch_client.minimized = false
-                    scratch_client:raise()
-                    client.focus = scratch_client
-                else
-                    scratch_client.minimized = not scratch_client.minimized
-                    if not scratch_client.minimized then
-                        scratch_client:raise()
-                        client.focus = scratch_client
-                    end
-                end
-            else
-                awful.spawn(terminal .. " --class " .. scratchpad_class)
-            end
-        end,
-        {description = "toggle scratchpad", group = "launcher"}),
+    awful.key({ modkey,           }, "z", function () toggle_scratchpad("scratchpad", terminal .. " --class scratchpad") end,
+              {description = "toggle scratchpad", group = "launcher"}),
+    awful.key({ modkey,           }, "e", function () toggle_scratchpad("file-manager", terminal .. " --class file-manager -e yazi") end,
+              {description = "toggle file manager scratchpad", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -531,7 +533,7 @@ awful.rules.rules = {
     { rule_any = {
         class = { "Arandr", "Blueman-manager", "Gpick", "Sxiv", "Wpa_gui" },
       }, properties = { floating = true }},
-    { rule = { class = "scratchpad" },
+    { rule_any = { class = { "scratchpad", "file-manager" } },
       properties = { floating = true, placement = awful.placement.centered } },
 }
 -- }}}
