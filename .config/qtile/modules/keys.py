@@ -8,7 +8,7 @@ keys = [
     Key([mod], "Left", lazy.screen.prev_group()),
     Key([mod], "s", lazy.group["scratchpad"].dropdown_toggle("term1")),
     Key([mod, "shift"], "s", lazy.group["scratchpad"].dropdown_toggle("term2")),
-    Key([mod], "m", lazy.spawn("slock"), desc="Lock screen with slock"),
+    Key([mod], "m", lazy.spawn("sh -c ~/.config/qtile/powermenu.sh"), desc="Power menu"),
     Key([mod], "e", lazy.spawn("alacritty -e yazi"), desc="Open file manager"),
     Key([mod], "y", lazy.group["scratchpad"].dropdown_toggle("file_manager")),
     Key(
