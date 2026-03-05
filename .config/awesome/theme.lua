@@ -33,7 +33,7 @@ theme.yellow        = "#e0af68"
 theme.useless_gap   = 3
 theme.border_width  = 3
 theme.border_normal = "#15161e"
-theme.border_focus  = theme.orange
+theme.border_focus  = theme.yellow
 theme.border_marked = theme.blue
 
 -- Wibar properties
