@@ -113,6 +113,45 @@ local function create_wifi_widget()
     return widget
 end
 
+local function create_battery_widget()
+    local widget = wibox.widget.textbox()
+    widget.font = beautiful.font
+
+    local script = [[
+        for bat in /sys/class/power_supply/BAT*; do
+            if [ -d "$bat" ]; then
+                cat "$bat/capacity" "$bat/status"
+            fi
+        done
+    ]]
+
+    awful.widget.watch('bash -c "' .. script .. '"', 30, function(w, stdout)
+        local lines = {}
+        for line in stdout:gmatch("[^\r\n]+") do
+            table.insert(lines, line)
+        end
+
+        local battery_info = {}
+        for i = 1, #lines, 2 do
+            local cap = lines[i]
+            local stat = lines[i+1]
+            if cap and stat then
+                local icon = (stat == "Charging" or stat == "Full") and "󰂄" or "󰁹"
+                table.insert(battery_info, icon .. " " .. cap .. "%")
+            end
+        end
+
+        local text = table.concat(battery_info, " | ")
+
+        if text ~= "" then
+            w:set_markup("<span foreground='" .. beautiful.green .. "'>" .. text .. "</span>")
+        else
+            w:set_markup("<span foreground='" .. beautiful.fg_minimize .. "'>󰂃  --</span>")
+        end
+    end, widget)
+    return widget
+end
+
 local function wrap_widget(widget, bg_color)
     return wibox.container.background(
         wibox.container.margin(widget, 10, 10),
@@ -296,6 +335,7 @@ awful.screen.connect_for_each_screen(function(s)
             spacing = 0,
             wibox.container.margin(wibox.widget.systray(), 8, 8),
             wrap_widget(create_wifi_widget(), beautiful.bg_normal),
+            wrap_widget(create_battery_widget(), beautiful.bg_normal),
             wrap_widget(create_brightness_widget(), beautiful.bg_normal),
             wrap_widget(create_volume_widget(), beautiful.bg_normal),
             wrap_widget(clock_widget, beautiful.bg_focus),
@@ -407,7 +447,7 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioMute", function () awful.spawn("amixer sset Master toggle") end),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.spawn.with_shell("rofi -show drun") end,
+    awful.key({ modkey },            "r",     function () awful.spawn.with_shell("pkill rofi || rofi -show drun") end,
               {description = "toggle rofi", group = "launcher"}),
 
     awful.key({ modkey }, "x",
