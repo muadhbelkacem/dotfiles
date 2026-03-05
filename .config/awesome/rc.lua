@@ -510,7 +510,7 @@ clientkeys = gears.table.join(
     --     {description = "(un)maximize", group = "client"})
 )
 
-for i = 1, 9 do
+for i = 1, 10 do
     globalkeys = gears.table.join(globalkeys,
         awful.key({ modkey }, "#" .. i + 9,
                   function ()
