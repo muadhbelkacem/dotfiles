@@ -371,7 +371,7 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+    awful.key({ modkey,           }, "z",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
@@ -418,7 +418,7 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey,           }, "z", function () toggle_scratchpad("scratchpad", terminal .. " --class scratchpad") end,
+    awful.key({ modkey,           }, "s", function () toggle_scratchpad("scratchpad", terminal .. " --class scratchpad") end,
               {description = "toggle scratchpad", group = "launcher"}),
     awful.key({ modkey,           }, "e", function () toggle_scratchpad("file-manager", terminal .. " --class file-manager -e yazi") end,
               {description = "toggle file manager scratchpad", group = "launcher"}),
