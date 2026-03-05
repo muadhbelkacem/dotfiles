@@ -152,6 +152,18 @@ local function create_battery_widget()
     return widget
 end
 
+local function create_power_widget()
+    local widget = wibox.widget.textbox()
+    widget.font = beautiful.icon_font
+    widget:set_markup("<span foreground='" .. beautiful.red .. "'> </span>")
+    widget:buttons(gears.table.join(
+        awful.button({ }, 1, function()
+            awful.spawn(gears.filesystem.get_configuration_dir() .. "powermenu.sh")
+        end)
+    ))
+    return widget
+end
+
 local function wrap_widget(widget, bg_color)
     return wibox.container.background(
         wibox.container.margin(widget, 10, 10),
@@ -340,6 +352,7 @@ awful.screen.connect_for_each_screen(function(s)
             wrap_widget(create_volume_widget(), beautiful.bg_normal),
             wrap_widget(clock_widget, beautiful.bg_focus),
             wrap_widget(s.mylayoutbox, beautiful.bg_minimize),
+            wrap_widget(create_power_widget(), beautiful.bg_normal),
         },
     }
 end)
