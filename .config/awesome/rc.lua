@@ -276,7 +276,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Using Roman numerals or just clean numbers for tags
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" }, s, awful.layout.layouts[1])
 
     s.mypromptbox = awful.widget.prompt()
     s.mylayoutbox = awful.widget.layoutbox(s)
@@ -290,21 +290,18 @@ awful.screen.connect_for_each_screen(function(s)
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
         buttons = taglist_buttons,
-        style   = {
-            shape = gears.shape.rectangle,
-        },
         layout   = { spacing = 0, layout  = wibox.layout.fixed.horizontal },
         widget_template = {
             {
                 {
                     {
                         { id = 'text_role', widget = wibox.widget.textbox },
-                        left  = 12, right = 12, widget = wibox.container.margin,
+                        left  = 6, right = 6, widget = wibox.container.margin,
                     },
                     id     = 'background_role',
                     widget = wibox.container.background,
                 },
-                top = 4, bottom = 4, left = 2, right = 2,
+                top = 6, bottom = 6, left = 4, right = 4,
                 widget = wibox.container.margin,
             },
             layout = wibox.layout.fixed.horizontal,
