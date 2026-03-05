@@ -167,6 +167,44 @@ local function create_power_widget()
     return widget
 end
 
+local function create_layout_widget(s)
+    local widget = wibox.widget.textbox()
+    widget.font = beautiful.icon_font
+
+    local layout_icons = {
+        tile = "󰙀 ",
+        floating = "󰉈 ",
+        max = "󰁌 ",
+        magnifier = "󰍉 ",
+        tileleft = "󰙄 ",
+        tilebottom = "󰙁 ",
+        tiletop = "󰙅 ",
+        fairv = "󰙆 ",
+        fairh = "󰙃 ",
+        spiral = "󰙇 ",
+        dwindle = "󰙂 ",
+    }
+
+    local function update()
+        local layout = awful.layout.get(s)
+        local name = layout and layout.name or "unknown"
+        local icon = layout_icons[name] or name
+        widget:set_markup("<span foreground='" .. widget_fg .. "'>" .. icon .. "</span>")
+    end
+
+    awful.tag.attached_connect_signal(s, "property::selected", update)
+    awful.tag.attached_connect_signal(s, "property::layout", update)
+    update()
+
+    widget:buttons(gears.table.join(
+        awful.button({ }, 1, function () awful.layout.inc( 1) end),
+        awful.button({ }, 3, function () awful.layout.inc(-1) end),
+        awful.button({ }, 4, function () awful.layout.inc( 1) end),
+        awful.button({ }, 5, function () awful.layout.inc(-1) end)
+    ))
+    return widget
+end
+
 local function wrap_widget(widget, bg_color)
     return wibox.container.background(
         wibox.container.margin(widget, 10, 10),
@@ -282,12 +320,7 @@ awful.screen.connect_for_each_screen(function(s)
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" }, s, awful.layout.layouts[1])
 
     s.mypromptbox = awful.widget.prompt()
-    s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(gears.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(-1) end),
-                           awful.button({ }, 4, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+    s.mylayoutbox = create_layout_widget(s)
 
     s.mytaglist = awful.widget.taglist {
         screen  = s,
