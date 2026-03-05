@@ -72,10 +72,24 @@ function keys.get_globalkeys(vars, helpers)
                   {description = "increase the number of columns", group = "layout"}),
         awful.key({ vars.modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
                   {description = "decrease the number of columns", group = "layout"}),
-        awful.key({ vars.modkey,           }, "space", function () awful.layout.inc( 1)                end,
-                  {description = "select next", group = "layout"}),
-        awful.key({ vars.modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
-                  {description = "select previous", group = "layout"}),
+
+        -- Window layout change
+        awful.key({ vars.modkey, "Shift"   }, "Tab",   function () awful.layout.inc( 1)                end,
+                  {description = "select next layout", group = "layout"}),
+
+        -- Keyboard layout change (Rotates through en, ara, fr)
+        awful.key({ vars.modkey,           }, "space", function ()
+            local script = [[
+                L=$(setxkbmap -query | grep layout | awk '{print $2}')
+                if echo "$L" | grep -q ','; then
+                    NEW=$(echo "$L" | sed 's/\([^,]*\),\(.*\)/\2,\1/')
+                    setxkbmap -layout "$NEW"
+                fi
+            ]]
+            awful.spawn.easy_async_with_shell(script, function()
+                awesome.emit_signal("widgets::keyboard_update")
+            end)
+        end, {description = "change keyboard layout", group = "layout"}),
 
         awful.key({ vars.modkey, "Control" }, "n",
                   function ()
@@ -175,7 +189,7 @@ function keys.clientkeys(vars)
                   {description = "move to master", group = "client"}),
         awful.key({ vars.modkey,           }, "o",      function (c) c:move_to_screen()               end,
                   {description = "move to screen", group = "client"}),
-        awful.key({ vars.modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
+        awful.key({ vars.modkey,           }, "t",      function (c) c.ontop = not f.ontop            end,
                   {description = "toggle keep on top", group = "client"}),
         awful.key({ vars.modkey,           }, "n",
             function (c)

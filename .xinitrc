@@ -1,5 +1,6 @@
 picom -b &
 touchegg &
+setxkbmap -layout us,ara,fr &
 
 wallpaper_loop() {
     while true; do

@@ -104,6 +104,46 @@ function widgets.create_battery_widget()
     return widget
 end
 
+function widgets.create_keyboard_layout_widget()
+    local widget = wibox.widget.textbox()
+    widget.font = beautiful.font
+
+    local function update()
+        -- Fetch only the first layout in the current setxkbmap list
+        awful.spawn.easy_async_with_shell("setxkbmap -query | grep layout | awk '{print $2}' | awk -F, '{print $1}'", function(stdout)
+            local layout = stdout:gsub("\n", ""):gsub("%s+", "")
+            local text = layout ~= "" and layout:upper() or "??"
+            -- Shorten 'ARABIC' to 'ARA' if necessary, though 'AR' is standard
+            if text == "ARA" then text = "AR" end
+            widget:set_markup("<span foreground='" .. widget_fg .. "'>󰌌   " .. text .. "</span>")
+        end)
+    end
+
+    awesome.connect_signal("xkb::group_changed", update)
+    awesome.connect_signal("xkb::names_changed", update)
+    awesome.connect_signal("widgets::keyboard_update", update)
+
+    update()
+
+    widget:buttons(gears.table.join(
+        awful.button({ }, 1, function()
+            -- Rotate the layout list: moves the first layout to the end
+            local script = [[
+                L=$(setxkbmap -query | grep layout | awk '{print $2}')
+                if echo "$L" | grep -q ','; then
+                    NEW=$(echo "$L" | sed 's/\([^,]*\),\(.*\)/\2,\1/')
+                    setxkbmap -layout "$NEW"
+                fi
+            ]]
+            awful.spawn.easy_async_with_shell(script, function()
+                awesome.emit_signal("widgets::keyboard_update")
+            end)
+        end)
+    ))
+
+    return widget
+end
+
 function widgets.create_power_widget()
     local widget = wibox.widget.textbox()
     widget.font = beautiful.icon_font

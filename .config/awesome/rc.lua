@@ -140,6 +140,7 @@ awful.screen.connect_for_each_screen(function(s)
             spacing = 0,
             helpers.wrap_widget(wibox.widget.systray(), beautiful.bg_focus),
             helpers.wrap_widget(widgets.create_wifi_widget(vars.terminal), beautiful.bg_focus),
+            helpers.wrap_widget(widgets.create_keyboard_layout_widget(), beautiful.bg_focus),
             helpers.wrap_widget(widgets.create_battery_widget(), beautiful.bg_focus),
             helpers.wrap_widget(widgets.create_brightness_widget(), beautiful.bg_focus),
             helpers.wrap_widget(widgets.create_volume_widget(), beautiful.bg_focus),
