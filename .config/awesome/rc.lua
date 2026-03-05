@@ -270,10 +270,10 @@ local function set_wallpaper(s)
     end
 end
 
-screen.connect_signal("property::geometry", set_wallpaper)
+--screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
-    set_wallpaper(s)
+    --set_wallpaper(s)
 
     -- Using Roman numerals or just clean numbers for tags
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" }, s, awful.layout.layouts[1])
