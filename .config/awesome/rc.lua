@@ -55,6 +55,9 @@ awful.layout.layouts = {
 }
 -- }}}
 
+-- Unified widget foreground color
+local widget_fg = beautiful.fg_normal
+
 -- {{{ Helper functions
 local function create_volume_widget()
     local widget = wibox.widget.textbox()
@@ -63,9 +66,9 @@ local function create_volume_widget()
         local volume = stdout:match("(%d?%d?%d)%%")
         local mute = stdout:match("%[(off)%]")
         if mute then
-            w:set_markup("<span foreground='" .. beautiful.red .. "'>󰝟  MUTE</span>")
+            w:set_markup("<span foreground='" .. beautiful.fg_minimize .. "'>󰝟  MUTE</span>")
         else
-            w:set_markup("<span foreground='" .. beautiful.blue .. "'>󰕾  " .. (volume or "0") .. "%</span>")
+            w:set_markup("<span foreground='" .. widget_fg .. "'>󰕾  " .. (volume or "0") .. "%</span>")
         end
     end, widget)
     widget:buttons(gears.table.join(
@@ -84,7 +87,7 @@ local function create_brightness_widget()
         local max = stdout:match("\n(%d+)")
         if current and max then
             local percent = math.floor((tonumber(current) / tonumber(max)) * 100)
-            w:set_markup("<span foreground='" .. beautiful.yellow .. "'>󰃠   " .. percent .. "%</span>")
+            w:set_markup("<span foreground='" .. widget_fg .. "'>󰃠   " .. percent .. "%</span>")
         else
             w:set_markup("<span foreground='" .. beautiful.fg_minimize .. "'>󰃠  --</span>")
         end
@@ -102,9 +105,9 @@ local function create_wifi_widget()
     awful.widget.watch('bash -c "nmcli -t -f active,ssid dev wifi | grep \'^yes\' | cut -d: -f2"', 5, function(w, stdout)
         local ssid = stdout:gsub("\n", "")
         if ssid == "" then
-            w:set_markup("<span foreground='" .. beautiful.red .. "'>󰤮  OFF</span>")
+            w:set_markup("<span foreground='" .. beautiful.fg_minimize .. "'>󰤮  OFF</span>")
         else
-            w:set_markup("<span foreground='" .. beautiful.green .. "'>󰤨    " .. ssid .. "</span>")
+            w:set_markup("<span foreground='" .. widget_fg .. "'>󰤨    " .. ssid .. "</span>")
         end
     end, widget)
     widget:buttons(gears.table.join(
@@ -144,7 +147,7 @@ local function create_battery_widget()
         local text = table.concat(battery_info, " | ")
 
         if text ~= "" then
-            w:set_markup("<span foreground='" .. beautiful.green .. "'>" .. text .. "</span>")
+            w:set_markup("<span foreground='" .. widget_fg .. "'>" .. text .. "</span>")
         else
             w:set_markup("<span foreground='" .. beautiful.fg_minimize .. "'>󰂃  --</span>")
         end
@@ -332,7 +335,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     s.mywibox = awful.wibar({ position = "top", screen = s, height = beautiful.wibar_height, bg = beautiful.bg_normal })
 
-    local clock_widget = wibox.widget.textclock("<span foreground='" .. beautiful.magenta .. "'>󰃭   %H:%M</span>")
+    local clock_widget = wibox.widget.textclock("<span foreground='" .. widget_fg .. "'>󰃭   %H:%M</span>")
 
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
@@ -348,14 +351,14 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             spacing = 0,
-            wibox.container.margin(wibox.widget.systray(), 8, 8),
-            wrap_widget(create_wifi_widget(), beautiful.bg_normal),
-            wrap_widget(create_battery_widget(), beautiful.bg_normal),
-            wrap_widget(create_brightness_widget(), beautiful.bg_normal),
-            wrap_widget(create_volume_widget(), beautiful.bg_normal),
+            wrap_widget(wibox.widget.systray(), beautiful.bg_focus),
+            wrap_widget(create_wifi_widget(), beautiful.bg_focus),
+            wrap_widget(create_battery_widget(), beautiful.bg_focus),
+            wrap_widget(create_brightness_widget(), beautiful.bg_focus),
+            wrap_widget(create_volume_widget(), beautiful.bg_focus),
             wrap_widget(clock_widget, beautiful.bg_focus),
-            wrap_widget(s.mylayoutbox, beautiful.bg_minimize),
-            wrap_widget(create_power_widget(), beautiful.bg_normal),
+            wrap_widget(s.mylayoutbox, beautiful.bg_focus),
+            wrap_widget(create_power_widget(), beautiful.bg_focus),
         },
     }
 end)
