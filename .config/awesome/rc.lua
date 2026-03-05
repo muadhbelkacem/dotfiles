@@ -407,8 +407,8 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioMute", function () awful.spawn("amixer sset Master toggle") end),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
+    awful.key({ modkey },            "r",     function () awful.spawn.with_shell("rofi -show drun") end,
+              {description = "toggle rofi", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
@@ -420,8 +420,8 @@ globalkeys = gears.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+    awful.key({ modkey }, "p", function() awful.spawn(gears.filesystem.get_configuration_dir() .. "powermenu.sh") end,
+              {description = "show power menu", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
