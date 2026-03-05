@@ -42,8 +42,8 @@ theme.wibar_bg      = theme.bg_normal
 theme.wibar_fg      = theme.fg_normal
 
 -- Taglist styling
-theme.taglist_fg_focus    = theme.fg_focus
-theme.taglist_bg_focus    = theme.bg_normal -- Keep background flat
+theme.taglist_fg_focus    = theme.bg_normal
+theme.taglist_bg_focus    = theme.yellow
 theme.taglist_fg_occupied = theme.green
 theme.taglist_fg_empty    = "#414868"
 theme.taglist_spacing     = 0
