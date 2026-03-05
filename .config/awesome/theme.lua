@@ -13,7 +13,7 @@ theme.bg_normal     = "#1a1b26" -- Tokyo Night inspired deep dark
 theme.bg_focus      = "#24283b"
 theme.bg_urgent     = "#f7768e"
 theme.bg_minimize   = "#292e42"
-theme.bg_systray    = theme.bg_normal
+theme.bg_systray    = theme.bg_focus
 
 theme.fg_normal     = "#a9b1d6"
 theme.fg_focus      = "#7aa2f7" -- Bright Blue accent
