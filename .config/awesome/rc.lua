@@ -366,7 +366,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     s.mywibox = awful.wibar({ position = "top", screen = s, height = beautiful.wibar_height, bg = beautiful.bg_normal })
 
-    local clock_widget = wibox.widget.textclock("<span foreground='" .. widget_fg .. "'>󰃭   %H:%M</span>")
+    local clock_widget = wibox.widget.textclock("<span foreground='" .. widget_fg .. "'>󰥔   %H:%M</span>")
 
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
