@@ -87,16 +87,18 @@ awful.screen.connect_for_each_screen(function(s)
             {
                 {
                     {
-                        { id = 'text_role', widget = wibox.widget.textbox },
-                        left  = 6, right = 6, widget = wibox.container.margin,
+                        id     = 'text_role',
+                        widget = wibox.widget.textbox,
                     },
-                    id     = 'background_role',
-                    widget = wibox.container.background,
+                    valign = 'center',
+                    halign = 'center',
+                    widget = wibox.container.place,
                 },
-                top = 6, bottom = 6, left = 4, right = 4,
-                widget = wibox.container.margin,
+                id     = 'background_role',
+                widget = wibox.container.background,
             },
-            layout = wibox.layout.fixed.horizontal,
+            forced_width = beautiful.wibar_height,
+            widget       = wibox.container.background, -- Placeholder to maintain square shape
         },
     }
 
