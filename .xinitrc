@@ -1,6 +1,6 @@
 picom -b &
 touchegg &
-setxkbmap -layout us,ara,fr &
+setxkbmap -layout us,ara,fr -option caps:escape_shifted_capslock &
 
 wallpaper_loop() {
     while true; do

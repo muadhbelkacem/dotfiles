@@ -54,8 +54,6 @@ alias ug='yay -Syyu'
 alias r='yay -Rns'
 alias s='yay -Ss'
 alias cln='yay -Rns $(yay -Qtdq)'
-alias cr='cursor'
-alias da='doas'
 
 alias ll='ls -lah'
 alias c='clear'
