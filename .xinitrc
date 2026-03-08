@@ -1,6 +1,7 @@
 picom -b &
 touchegg &
-setxkbmap -layout us,ara,fr -option caps:escape_shifted_capslock &
+setxkbmap -layout us,ara,fr &
+xmodmap ~/.Xmodmap &
 
 wallpaper_loop() {
     while true; do
