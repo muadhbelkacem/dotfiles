@@ -34,10 +34,16 @@ end
 
 function helpers.wrap_widget(widget, bg_color)
     local wibox = require("wibox")
+    -- Ensure widget is a proper widget if it's a table (layout)
+    local w = widget
+    if type(widget) == "table" and not widget._is_widget then
+        w = wibox.widget(widget)
+    end
+
     return wibox.container.background(
-        wibox.container.margin(widget, 10, 10),
+        wibox.container.margin(w, 10, 10),
         bg_color,
-        gears.shape.rectangle -- Explicitly no curves
+        gears.shape.rectangle
     )
 end
 

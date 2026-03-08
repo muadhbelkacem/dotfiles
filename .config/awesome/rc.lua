@@ -126,12 +126,16 @@ awful.screen.connect_for_each_screen(function(s)
 
     local clock_widget = wibox.widget.textclock("<span foreground='" .. beautiful.fg_normal .. "'>󰥔   %H:%M</span>")
 
-    -- Systray visibility handling: hide the wrapper when no icons are present
+    -- Systray visibility handling: hide the systray and its separator when no icons are present
     local systray = wibox.widget.systray()
-    local wrapped_systray = helpers.wrap_widget(systray, beautiful.bg_focus)
-    wrapped_systray.visible = awesome.systray() > 0
+    local systray_with_sep = wibox.widget {
+        systray,
+        widgets.create_separator(),
+        layout = wibox.layout.fixed.horizontal,
+    }
+    systray_with_sep.visible = awesome.systray() > 0
     systray:connect_signal("widget::redraw_needed", function()
-        wrapped_systray.visible = awesome.systray() > 0
+        systray_with_sep.visible = awesome.systray() > 0
     end)
 
     s.mywibox:setup {
@@ -147,24 +151,25 @@ awful.screen.connect_for_each_screen(function(s)
         },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            spacing = 0,
-            wrapped_systray,
-            widgets.create_separator(),
-            helpers.wrap_widget(widgets.create_wifi_widget(vars.terminal), beautiful.bg_focus),
-            widgets.create_separator(),
-            helpers.wrap_widget(widgets.create_keyboard_layout_widget(), beautiful.bg_focus),
-            widgets.create_separator(),
-            helpers.wrap_widget(widgets.create_battery_widget(), beautiful.bg_focus),
-            widgets.create_separator(),
-            helpers.wrap_widget(widgets.create_brightness_widget(), beautiful.bg_focus),
-            widgets.create_separator(),
-            helpers.wrap_widget(widgets.create_volume_widget(), beautiful.bg_focus),
-            widgets.create_separator(),
-            helpers.wrap_widget(clock_widget, beautiful.bg_focus),
-            widgets.create_separator(),
-            helpers.wrap_widget(s.mylayoutbox, beautiful.bg_focus),
-            widgets.create_separator(),
-            helpers.wrap_widget(widgets.create_power_widget(), beautiful.bg_focus),
+            helpers.wrap_widget({
+                layout = wibox.layout.fixed.horizontal,
+                systray_with_sep,
+                widgets.create_wifi_widget(vars.terminal),
+                widgets.create_separator(),
+                widgets.create_keyboard_layout_widget(),
+                widgets.create_separator(),
+                widgets.create_battery_widget(),
+                widgets.create_separator(),
+                widgets.create_brightness_widget(),
+                widgets.create_separator(),
+                widgets.create_volume_widget(),
+                widgets.create_separator(),
+                clock_widget,
+                widgets.create_separator(),
+                s.mylayoutbox,
+                widgets.create_separator(),
+                widgets.create_power_widget(),
+            }, beautiful.bg_focus),
         },
     }
 end)
