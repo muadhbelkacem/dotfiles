@@ -16,7 +16,8 @@ function rules.get(clientkeys, clientbuttons)
                          placement = awful.placement.no_overlap+awful.placement.no_offscreen,
                          maximized = false,
                          maximized_vertical = false,
-                         maximized_horizontal = false
+                         maximized_horizontal = false,
+                         titlebars_enabled = true
          }
         },
         { rule_any = {

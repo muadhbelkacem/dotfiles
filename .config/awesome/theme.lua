@@ -55,6 +55,13 @@ theme.tasklist_bg_normal   = theme.bg_normal
 theme.tasklist_fg_normal   = theme.fg_normal
 theme.tasklist_spacing     = 0
 
+-- Titlebar styling
+theme.titlebar_size = 28
+theme.titlebar_bg_normal = theme.bg_normal
+theme.titlebar_bg_focus = theme.bg_focus
+theme.titlebar_fg_normal = theme.fg_normal
+theme.titlebar_fg_focus = theme.fg_focus
+
 -- Notification styling
 theme.notification_font = "Inter 11"
 theme.notification_bg = theme.bg_normal
