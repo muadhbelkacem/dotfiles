@@ -16,3 +16,9 @@ set completion-ignore-case on
 set show-all-if-ambiguous on
 # Display completions without requiring a double Tab
 set show-all-if-unmodified on
+
+# TAB cycles forward through completion
+TAB: menu-complete
+
+# Shift+TAB for complete
+"\e[Z": complete
