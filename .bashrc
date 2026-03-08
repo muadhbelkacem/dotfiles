@@ -1,16 +1,10 @@
+# run first
+
 eval "$(starship init bash)"
-
-#exports
-
-export HYPRSHOT_DIR="$HOME/screenshots"
-export QT_QPA_PLATFORMTHEME=qt5ct
-# unlimited in‑memory history
-export HISTSIZE=-1
-
-# unlimited in‑file history
-export HISTFILESIZE=-1
+pfetch
 
 # optional: always append (don’t overwrite) when writing history
+
 shopt -s histappend
 
 hsr(){
@@ -41,7 +35,7 @@ changeprefix(){
   done
 }
 
-#aliases
+# aliases
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -71,6 +65,17 @@ alias wfc='wifi connect'
 alias renumber='i=1; ls -v *.{jpg,png,gif,jpeg} | while read -r f; do ext="${f##*.}"; mv "$f" "$((i++)).$ext"; done'
 alias md='mkdir -p'
 alias py='python'
+
+# exports
+
+export HYPRSHOT_DIR="$HOME/screenshots"
+export QT_QPA_PLATFORMTHEME=qt5ct
+
+# unlimited in‑memory history
+export HISTSIZE=-1
+
+# unlimited in‑file history
+export HISTFILESIZE=-1
 
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
