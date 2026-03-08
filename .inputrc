@@ -1,0 +1,8 @@
+# colorize autocomplete suggestions like ls
+set colored-stats on
+# optionally color the common prefix
+set colored-completion-prefix on
+# optionally show type suffixes (like / for dirs)
+set visible-stats on
+# mark symlinked directories
+set mark-symlinked-directories on
