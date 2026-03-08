@@ -112,6 +112,18 @@ function keys.get_globalkeys(vars, helpers)
             end)
         end, {description = "decrease brightness", group = "hotkeys"}),
 
+        -- Mod + O / Mod + Shift + O for Brightness
+        awful.key({ vars.modkey }, "o", function ()
+            awful.spawn.easy_async("brightnessctl set 5%+", function()
+                awesome.emit_signal("widgets::brightness_update")
+            end)
+        end, {description = "increase brightness", group = "hotkeys"}),
+        awful.key({ vars.modkey, "Shift" }, "o", function ()
+            awful.spawn.easy_async("brightnessctl set 5%-", function()
+                awesome.emit_signal("widgets::brightness_update")
+            end)
+        end, {description = "decrease brightness", group = "hotkeys"}),
+
         -- Volume
         awful.key({ }, "XF86AudioRaiseVolume", function ()
             awful.spawn.easy_async("amixer sset Master 5%+", function()
