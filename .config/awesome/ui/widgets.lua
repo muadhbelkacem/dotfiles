@@ -8,6 +8,17 @@ local widgets = {}
 -- Unified widget foreground color
 local widget_fg = beautiful.fg_normal
 
+function widgets.create_separator()
+    return wibox.widget {
+        widget = wibox.widget.separator,
+        orientation = "vertical",
+        forced_width = 8,
+        thickness = 1,
+        color = beautiful.fg_minimize,
+        span_ratio = 0.5
+    }
+end
+
 function widgets.create_volume_widget()
     local widget = wibox.widget.textbox()
     widget.font = beautiful.font
