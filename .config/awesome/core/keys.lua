@@ -129,6 +129,18 @@ function keys.get_globalkeys(vars, helpers)
             end)
         end, {description = "mute volume", group = "hotkeys"}),
 
+        -- Mod + I / Mod + Shift + I for Volume
+        awful.key({ vars.modkey }, "i", function ()
+            awful.spawn.easy_async("amixer sset Master 5%+", function()
+                awesome.emit_signal("widgets::volume_update")
+            end)
+        end, {description = "increase volume", group = "hotkeys"}),
+        awful.key({ vars.modkey, "Shift" }, "i", function ()
+            awful.spawn.easy_async("amixer sset Master 5%-", function()
+                awesome.emit_signal("widgets::volume_update")
+            end)
+        end, {description = "decrease volume", group = "hotkeys"}),
+
         -- Prompt
         awful.key({ vars.modkey },            "r",     function () awful.spawn.with_shell("pkill rofi || rofi -show drun") end,
                   {description = "toggle rofi", group = "launcher"}),
