@@ -30,7 +30,7 @@ theme.red           = "#f7768e"
 theme.yellow        = "#e0af68"
 
 -- Borders (Sharp)
-theme.useless_gap   = 3
+theme.useless_gap   = 0
 theme.border_width  = 3
 theme.border_normal = "#15161e"
 theme.border_focus  = theme.yellow
