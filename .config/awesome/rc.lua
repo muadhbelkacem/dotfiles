@@ -126,6 +126,14 @@ awful.screen.connect_for_each_screen(function(s)
 
     local clock_widget = wibox.widget.textclock("<span foreground='" .. beautiful.fg_normal .. "'>󰥔   %H:%M</span>")
 
+    -- Systray visibility handling: hide the wrapper when no icons are present
+    local systray = wibox.widget.systray()
+    local wrapped_systray = helpers.wrap_widget(systray, beautiful.bg_focus)
+    wrapped_systray.visible = awesome.systray() > 0
+    systray:connect_signal("widget::redraw_needed", function()
+        wrapped_systray.visible = awesome.systray() > 0
+    end)
+
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
@@ -140,7 +148,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             spacing = 0,
-            helpers.wrap_widget(wibox.widget.systray(), beautiful.bg_focus),
+            wrapped_systray,
             helpers.wrap_widget(widgets.create_wifi_widget(vars.terminal), beautiful.bg_focus),
             helpers.wrap_widget(widgets.create_keyboard_layout_widget(), beautiful.bg_focus),
             helpers.wrap_widget(widgets.create_battery_widget(), beautiful.bg_focus),
