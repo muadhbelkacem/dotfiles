@@ -4,35 +4,35 @@ local gfs = require("gears.filesystem")
 
 local theme = {}
 
--- Modern Font (Assumes Nerd Font is installed for icons)
+-- Modern Font
 theme.font          = "Inter SemiBold 10"
 theme.icon_font     = "JetBrainsMono Nerd Font 11"
 
--- Color Palette (Deep Dark / Modern)
-theme.bg_normal     = "#1a1b26" -- Tokyo Night inspired deep dark
-theme.bg_focus      = "#24283b"
-theme.bg_urgent     = "#f7768e"
-theme.bg_minimize   = "#292e42"
+-- Color Palette (Gruvbox Dark)
+theme.bg_normal     = "#282828"
+theme.bg_focus      = "#3c3836"
+theme.bg_urgent     = "#fb4934"
+theme.bg_minimize   = "#504945"
 theme.bg_systray    = theme.bg_focus
 
-theme.fg_normal     = "#a9b1d6"
-theme.fg_focus      = "#7aa2f7" -- Bright Blue accent
-theme.fg_urgent     = "#1a1b26"
-theme.fg_minimize   = "#565f89"
+theme.fg_normal     = "#ebdbb2"
+theme.fg_focus      = "#fabd2f"
+theme.fg_urgent     = "#282828"
+theme.fg_minimize   = "#928374"
 
 -- Accent colors
-theme.blue          = "#7aa2f7"
-theme.cyan          = "#7dcfff"
-theme.green         = "#9ece6a"
-theme.magenta       = "#bb9af7"
-theme.orange        = "#ff9e64"
-theme.red           = "#f7768e"
-theme.yellow        = "#e0af68"
+theme.blue          = "#83a598"
+theme.cyan          = "#8ec07c"
+theme.green         = "#b8bb26"
+theme.magenta       = "#d3869b"
+theme.orange        = "#fe8019"
+theme.red           = "#fb4934"
+theme.yellow        = "#fabd2f"
 
--- Borders (Sharp)
+-- Borders
 theme.useless_gap   = 0
-theme.border_width  = 3
-theme.border_normal = "#15161e"
+theme.border_width  = 2
+theme.border_normal = "#3c3836"
 theme.border_focus  = theme.yellow
 theme.border_marked = theme.blue
 
@@ -45,8 +45,8 @@ theme.wibar_fg      = theme.fg_normal
 theme.taglist_fg_focus    = theme.bg_normal
 theme.taglist_bg_focus    = theme.yellow
 theme.taglist_fg_occupied = theme.green
-theme.taglist_fg_empty    = "#414868"
-theme.taglist_spacing     = 0
+theme.taglist_fg_empty    = "#665c54"
+theme.taglist_spacing     = 4
 
 -- Tasklist styling
 theme.tasklist_bg_focus    = theme.bg_focus
@@ -67,7 +67,7 @@ theme.notification_font = "Inter 11"
 theme.notification_bg = theme.bg_normal
 theme.notification_fg = theme.fg_normal
 theme.notification_border_width = 1
-theme.notification_border_color = theme.blue
+theme.notification_border_color = theme.yellow
 theme.notification_margin = 10
 
 -- Wallpaper
