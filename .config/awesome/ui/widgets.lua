@@ -93,7 +93,7 @@ function widgets.create_battery_widget()
             end
         end
 
-        local text = table.concat(battery_info, " | ")
+        local text = table.concat(battery_info, "  ")
 
         if text ~= "" then
             w:set_markup("<span foreground='" .. widget_fg .. "'>" .. text .. "</span>")
