@@ -52,7 +52,7 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    -- Custom close button using Nerd Font icon for better look
+    -- Custom close button
     local close_button = wibox.widget {
         {
             {
@@ -69,6 +69,38 @@ client.connect_signal("request::titlebars", function(c)
     }
     close_button:buttons(gears.table.join(
         awful.button({ }, 1, function() c:kill() end)
+    ))
+
+    -- Custom float button
+    local float_button = wibox.widget {
+        {
+            {
+                id = "icon",
+                markup = "<span foreground='" .. beautiful.blue .. "'>󰉈 </span>",
+                font = beautiful.icon_font,
+                align = "center",
+                valign = "center",
+                widget = wibox.widget.textbox
+            },
+            margins = 4,
+            widget = wibox.container.margin,
+        },
+        widget = wibox.container.background
+    }
+
+    local function update_float_icon(c)
+        local icon = c.floating and "󰉈 " or "󰙀 "
+        float_button:get_children_by_id("icon")[1]:set_markup("<span foreground='" .. beautiful.blue .. "'>" .. icon .. "</span>")
+    end
+
+    c:connect_signal("property::floating", update_float_icon)
+    update_float_icon(c)
+
+    float_button:buttons(gears.table.join(
+        awful.button({ }, 1, function()
+            c.floating = not c.floating
+            c:raise()
+        end)
     ))
 
     awful.titlebar(c, { size = beautiful.titlebar_size or 24 }) : setup {
@@ -90,10 +122,7 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            -- You can add other buttons here if needed (minimize, maximize, etc.)
-            -- awful.titlebar.widget.floatingbutton (c),
-            -- awful.titlebar.widget.maximizedbutton(c),
-            -- awful.titlebar.widget.minimizebutton(c),
+            float_button,
             close_button,
             layout = wibox.layout.fixed.horizontal()
         },
