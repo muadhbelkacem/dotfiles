@@ -101,13 +101,33 @@ function keys.get_globalkeys(vars, helpers)
                   {description = "restore minimized", group = "client"}),
 
         -- Brightness
-        awful.key({ }, "XF86MonBrightnessUp", function () awful.spawn("brightnessctl set 5%+") end),
-        awful.key({ }, "XF86MonBrightnessDown", function () awful.spawn("brightnessctl set 5%-") end),
+        awful.key({ }, "XF86MonBrightnessUp", function ()
+            awful.spawn.easy_async("brightnessctl set 5%+", function()
+                awesome.emit_signal("widgets::brightness_update")
+            end)
+        end, {description = "increase brightness", group = "hotkeys"}),
+        awful.key({ }, "XF86MonBrightnessDown", function ()
+            awful.spawn.easy_async("brightnessctl set 5%-", function()
+                awesome.emit_signal("widgets::brightness_update")
+            end)
+        end, {description = "decrease brightness", group = "hotkeys"}),
 
         -- Volume
-        awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn("amixer sset Master 5%+") end),
-        awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn("amixer sset Master 5%-") end),
-        awful.key({ }, "XF86AudioMute", function () awful.spawn("amixer sset Master toggle") end),
+        awful.key({ }, "XF86AudioRaiseVolume", function ()
+            awful.spawn.easy_async("amixer sset Master 5%+", function()
+                awesome.emit_signal("widgets::volume_update")
+            end)
+        end, {description = "increase volume", group = "hotkeys"}),
+        awful.key({ }, "XF86AudioLowerVolume", function ()
+            awful.spawn.easy_async("amixer sset Master 5%-", function()
+                awesome.emit_signal("widgets::volume_update")
+            end)
+        end, {description = "decrease volume", group = "hotkeys"}),
+        awful.key({ }, "XF86AudioMute", function ()
+            awful.spawn.easy_async("amixer sset Master toggle", function()
+                awesome.emit_signal("widgets::volume_update")
+            end)
+        end, {description = "mute volume", group = "hotkeys"}),
 
         -- Prompt
         awful.key({ vars.modkey },            "r",     function () awful.spawn.with_shell("pkill rofi || rofi -show drun") end,

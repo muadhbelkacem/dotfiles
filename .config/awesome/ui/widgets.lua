@@ -11,19 +11,46 @@ local widget_fg = beautiful.fg_normal
 function widgets.create_volume_widget()
     local widget = wibox.widget.textbox()
     widget.font = beautiful.font
-    awful.widget.watch('bash -c "amixer sget Master"', 2, function(w, stdout)
-        local volume = stdout:match("(%d?%d?%d)%%")
-        local mute = stdout:match("%[(off)%]")
-        if mute then
-            w:set_markup("<span foreground='" .. beautiful.fg_minimize .. "'>󰝟  MUTE</span>")
-        else
-            w:set_markup("<span foreground='" .. widget_fg .. "'>󰕾  " .. (volume or "0") .. "%</span>")
-        end
-    end, widget)
+
+    local function update()
+        awful.spawn.easy_async_with_shell('amixer sget Master', function(stdout)
+            local volume = stdout:match("(%d?%d?%d)%%")
+            local mute = stdout:match("%[(off)%]")
+            if mute then
+                widget:set_markup("<span foreground='" .. beautiful.fg_minimize .. "'>󰝟  MUTE</span>")
+            else
+                widget:set_markup("<span foreground='" .. widget_fg .. "'>󰕾  " .. (volume or "0") .. "%</span>")
+            end
+        end)
+    end
+
+    -- Initial update and polling
+    gears.timer {
+        timeout = 5,
+        autostart = true,
+        call_now = true,
+        callback = update
+    }
+
+    -- Immediate update on signal
+    awesome.connect_signal("widgets::volume_update", update)
+
     widget:buttons(gears.table.join(
-        awful.button({ }, 1, function() awful.spawn("amixer sset Master toggle") end),
-        awful.button({ }, 4, function() awful.spawn("amixer sset Master 5%+") end),
-        awful.button({ }, 5, function() awful.spawn("amixer sset Master 5%-") end)
+        awful.button({ }, 1, function()
+            awful.spawn.easy_async("amixer sset Master toggle", function()
+                awesome.emit_signal("widgets::volume_update")
+            end)
+        end),
+        awful.button({ }, 4, function()
+            awful.spawn.easy_async("amixer sset Master 5%+", function()
+                awesome.emit_signal("widgets::volume_update")
+            end)
+        end),
+        awful.button({ }, 5, function()
+            awful.spawn.easy_async("amixer sset Master 5%-", function()
+                awesome.emit_signal("widgets::volume_update")
+            end)
+        end)
     ))
     return widget
 end
@@ -31,19 +58,42 @@ end
 function widgets.create_brightness_widget()
     local widget = wibox.widget.textbox()
     widget.font = beautiful.font
-    awful.widget.watch('bash -c "brightnessctl g && brightnessctl m"', 2, function(w, stdout)
-        local current = stdout:match("(%d+)\n")
-        local max = stdout:match("\n(%d+)")
-        if current and max then
-            local percent = math.floor((tonumber(current) / tonumber(max)) * 100)
-            w:set_markup("<span foreground='" .. widget_fg .. "'>󰃠   " .. percent .. "%</span>")
-        else
-            w:set_markup("<span foreground='" .. beautiful.fg_minimize .. "'>󰃠  --</span>")
-        end
-    end, widget)
+
+    local function update()
+        awful.spawn.easy_async_with_shell('brightnessctl g && brightnessctl m', function(stdout)
+            local current = stdout:match("(%d+)\n")
+            local max = stdout:match("\n(%d+)")
+            if current and max then
+                local percent = math.floor((tonumber(current) / tonumber(max)) * 100)
+                widget:set_markup("<span foreground='" .. widget_fg .. "'>󰃠   " .. percent .. "%</span>")
+            else
+                widget:set_markup("<span foreground='" .. beautiful.fg_minimize .. "'>󰃠  --</span>")
+            end
+        end)
+    end
+
+    -- Initial update and polling
+    gears.timer {
+        timeout = 5,
+        autostart = true,
+        call_now = true,
+        callback = update
+    }
+
+    -- Immediate update on signal
+    awesome.connect_signal("widgets::brightness_update", update)
+
     widget:buttons(gears.table.join(
-        awful.button({ }, 4, function() awful.spawn("brightnessctl set 5%+") end),
-        awful.button({ }, 5, function() awful.spawn("brightnessctl set 5%-") end)
+        awful.button({ }, 4, function()
+            awful.spawn.easy_async("brightnessctl set 5%+", function()
+                awesome.emit_signal("widgets::brightness_update")
+            end)
+        end),
+        awful.button({ }, 5, function()
+            awful.spawn.easy_async("brightnessctl set 5%-", function()
+                awesome.emit_signal("widgets::brightness_update")
+            end)
+        end)
     ))
     return widget
 end
