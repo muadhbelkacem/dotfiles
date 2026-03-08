@@ -222,17 +222,17 @@ function widgets.create_layout_widget(s)
     widget.font = beautiful.icon_font
 
     local layout_icons = {
-        tile = "󰙀 ",
-        floating = "󰉈 ",
-        max = "󰁌 ",
-        magnifier = "󰍉 ",
-        tileleft = "󰙄 ",
-        tilebottom = "󰙁 ",
-        tiletop = "󰙅 ",
-        fairv = "󰙆 ",
-        fairh = "󰙃 ",
-        spiral = "󰙇 ",
-        dwindle = "󰙂 ",
+        tile = " 󰙀 ",
+        floating = " 󰉈 ",
+        max = " 󰁌 ",
+        magnifier = " 󰍉 ",
+        tileleft = " 󰙄 ",
+        tilebottom = " 󰙁 ",
+        tiletop = " 󰙅 ",
+        fairv = " 󰙆 ",
+        fairh = " 󰙃 ",
+        spiral = " 󰙇 ",
+        dwindle = " 󰙂 ",
     }
 
     local function update()

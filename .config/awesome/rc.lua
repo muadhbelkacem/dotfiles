@@ -82,7 +82,7 @@ awful.screen.connect_for_each_screen(function(s)
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
         buttons = taglist_buttons,
-        layout   = { spacing = 0, layout  = wibox.layout.fixed.horizontal },
+        layout   = { spacing = 4, layout  = wibox.layout.fixed.horizontal },
         widget_template = {
             {
                 {
@@ -142,6 +142,7 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
+            spacing = 10,
             s.mytaglist,
             s.mypromptbox,
         },
@@ -151,8 +152,10 @@ awful.screen.connect_for_each_screen(function(s)
         },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            spacing = 10,
             helpers.wrap_widget({
                 layout = wibox.layout.fixed.horizontal,
+                spacing = 12,
                 systray_with_sep,
                 widgets.create_wifi_widget(vars.terminal),
                 widgets.create_separator(),
