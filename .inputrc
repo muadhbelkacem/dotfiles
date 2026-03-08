@@ -1,8 +1,18 @@
-# colorize autocomplete suggestions like ls
+# Use ls‑style colors when showing completion options
 set colored-stats on
-# optionally color the common prefix
-set colored-completion-prefix on
-# optionally show type suffixes (like / for dirs)
+# Append type indicators (like '/' for dirs)
 set visible-stats on
-# mark symlinked directories
+# Mark symlinked directories
 set mark-symlinked-directories on
+# Color the common prefix part of completion
+set colored-completion-prefix on
+# Color the prefix also in menu completion mode
+set menu-complete-display-prefix on
+
+# Optional niceties:
+# Ignore case when completing
+set completion-ignore-case on
+# Show matching completions on first Tab press
+set show-all-if-ambiguous on
+# Display completions without requiring a double Tab
+set show-all-if-unmodified on
