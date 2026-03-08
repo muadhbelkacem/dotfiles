@@ -1,7 +1,7 @@
 # run first
 
 eval "$(starship init bash)"
-pfetch
+PF_INFO="ascii title os kernel host shell wm uptime pkgs memory palette" pfetch
 
 # optional: always append (don’t overwrite) when writing history
 
