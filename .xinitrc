@@ -2,6 +2,7 @@ picom -b &
 touchegg &
 setxkbmap -layout us,ara,fr &
 xmodmap ~/.Xmodmap &
+dunst &
 
 wallpaper_loop() {
     while true; do
