@@ -34,7 +34,7 @@ window {
     enabled:                     true;
     border:                      2px solid;
     border-radius:               12px;
-    border-color:                @green;
+    border-color:                @bg3;
     background-color:            @bg0;
     cursor:                      "default";
 }
@@ -107,7 +107,42 @@ element normal.normal {
     text-color:                  @fg;
 }
 
+element normal.urgent {
+    background-color:            @red;
+    text-color:                  @bg0;
+}
+
+element normal.active {
+    background-color:            @green;
+    text-color:                  @bg0;
+}
+
 element selected.normal {
+    background-color:            @bg2;
+    text-color:                  @green;
+}
+
+element selected.urgent {
+    background-color:            @red;
+    text-color:                  @bg0;
+}
+
+element selected.active {
+    background-color:            @bg2;
+    text-color:                  @green;
+}
+
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  @fg;
+}
+
+element alternate.urgent {
+    background-color:            @red;
+    text-color:                  @bg0;
+}
+
+element alternate.active {
     background-color:            @green;
     text-color:                  @bg0;
 }
