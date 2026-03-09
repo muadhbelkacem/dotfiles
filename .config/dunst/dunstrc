@@ -1,9 +1,9 @@
 [global]
     font = JetBrains Mono 10
     frame_width = 2
-    frame_color = "#3A3A3A"
+    frame_color = "#a7c080"
     corner_radius = 10
-    transparency = 15
+    transparency = 0
     padding = 10
     horizontal_padding = 10
     icon_corner_radius = 8
@@ -23,19 +23,19 @@
     format = "<b>%s</b>\n%b"
 
 [urgency_low]
-    background = "#1E1E2E"
-    foreground = "#A6ADC8"
-    frame_color = "#313244"
+    background = "#272e33"
+    foreground = "#d3c6aa"
+    frame_color = "#475258"
     timeout = 6
 
 [urgency_normal]
-    background = "#1E1E2E"
-    foreground = "#b57ae9"
-    frame_color = "#b57ae9"
+    background = "#272e33"
+    foreground = "#d3c6aa"
+    frame_color = "#a7c080"
     timeout = 8
 
 [urgency_critical]
-    background = "#1E1E2E"
-    foreground = "#F38BA8"
-    frame_color = "#F38BA8"
+    background = "#272e33"
+    foreground = "#d3c6aa"
+    frame_color = "#e67e80"
     timeout = 0
