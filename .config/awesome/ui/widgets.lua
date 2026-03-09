@@ -49,12 +49,9 @@ function widgets.create_volume_widget()
             if show_notification then
                 volume_notification = naughty.notify({
                     title = " Volume",
-                    text = display_text,
-                    icon = icon, -- Note: This depends on naughty handling icon strings as icons or we can use markup in text
+                    text = "<span font='" .. beautiful.icon_font .. "'>" .. icon .. "</span> " .. display_text,
                     replaces_id = volume_notification and volume_notification.id or nil,
                     timeout = 2,
-                    -- Use markup for the icon if naughty doesn't support the icon string directly
-                    message = "<span font='" .. beautiful.icon_font .. "'>" .. icon .. "</span> " .. display_text
                 })
             end
         end)
@@ -108,10 +105,9 @@ function widgets.create_brightness_widget()
                 if show_notification then
                     brightness_notification = naughty.notify({
                         title = " Brightness",
-                        text = display_text,
+                        text = "<span font='" .. beautiful.icon_font .. "'>" .. icon .. "</span> " .. display_text,
                         replaces_id = brightness_notification and brightness_notification.id or nil,
                         timeout = 2,
-                        message = "<span font='" .. beautiful.icon_font .. "'>" .. icon .. "</span> " .. display_text
                     })
                 end
             else
@@ -218,10 +214,9 @@ function widgets.create_keyboard_layout_widget()
             if show_notification then
                 keyboard_notification = naughty.notify({
                     title = " Keyboard",
-                    text = "Layout: " .. text,
+                    text = "<span font='" .. beautiful.icon_font .. "'>󰌌  </span> " .. text,
                     replaces_id = keyboard_notification and keyboard_notification.id or nil,
                     timeout = 2,
-                    message = "<span font='" .. beautiful.icon_font .. "'>󰌌  </span> " .. text
                 })
             end
         end)
@@ -269,33 +264,33 @@ function widgets.create_layout_widget(s)
     widget.font = beautiful.icon_font
 
     local layout_icons = {
-        tile = " 󰙀 ",
-        floating = " 󰉈 ",
-        max = " 󰁌 ",
-        magnifier = " 󰍉 ",
-        tileleft = " 󰙄 ",
-        tilebottom = " 󰙁 ",
-        tiletop = " 󰙅 ",
-        fairv = " 󰙆 ",
-        fairh = " 󰙃 ",
-        spiral = " 󰙇 ",
-        dwindle = " 󰙂 ",
+        tile = "󰙀",
+        floating = "󰉈",
+        max = "󰁌",
+        magnifier = "󰍉",
+        tileleft = "󰙄",
+        tilebottom = "󰙁",
+        tiletop = "󰙅",
+        fairv = "󰙆",
+        fairh = "󰙃",
+        spiral = "󰙇",
+        dwindle = "󰙂",
     }
 
     local function update(show_notification)
         local layout = awful.layout.get(s)
         local name = layout and layout.name or "unknown"
         local icon = layout_icons[name] or name
-        widget:set_markup("<span foreground='" .. widget_fg .. "'>" .. icon .. "</span>")
+        -- Add spaces for the bar display
+        widget:set_markup("<span foreground='" .. widget_fg .. "'> " .. icon .. " </span>")
 
         if show_notification then
             local display_name = name:gsub("^%l", string.upper)
             layout_notification = naughty.notify({
                 title = " Layout",
-                text = display_name,
+                text = "<span font='" .. beautiful.icon_font .. "'>" .. icon .. "</span> " .. display_name,
                 replaces_id = layout_notification and layout_notification.id or nil,
                 timeout = 2,
-                message = "<span font='" .. beautiful.icon_font .. "'>" .. icon .. "</span> " .. display_name
             })
         end
     end
