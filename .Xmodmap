@@ -1,9 +1,0 @@
-clear Lock
-clear Control
-
-keycode 66 = Control_L
-keycode 37 = Escape
-keycode 9  = Caps_Lock
-
-add Control = Control_L
-add Lock = Caps_Lock
