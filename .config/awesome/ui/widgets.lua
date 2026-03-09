@@ -2,11 +2,17 @@ local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local naughty = require("naughty")
 
 local widgets = {}
 
 -- Unified widget foreground color
 local widget_fg = beautiful.fg_normal
+
+-- Notification objects to allow replacing
+local volume_notification
+local brightness_notification
+local keyboard_notification
 
 function widgets.create_separator()
     return wibox.widget {
@@ -23,14 +29,32 @@ function widgets.create_volume_widget()
     local widget = wibox.widget.textbox()
     widget.font = beautiful.font
 
-    local function update()
+    local function update(show_notification)
         awful.spawn.easy_async_with_shell('amixer sget Master', function(stdout)
             local volume = stdout:match("(%d?%d?%d)%%")
             local mute = stdout:match("%[(off)%]")
+            local display_text
+            local icon
             if mute then
+                display_text = "MUTE"
+                icon = "󰝟 "
                 widget:set_markup("<span foreground='" .. beautiful.fg_minimize .. "'>󰝟  MUTE</span>")
             else
-                widget:set_markup("<span foreground='" .. widget_fg .. "'>󰕾  " .. (volume or "0") .. "%</span>")
+                display_text = (volume or "0") .. "%"
+                icon = "󰕾 "
+                widget:set_markup("<span foreground='" .. widget_fg .. "'>󰕾  " .. display_text .. "</span>")
+            end
+
+            if show_notification then
+                volume_notification = naughty.notify({
+                    title = " Volume",
+                    text = display_text,
+                    icon = icon, -- Note: This depends on naughty handling icon strings as icons or we can use markup in text
+                    replaces_id = volume_notification and volume_notification.id or nil,
+                    timeout = 2,
+                    -- Use markup for the icon if naughty doesn't support the icon string directly
+                    message = "<span font='" .. beautiful.icon_font .. "'>" .. icon .. "</span> " .. display_text
+                })
             end
         end)
     end
@@ -40,11 +64,11 @@ function widgets.create_volume_widget()
         timeout = 5,
         autostart = true,
         call_now = true,
-        callback = update
+        callback = function() update(false) end
     }
 
     -- Immediate update on signal
-    awesome.connect_signal("widgets::volume_update", update)
+    awesome.connect_signal("widgets::volume_update", function() update(true) end)
 
     widget:buttons(gears.table.join(
         awful.button({ }, 1, function()
@@ -70,13 +94,25 @@ function widgets.create_brightness_widget()
     local widget = wibox.widget.textbox()
     widget.font = beautiful.font
 
-    local function update()
+    local function update(show_notification)
         awful.spawn.easy_async_with_shell('brightnessctl g && brightnessctl m', function(stdout)
             local current = stdout:match("(%d+)\n")
             local max = stdout:match("\n(%d+)")
             if current and max then
                 local percent = math.floor((tonumber(current) / tonumber(max)) * 100)
-                widget:set_markup("<span foreground='" .. widget_fg .. "'>󰃠   " .. percent .. "%</span>")
+                local display_text = percent .. "%"
+                local icon = "󰃠 "
+                widget:set_markup("<span foreground='" .. widget_fg .. "'>󰃠   " .. display_text .. "</span>")
+
+                if show_notification then
+                    brightness_notification = naughty.notify({
+                        title = " Brightness",
+                        text = display_text,
+                        replaces_id = brightness_notification and brightness_notification.id or nil,
+                        timeout = 2,
+                        message = "<span font='" .. beautiful.icon_font .. "'>" .. icon .. "</span> " .. display_text
+                    })
+                end
             else
                 widget:set_markup("<span foreground='" .. beautiful.fg_minimize .. "'>󰃠  --</span>")
             end
@@ -88,11 +124,11 @@ function widgets.create_brightness_widget()
         timeout = 5,
         autostart = true,
         call_now = true,
-        callback = update
+        callback = function() update(false) end
     }
 
     -- Immediate update on signal
-    awesome.connect_signal("widgets::brightness_update", update)
+    awesome.connect_signal("widgets::brightness_update", function() update(true) end)
 
     widget:buttons(gears.table.join(
         awful.button({ }, 4, function()
@@ -169,7 +205,7 @@ function widgets.create_keyboard_layout_widget()
     local widget = wibox.widget.textbox()
     widget.font = beautiful.font
 
-    local function update()
+    local function update(show_notification)
         -- Fetch only the first layout in the current setxkbmap list
         awful.spawn.easy_async_with_shell("setxkbmap -query | grep layout | awk '{print $2}' | awk -F, '{print $1}'", function(stdout)
             local layout = stdout:gsub("\n", ""):gsub("%s+", "")
@@ -177,14 +213,24 @@ function widgets.create_keyboard_layout_widget()
             -- Shorten 'ARABIC' to 'ARA' if necessary, though 'AR' is standard
             if text == "ARA" then text = "AR" end
             widget:set_markup("<span foreground='" .. widget_fg .. "'>󰌌   " .. text .. "</span>")
+
+            if show_notification then
+                keyboard_notification = naughty.notify({
+                    title = " Keyboard",
+                    text = "Layout: " .. text,
+                    replaces_id = keyboard_notification and keyboard_notification.id or nil,
+                    timeout = 2,
+                    message = "<span font='" .. beautiful.icon_font .. "'>󰌌  </span> " .. text
+                })
+            end
         end)
     end
 
-    awesome.connect_signal("xkb::group_changed", update)
-    awesome.connect_signal("xkb::names_changed", update)
-    awesome.connect_signal("widgets::keyboard_update", update)
+    awesome.connect_signal("xkb::group_changed", function() update(false) end)
+    awesome.connect_signal("xkb::names_changed", function() update(false) end)
+    awesome.connect_signal("widgets::keyboard_update", function() update(true) end)
 
-    update()
+    update(false)
 
     widget:buttons(gears.table.join(
         awful.button({ }, 1, function()
