@@ -19,6 +19,7 @@ local widgets = require("ui.widgets")
 local keys = require("core.keys")
 local rules = require("core.rules")
 require("core.signals")
+require("core.autostart")
 
 -- {{{ Menu
 local myawesomemenu = {
