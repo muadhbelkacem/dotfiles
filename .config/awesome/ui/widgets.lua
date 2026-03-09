@@ -2,22 +2,17 @@ local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local naughty = require("naughty")
 
 local widgets = {}
 
 -- Unified widget foreground color
 local widget_fg = beautiful.fg_normal
 
--- Notification objects to allow replacing
-local volume_notification
-local brightness_notification
-local keyboard_notification
-local layout_notification
-
--- Helper to create a markup icon for notifications
-local function notify_icon(icon)
-    return "<span font='" .. (beautiful.icon_font or "JetBrainsMono Nerd Font 12") .. "' foreground='" .. (beautiful.yellow or "#dbbc7f") .. "'>" .. icon .. "</span>"
+-- Helper to send notification via notify-send
+-- Using 'x-canonical-private-synchronous' hint allows replacing notifications in Dunst/Mako
+local function notify_send(title, message, tag)
+    local cmd = string.format("notify-send -h string:x-canonical-private-synchronous:%s '%s' '%s'", tag, title, message)
+    awful.spawn(cmd)
 end
 
 function widgets.create_separator()
@@ -52,17 +47,11 @@ function widgets.create_volume_widget()
             end
 
             if show_notification then
-                volume_notification = naughty.notify({
-                    title = "Volume",
-                    text = notify_icon(icon) .. "  " .. display_text,
-                    replaces_id = volume_notification and volume_notification.id or nil,
-                    timeout = 2,
-                })
+                notify_send("Volume", icon .. "  " .. display_text, "volume")
             end
         end)
     end
 
-    -- Initial update and polling
     gears.timer {
         timeout = 5,
         autostart = true,
@@ -70,7 +59,6 @@ function widgets.create_volume_widget()
         callback = function() update(false) end
     }
 
-    -- Immediate update on signal
     awesome.connect_signal("widgets::volume_update", function() update(true) end)
 
     widget:buttons(gears.table.join(
@@ -108,12 +96,7 @@ function widgets.create_brightness_widget()
                 widget:set_markup("<span foreground='" .. widget_fg .. "'>󰃠   " .. display_text .. "</span>")
 
                 if show_notification then
-                    brightness_notification = naughty.notify({
-                        title = "Brightness",
-                        text = notify_icon(icon) .. "  " .. display_text,
-                        replaces_id = brightness_notification and brightness_notification.id or nil,
-                        timeout = 2,
-                    })
+                    notify_send("Brightness", icon .. "  " .. display_text, "brightness")
                 end
             else
                 widget:set_markup("<span foreground='" .. beautiful.fg_minimize .. "'>󰃠  --</span>")
@@ -121,7 +104,6 @@ function widgets.create_brightness_widget()
         end)
     end
 
-    -- Initial update and polling
     gears.timer {
         timeout = 5,
         autostart = true,
@@ -129,7 +111,6 @@ function widgets.create_brightness_widget()
         callback = function() update(false) end
     }
 
-    -- Immediate update on signal
     awesome.connect_signal("widgets::brightness_update", function() update(true) end)
 
     widget:buttons(gears.table.join(
@@ -208,21 +189,14 @@ function widgets.create_keyboard_layout_widget()
     widget.font = beautiful.font
 
     local function update(show_notification)
-        -- Fetch only the first layout in the current setxkbmap list
         awful.spawn.easy_async_with_shell("setxkbmap -query | grep layout | awk '{print $2}' | awk -F, '{print $1}'", function(stdout)
             local layout = stdout:gsub("\n", ""):gsub("%s+", "")
             local text = layout ~= "" and layout:upper() or "??"
-            -- Shorten 'ARABIC' to 'ARA' if necessary, though 'AR' is standard
             if text == "ARA" then text = "AR" end
             widget:set_markup("<span foreground='" .. widget_fg .. "'>󰌌   " .. text .. "</span>")
 
             if show_notification then
-                keyboard_notification = naughty.notify({
-                    title = "Keyboard",
-                    text = notify_icon("󰌌 ") .. "  " .. text,
-                    replaces_id = keyboard_notification and keyboard_notification.id or nil,
-                    timeout = 2,
-                })
+                notify_send("Keyboard", "󰌌   " .. text, "keyboard")
             end
         end)
     end
@@ -235,7 +209,6 @@ function widgets.create_keyboard_layout_widget()
 
     widget:buttons(gears.table.join(
         awful.button({ }, 1, function()
-            -- Rotate the layout list: moves the first layout to the end
             local script = [[
                 L=$(setxkbmap -query | grep layout | awk '{print $2}')
                 if echo "$L" | grep -q ','; then
@@ -286,17 +259,11 @@ function widgets.create_layout_widget(s)
         local layout = awful.layout.get(s)
         local name = layout and layout.name or "unknown"
         local icon = layout_icons[name] or "󰙀"
-        -- Add spaces for the bar display
         widget:set_markup("<span foreground='" .. widget_fg .. "'> " .. icon .. " </span>")
 
         if show_notification then
             local display_name = name:gsub("^%l", string.upper)
-            layout_notification = naughty.notify({
-                title = "Layout",
-                text = notify_icon(icon) .. "  " .. display_name,
-                replaces_id = layout_notification and layout_notification.id or nil,
-                timeout = 2,
-            })
+            notify_send("Layout", icon .. "  " .. display_name, "layout")
         end
     end
 

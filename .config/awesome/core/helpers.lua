@@ -47,4 +47,10 @@ function helpers.wrap_widget(widget, bg_color)
     )
 end
 
+-- Send notification using notify-send
+function helpers.send_notification(title, message, icon)
+    local icon_arg = icon and string.format("-i '%s' ", icon) or ""
+    awful.spawn(string.format("notify-send %s'%s' '%s'", icon_arg, title, message))
+end
+
 return helpers
