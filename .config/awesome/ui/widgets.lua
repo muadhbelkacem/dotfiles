@@ -13,6 +13,7 @@ local widget_fg = beautiful.fg_normal
 local volume_notification
 local brightness_notification
 local keyboard_notification
+local layout_notification
 
 function widgets.create_separator()
     return wibox.widget {
@@ -281,16 +282,27 @@ function widgets.create_layout_widget(s)
         dwindle = " 󰙂 ",
     }
 
-    local function update()
+    local function update(show_notification)
         local layout = awful.layout.get(s)
         local name = layout and layout.name or "unknown"
         local icon = layout_icons[name] or name
         widget:set_markup("<span foreground='" .. widget_fg .. "'>" .. icon .. "</span>")
+
+        if show_notification then
+            local display_name = name:gsub("^%l", string.upper)
+            layout_notification = naughty.notify({
+                title = " Layout",
+                text = display_name,
+                replaces_id = layout_notification and layout_notification.id or nil,
+                timeout = 2,
+                message = "<span font='" .. beautiful.icon_font .. "'>" .. icon .. "</span> " .. display_name
+            })
+        end
     end
 
-    awful.tag.attached_connect_signal(s, "property::selected", update)
-    awful.tag.attached_connect_signal(s, "property::layout", update)
-    update()
+    awful.tag.attached_connect_signal(s, "property::selected", function() update(false) end)
+    awful.tag.attached_connect_signal(s, "property::layout", function() update(true) end)
+    update(false)
 
     widget:buttons(gears.table.join(
         awful.button({ }, 1, function () awful.layout.inc( 1) end),
