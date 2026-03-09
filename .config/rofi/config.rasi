@@ -1,161 +1,129 @@
 configuration {
-    display-run: "";
-    display-drun: "";
-    font: "JetBrainsMono Nerd Font Mono 12";
-    show-icons: true;
-    icon-theme: "Papirus";
+    modi:                       "drun,run,window";
+    show-icons:                 true;
+    display-drun:               "";
+    display-run:                "";
+    display-window:             "";
+    drun-display-format:        "{name}";
+    font:                       "JetBrainsMono Nerd Font 11";
+    icon-theme:                 "Papirus";
 }
 
 @import "/dev/null"
 
 * {
-    selected-normal-foreground:  rgba ( 255, 147, 5, 100 % );
-    foreground:                  rgba ( 162, 157, 136, 100 % );
-    normal-foreground:           @foreground;
-    alternate-normal-background: rgba ( 45, 48, 59, 1 % );
-    red:                         rgba ( 220, 50, 47, 100 % );
-    selected-urgent-foreground:  rgba ( 249, 249, 249, 100 % );
-    blue:                        rgba ( 38, 139, 210, 100 % );
-    urgent-foreground:           rgba ( 204, 102, 102, 100 % );
-    alternate-urgent-background: rgba ( 75, 81, 96, 90 % );
-    active-foreground:           rgba ( 101, 172, 255, 100 % );
-    lightbg:                     rgba ( 238, 232, 213, 100 % );
-    selected-active-foreground:  rgba ( 249, 249, 249, 100 % );
-    alternate-active-background: rgba ( 45, 48, 59, 88 % );
-    background:                  rgba ( 15, 15, 15, 100 % );
-    alternate-normal-foreground: @foreground;
-    normal-background:           rgba ( 45, 48, 59, 1 % );
-    lightfg:                     rgba ( 88, 104, 117, 100 % );
-    selected-normal-background:  rgba ( 24, 26, 32, 100 % );
-    border-color:                rgba ( 124, 131, 137, 100 % );
-    spacing:                     2;
-    separatorcolor:              rgba ( 45, 48, 59, 1 % );
-    urgent-background:           rgba ( 45, 48, 59, 15 % );
-    selected-urgent-background:  rgba ( 165, 66, 66, 100 % );
-    alternate-urgent-foreground: @urgent-foreground;
-    background-color:            rgba ( 0, 0, 0, 0 % );
-    alternate-active-foreground: @active-foreground;
-    active-background:           rgba ( 29, 31, 33, 17 % );
-    selected-active-background:  rgba ( 26, 28, 35, 100 % );
-}
+    bg0:     #272e33;
+    bg1:     #2e383e;
+    bg2:     #374145;
+    bg3:     #414b50;
+    bg4:     #495156;
+    fg:      #d3c6aa;
+    red:     #e67e80;
+    blue:    #7fbbb3;
+    green:   #a7c080;
 
-entry {
-    placeholder: "";
+    background-color:            transparent;
+    text-color:                  @fg;
+    margin:                      0;
+    padding:                     0;
+    spacing:                     0;
 }
 
 window {
-    background-color: @background;
-    border:           0;
-    padding:          30;
-    height:           70%;
-    width:            65%;
+    width:                       600px;
+    enabled:                     true;
+    border:                      2px solid;
+    border-radius:               12px;
+    border-color:                @green;
+    background-color:            @bg0;
+    cursor:                      "default";
 }
+
 mainbox {
-    border:  0;
-    padding: 0;
+    enabled:                     true;
+    spacing:                     0px;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
 }
-message {
-    border:       2px 0px 0px ;
-    padding:      1px ;
-}
-textbox {
-    text-color: @foreground;
-}
-listview {
-    fixed-height: 0;
-    border:       8px 0px 0px ;
-    spacing:      10px ;
-    scrollbar:    false;
-    padding:      2px 0px 0px ;
-    lines:        8;
-    columns:      1;
-}
-element {
-    border:  0;
-    padding: 1px ;
-}
-element-text {
-    background-color: inherit;
-    text-color:       inherit;
-}
-element.normal.normal {
-    background-color: @normal-background;
-    text-color:       @normal-foreground;
-}
-element.normal.urgent {
-    background-color: @urgent-background;
-    text-color:       @urgent-foreground;
-}
-element.normal.active {
-    background-color: @active-background;
-    text-color:       @active-foreground;
-}
-element.selected.normal {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
-}
-element.selected.urgent {
-    background-color: @selected-urgent-background;
-    text-color:       @selected-urgent-foreground;
-}
-element.selected.active {
-    background-color: @selected-active-background;
-    text-color:       @selected-active-foreground;
-}
-element.alternate.normal {
-    background-color: @alternate-normal-background;
-    text-color:       @alternate-normal-foreground;
-}
-element.alternate.urgent {
-    background-color: @alternate-urgent-background;
-    text-color:       @alternate-urgent-foreground;
-}
-element.alternate.active {
-    background-color: @alternate-active-background;
-    text-color:       @alternate-active-foreground;
-}
-scrollbar {
-    width:        4px ;
-    border:       0;
-    handle-color: @normal-foreground;
-    handle-width: 8px ;
-    padding:      0;
-}
-mode-switcher {
-    border:       2px 0px 0px ;
-}
-button {
-    spacing:    0;
-    text-color: @normal-foreground;
-}
-button.selected {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
-}
+
 inputbar {
-    spacing:    0;
-    text-color: @normal-foreground;
-    padding:    1px ;
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     15px;
+    background-color:            @bg1;
+    text-color:                  @fg;
+    children:                    [ "prompt", "entry" ];
 }
-case-indicator {
-    spacing:    0;
-    text-color: @normal-foreground;
-}
-entry {
-    expand:     true;
-    spacing:    0;
-    text-color: @normal-foreground;
-}
+
 prompt {
-    spacing:    0;
-    text-color: @normal-foreground;
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @green;
 }
-inputbar {
-    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+
+entry {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Search...";
+    placeholder-color:           @bg4;
 }
-textbox-prompt-colon {
-    expand:     false;
-    str:        "";
-    margin:     0px 0.3em 0em 0em ;
-    text-color: @normal-foreground;
+
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       8;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+
+    spacing:                     5px;
+    margin:                      0px;
+    padding:                     10px;
+    border:                      0px;
+    background-color:            transparent;
+}
+
+element {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     10px;
+    border:                      0px;
+    border-radius:               8px;
+    background-color:            transparent;
+    text-color:                  @fg;
+    cursor:                      pointer;
+}
+
+element normal.normal {
+    background-color:            transparent;
+    text-color:                  @fg;
+}
+
+element selected.normal {
+    background-color:            @green;
+    text-color:                  @bg0;
+}
+
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        28px;
+    cursor:                      inherit;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:             0.0;
 }
