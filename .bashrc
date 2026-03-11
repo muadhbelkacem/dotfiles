@@ -63,7 +63,7 @@ alias wifi='nmcli device wifi'
 alias wfl='wifi list'
 alias wfc='wifi connect'
 
-alias renumber='i=1; ls -v *.{jpg,png,gif,jpeg} | while read -r f; do ext="${f##*.}"; mv "$f" "$((i++)).$ext"; done'
+alias renumber='i=1; command ls -v *.{jpg,png,gif,jpeg} | while read -r f; do ext="${f##*.}"; mv "$f" "$((i++)).$ext"; done'
 alias md='mkdir -p'
 alias py='python'
 
