@@ -8,32 +8,32 @@ local theme = {}
 theme.font          = "Inter SemiBold 10"
 theme.icon_font     = "JetBrainsMono Nerd Font 11"
 
--- Color Palette
-theme.bg_normal     = "#191724"
-theme.bg_focus      = "#1f1d2e"
-theme.bg_urgent     = "#eb6f92"
-theme.bg_minimize   = "#26233a"
+-- Gruvbox Color Palette
+theme.bg_normal     = "#282828"
+theme.bg_focus      = "#3c3836"
+theme.bg_urgent     = "#fb4934"
+theme.bg_minimize   = "#504945"
 theme.bg_systray    = theme.bg_focus
 
-theme.fg_normal     = "#e0def4"
-theme.fg_focus      = "#ebbcba"
-theme.fg_urgent     = "#191724"
-theme.fg_minimize   = "#6e6a86"
+theme.fg_normal     = "#ebdbb2"
+theme.fg_focus      = "#fabd2f"
+theme.fg_urgent     = "#282828"
+theme.fg_minimize   = "#928374"
 
 -- Accent colors
-theme.blue          = "#31748f"
-theme.cyan          = "#9ccfd8"
-theme.green         = "#31748f"
-theme.magenta       = "#c4a7e7"
-theme.orange        = "#f6c177"
-theme.red           = "#eb6f92"
-theme.yellow        = "#f6c177"
+theme.blue          = "#83a598"
+theme.cyan          = "#8ec07c"
+theme.green         = "#b8bb26"
+theme.magenta       = "#d3869b"
+theme.orange        = "#fe8019"
+theme.red           = "#fb4934"
+theme.yellow        = "#fabd2f"
 
 -- Borders
-theme.useless_gap   = 0
+theme.useless_gap   = 4
 theme.border_width  = 2
-theme.border_normal = "#26233a"
-theme.border_focus  = "#ebbcba"
+theme.border_normal = "#3c3836"
+theme.border_focus  = "#fabd2f"
 theme.border_marked = theme.blue
 
 -- Wibar properties
@@ -45,7 +45,7 @@ theme.wibar_fg      = theme.fg_normal
 theme.taglist_fg_focus    = theme.bg_normal
 theme.taglist_bg_focus    = theme.yellow
 theme.taglist_fg_occupied = theme.cyan
-theme.taglist_fg_empty    = "#6e6a86"
+theme.taglist_fg_empty    = "#665c54"
 theme.taglist_spacing     = 4
 
 -- Tasklist styling
