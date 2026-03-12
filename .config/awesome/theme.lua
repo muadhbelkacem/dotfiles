@@ -1,5 +1,3 @@
-local theme_assets = require("beautiful.theme_assets")
-local gears = require("gears")
 local gfs = require("gears.filesystem")
 
 local theme = {}
@@ -8,32 +6,32 @@ local theme = {}
 theme.font          = "Inter SemiBold 10"
 theme.icon_font     = "JetBrainsMono Nerd Font 11"
 
--- Gruvbox Color Palette
-theme.bg_normal     = "#282828"
-theme.bg_focus      = "#3c3836"
-theme.bg_urgent     = "#fb4934"
-theme.bg_minimize   = "#504945"
+-- Color Palette
+theme.bg_normal     = "#292522"
+theme.bg_focus      = "#403A36"
+theme.bg_urgent     = "#BD8183"
+theme.bg_minimize   = "#34302C"
 theme.bg_systray    = theme.bg_focus
 
-theme.fg_normal     = "#ebdbb2"
-theme.fg_focus      = "#fabd2f"
-theme.fg_urgent     = "#282828"
-theme.fg_minimize   = "#928374"
+theme.fg_normal     = "#ECE1D7"
+theme.fg_focus      = "#EBC06D"
+theme.fg_urgent     = "#292522"
+theme.fg_minimize   = "#867462"
 
 -- Accent colors
-theme.blue          = "#83a598"
-theme.cyan          = "#8ec07c"
-theme.green         = "#b8bb26"
-theme.magenta       = "#d3869b"
-theme.orange        = "#fe8019"
+theme.blue          = "#7F91B2"
+theme.cyan          = "#7B9695"
+theme.green         = "#78997A"
+theme.magenta       = "#B3809B"
+theme.orange        = "#CF9C79"
 theme.red           = "#fb4934"
-theme.yellow        = "#fabd2f"
+theme.yellow        = "#EBC06D"
 
 -- Borders
 theme.useless_gap   = 4
 theme.border_width  = 2
-theme.border_normal = "#3c3836"
-theme.border_focus  = "#fabd2f"
+theme.border_normal = "#34302C"
+theme.border_focus  = "#EBC06D"
 theme.border_marked = theme.blue
 
 -- Wibar properties
@@ -45,7 +43,7 @@ theme.wibar_fg      = theme.fg_normal
 theme.taglist_fg_focus    = theme.bg_normal
 theme.taglist_bg_focus    = theme.yellow
 theme.taglist_fg_occupied = theme.cyan
-theme.taglist_fg_empty    = "#665c54"
+theme.taglist_fg_empty    = "#867462"
 theme.taglist_spacing     = 4
 
 -- Tasklist styling
