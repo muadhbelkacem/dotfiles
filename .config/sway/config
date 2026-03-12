@@ -86,7 +86,7 @@ exec --no-startup-id /usr/libexec/xdg-desktop-portal-wlr
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+Shift+c reload
+    bindsym $mod+Ctrl+r reload
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag 
