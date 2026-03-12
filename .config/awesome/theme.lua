@@ -8,32 +8,32 @@ local theme = {}
 theme.font          = "Inter SemiBold 10"
 theme.icon_font     = "JetBrainsMono Nerd Font 11"
 
--- Color Palette (Everforest Hard)
-theme.bg_normal     = "#272e33"
-theme.bg_focus      = "#374148"
-theme.bg_urgent     = "#e67e80"
-theme.bg_minimize   = "#414b50"
+-- Color Palette
+theme.bg_normal     = "#191724"
+theme.bg_focus      = "#1f1d2e"
+theme.bg_urgent     = "#eb6f92"
+theme.bg_minimize   = "#26233a"
 theme.bg_systray    = theme.bg_focus
 
-theme.fg_normal     = "#d3c6aa"
-theme.fg_focus      = "#dbbc7f"
-theme.fg_urgent     = "#272e33"
-theme.fg_minimize   = "#859289"
+theme.fg_normal     = "#e0def4"
+theme.fg_focus      = "#ebbcba"
+theme.fg_urgent     = "#191724"
+theme.fg_minimize   = "#6e6a86"
 
 -- Accent colors
-theme.blue          = "#7fbbb3"
-theme.cyan          = "#83c092"
-theme.green         = "#a7c080"
-theme.magenta       = "#d699b6"
-theme.orange        = "#e69875"
-theme.red           = "#e67e80"
-theme.yellow        = "#dbbc7f"
+theme.blue          = "#31748f"
+theme.cyan          = "#9ccfd8"
+theme.green         = "#31748f"
+theme.magenta       = "#c4a7e7"
+theme.orange        = "#f6c177"
+theme.red           = "#eb6f92"
+theme.yellow        = "#f6c177"
 
 -- Borders
 theme.useless_gap   = 0
 theme.border_width  = 2
-theme.border_normal = "#374148"
-theme.border_focus  = theme.yellow
+theme.border_normal = "#26233a"
+theme.border_focus  = "#ebbcba"
 theme.border_marked = theme.blue
 
 -- Wibar properties
@@ -44,8 +44,8 @@ theme.wibar_fg      = theme.fg_normal
 -- Taglist styling
 theme.taglist_fg_focus    = theme.bg_normal
 theme.taglist_bg_focus    = theme.yellow
-theme.taglist_fg_occupied = theme.green
-theme.taglist_fg_empty    = "#495156"
+theme.taglist_fg_occupied = theme.cyan
+theme.taglist_fg_empty    = "#6e6a86"
 theme.taglist_spacing     = 4
 
 -- Tasklist styling
