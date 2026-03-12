@@ -14,4 +14,5 @@ wallpaper_loop &
 rofi -show drun &
 pipewire &
 wireplumber &
+exec dbus-run-session awesome
 exec awesome
