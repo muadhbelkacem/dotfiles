@@ -71,6 +71,7 @@ alias py='python'
 
 export HYPRSHOT_DIR="$HOME/screenshots"
 export QT_QPA_PLATFORMTHEME=qt5ct
+export XDG_CURRENT_DESKTOP=sway
 
 # unlimited in‑memory history
 export HISTSIZE=-1
