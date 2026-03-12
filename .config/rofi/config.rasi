@@ -12,15 +12,16 @@ configuration {
 @import "/dev/null"
 
 * {
-    bg0:     #272e33;
-    bg1:     #2e383e;
-    bg2:     #374145;
-    bg3:     #414b50;
-    bg4:     #495156;
-    fg:      #d3c6aa;
-    red:     #e67e80;
-    blue:    #7fbbb3;
-    green:   #a7c080;
+    bg0:     #292522;
+    bg1:     #34302c;
+    bg2:     #403a36;
+    bg3:     #524942;
+    bg4:     #6b5d52;
+    fg:      #ece1d7;
+    red:     #c4746e;
+    blue:    #89b3b6;
+    green:   #85b695;
+    yellow:   #ebc06d;
 
     background-color:            transparent;
     text-color:                  @fg;
@@ -33,8 +34,8 @@ window {
     width:                       600px;
     enabled:                     true;
     border:                      2px solid;
-    border-radius:               12px;
-    border-color:                @bg3;
+    border-radius:               0px;
+    border-color:                @yellow;
     background-color:            @bg0;
     cursor:                      "default";
 }
@@ -57,7 +58,7 @@ inputbar {
 }
 
 prompt {
-    enabled:                     true;
+    enabled:                     false;
     background-color:            transparent;
     text-color:                  @green;
 }
@@ -96,7 +97,7 @@ element {
     margin:                      0px;
     padding:                     10px;
     border:                      0px;
-    border-radius:               8px;
+    border-radius:               0px;
     background-color:            transparent;
     text-color:                  @fg;
     cursor:                      pointer;
