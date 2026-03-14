@@ -43,11 +43,11 @@ alias lp='find . -type f \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.webm" 
 
 alias e='emacs -nw'
 alias nv='nvim'
-alias i='sudo xbps-install -S'
-alias u='sudo xbps-install -Su'
-alias q='xbps-query -Rs'
-alias r='sudo xbps-remove -R'
-alias ro='sudo xbps-remove -o'
+alias i='yay -S'
+alias u='yay -Syu'
+alias s='yay -Ss'
+alias r='yay -Rns'
+alias ro='yay -Yc'
 
 alias ll='ls -lah'
 alias c='clear'
