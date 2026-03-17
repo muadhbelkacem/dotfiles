@@ -13,9 +13,6 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 
--- Set colorscheme
-vim.cmd([[colorscheme retrobox]])
-
 -- Use appropriate when using indent command
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
