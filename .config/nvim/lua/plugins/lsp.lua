@@ -4,7 +4,6 @@ return {
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 			"neovim/nvim-lspconfig",
-			"artemave/workspace-diagnostics.nvim",
 		},
 		opts = {
 			servers = {
@@ -17,11 +16,7 @@ return {
 						},
 					},
 				},
-				ts_ls = {
-					on_attach = function(client, bufnr)
-						require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-					end,
-				},
+				ts_ls = {},
 				eslint = {},
 				tailwindcss = {},
 				clangd = {},

@@ -13,14 +13,9 @@ return {
                         "filename",
                         path = 1,
                     } },
-                    lualine_b = { "branch", "diff", "diagnostics" },
+                    lualine_b = { "branch", "diff" },
                     lualine_x = { "filetype" },
-                    lualine_y = {
-                        {
-                            "diagnostics",
-                            sources = { "nvim_workspace_diagnostic" },
-                        },
-                    },
+                    lualine_y = {},
                     lualine_z = {},
                 },
             })
