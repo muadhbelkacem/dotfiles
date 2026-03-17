@@ -28,8 +28,8 @@ theme.red           = "#fb4934"
 theme.yellow        = "#EBC06D"
 
 -- Borders
-theme.useless_gap   = 4
-theme.border_width  = 2
+theme.useless_gap   = 0
+theme.border_width  = 1
 theme.border_normal = "#34302C"
 theme.border_focus  = "#EBC06D"
 theme.border_marked = theme.blue

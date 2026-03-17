@@ -12,4 +12,4 @@ wallpaper_loop() {
 
 wallpaper_loop &
 rofi -show drun &
-exec dwm
+exec awesome
