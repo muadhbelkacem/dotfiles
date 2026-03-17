@@ -26,13 +26,30 @@ return {
 			require("mason").setup()
 
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "eslint", "ts_ls", "clangd" },
+				ensure_installed = vim.tbl_keys(opts.servers),
 			})
 
+			-- Use the new Neovim 0.11+ API
 			for server, config in pairs(opts.servers) do
 				vim.lsp.config(server, config)
 				vim.lsp.enable(server)
 			end
+
+			-- Configure how diagnostics (errors) are displayed
+			vim.diagnostic.config({
+				virtual_text = {
+					prefix = "●",
+					spacing = 4,
+				},
+				signs = true,
+				underline = true,
+				update_in_insert = true,
+				severity_sort = true,
+				float = {
+					border = "rounded",
+					source = "always",
+				},
+			})
 		end,
 	},
 }
