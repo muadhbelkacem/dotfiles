@@ -24,7 +24,18 @@ function rules.get(clientkeys, clientbuttons)
             class = { "Arandr", "Blueman-manager", "Gpick", "Sxiv", "Wpa_gui" },
           }, properties = { floating = true }},
         { rule_any = { class = { "scratchpad", "file-manager" } },
-          properties = { floating = true, placement = awful.placement.centered } },
+          properties = {
+              floating = true,
+              placement = function(c)
+                  local wa = c.screen.workarea
+                  c:geometry({
+                      width = wa.width * 0.95,
+                      height = wa.height * 0.9
+                  })
+                  awful.placement.centered(c, { honor_workarea = true })
+              end
+          }
+        },
     }
 end
 
