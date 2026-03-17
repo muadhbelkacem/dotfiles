@@ -35,7 +35,7 @@ theme.border_focus  = "#EBC06D"
 theme.border_marked = theme.blue
 
 -- Wibar properties
-theme.wibar_height  = 27
+theme.wibar_height  = 24
 theme.wibar_bg      = theme.bg_normal
 theme.wibar_fg      = theme.fg_normal
 
