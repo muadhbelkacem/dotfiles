@@ -24,13 +24,14 @@ return {
 				},
 				eslint = {},
 				tailwindcss = {},
+				clangd = {},
 			},
 		},
 		config = function(_, opts)
 			require("mason").setup()
 
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "eslint", "ts_ls" },
+				ensure_installed = { "lua_ls", "eslint", "ts_ls", "clangd" },
 			})
 
 			for server, config in pairs(opts.servers) do

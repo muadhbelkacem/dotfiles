@@ -19,3 +19,12 @@ vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], { silent = true })
 vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]], { silent = true })
 vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]], { silent = true })
 vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]], { silent = true })
+
+-- LSP Navigation
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
+vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover info" })
+
+-- Go back and forward in jump list
+vim.keymap.set("n", "gb", "<C-o>", { desc = "Go back" })
+vim.keymap.set("n", "gf", "<C-i>", { desc = "Go forward" })
