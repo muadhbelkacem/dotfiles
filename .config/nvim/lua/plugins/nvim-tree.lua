@@ -2,6 +2,10 @@ local function custom_on_attach(bufnr)
   local api = require("nvim-tree.api")
   -- set up default mappings first
   api.config.mappings.default_on_attach(bufnr)
+
+  -- Remove the default <C-t> mapping to allow the terminal toggle to work
+  vim.keymap.del("n", "<C-t>", { buffer = bufnr })
+
   -- then remove the <C-e> mapping in normal mode for this buffer
   vim.keymap.del("n", "<C-e>", { buffer = bufnr })
 
@@ -26,6 +30,9 @@ return {
   config = function()
     require("nvim-tree").setup({
       on_attach = custom_on_attach,
+      view = {
+        side = "right",
+      },
     })
   end,
 }

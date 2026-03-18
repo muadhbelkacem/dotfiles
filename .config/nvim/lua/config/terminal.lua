@@ -2,42 +2,22 @@ local M = {}
 
 -- Configuration
 local config = {
-	width = 0.8,
-	height = 0.8,
-	border = "rounded",
-	winblend = 3,
+	height = 0.8, -- 80% of the screen height
 }
 
 -- Internal state
 local state = {
-	terminals = {}, -- List of {buf, win}
+	terminals = {}, -- List of {buf, win, name}
 	current_idx = 0,
+	last_height = nil,
 }
-
---- Calculate window options for the floating terminal
-local function get_win_opts(idx)
-	local width = math.floor(vim.o.columns * config.width)
-	local height = math.floor(vim.o.lines * config.height)
-	local col = math.floor((vim.o.columns - width) / 2)
-	local row = math.floor((vim.o.lines - height) / 2)
-
-	return {
-		relative = "editor",
-		width = width,
-		height = height,
-		col = col,
-		row = row,
-		style = "minimal",
-		border = config.border,
-		title = string.format(" Terminal %d ", idx),
-		title_pos = "center",
-	}
-end
 
 --- Hide the currently active terminal window if it exists
 local function hide_current()
 	local term = state.terminals[state.current_idx]
 	if term and vim.api.nvim_win_is_valid(term.win) then
+		-- Save current height to state to share it across all terminals
+		state.last_height = vim.api.nvim_win_get_height(term.win)
 		vim.api.nvim_win_hide(term.win)
 		term.win = -1
 	end
@@ -50,13 +30,19 @@ local function open_term(idx)
 	-- Create buffer if it doesn't exist or is invalid
 	if not term or not vim.api.nvim_buf_is_valid(term.buf) then
 		local buf = vim.api.nvim_create_buf(false, true)
-		term = { buf = buf, win = -1 }
+		term = { buf = buf, win = -1, name = nil }
 		state.terminals[idx] = term
 	end
 
-	-- Open the floating window
-	term.win = vim.api.nvim_open_win(term.buf, true, get_win_opts(idx))
-	vim.wo[term.win].winblend = config.winblend
+	-- Use saved height if available, otherwise use default 80%
+	local height = state.last_height or math.floor(vim.o.lines * config.height)
+	vim.cmd("botright " .. height .. "split")
+	term.win = vim.api.nvim_get_current_win()
+	vim.api.nvim_win_set_buf(term.win, term.buf)
+
+	-- Keep naming using winbar
+	local display_name = term.name or string.format("Terminal %d", idx)
+	vim.wo[term.win].winbar = string.format("%%#TabLine# %%= %s %%= %%*", display_name)
 
 	-- Initialize terminal if not already done
 	if vim.bo[term.buf].buftype ~= "terminal" then
@@ -77,7 +63,14 @@ function M.toggle()
 
 	local term = state.terminals[state.current_idx]
 	if term and vim.api.nvim_win_is_valid(term.win) then
-		hide_current()
+		-- If we are in the terminal window, hide it
+		if vim.api.nvim_get_current_win() == term.win then
+			hide_current()
+		else
+			-- If we are elsewhere, focus the terminal window
+			vim.api.nvim_set_current_win(term.win)
+			vim.cmd("startinsert")
+		end
 	else
 		open_term(state.current_idx)
 	end
@@ -109,6 +102,23 @@ function M.cycle(delta)
 	open_term(state.current_idx)
 end
 
+--- Rename the current terminal
+function M.rename_current()
+	local term = state.terminals[state.current_idx]
+	if not term then
+		return
+	end
+
+	vim.ui.input({ prompt = "Terminal Name: " }, function(input)
+		if input and input ~= "" then
+			term.name = input
+			if term.win and vim.api.nvim_win_is_valid(term.win) then
+				vim.wo[term.win].winbar = string.format("%%#TabLine# %%= %s %%= %%*", input)
+			end
+		end
+	end)
+end
+
 -- Set up keymaps
 local function setup_keymaps()
 	local opts = { silent = true }
@@ -120,6 +130,15 @@ local function setup_keymaps()
 	vim.keymap.set({ "n", "i", "t" }, "<A-p>", function()
 		M.cycle(-1)
 	end, vim.tbl_extend("force", opts, { desc = "Prev Terminal" }))
+	vim.keymap.set({ "n", "i", "t" }, "<A-r>", M.rename_current, vim.tbl_extend("force", opts, { desc = "Rename Terminal" }))
+
+	-- Resizing terminal height
+	-- Using Alt + k/j for resizing
+	vim.keymap.set({ "n", "t" }, "<A-k>", "<cmd>resize +2<cr>", vim.tbl_extend("force", opts, { desc = "Increase Terminal Height" }))
+	vim.keymap.set({ "n", "t" }, "<A-j>", "<cmd>resize -2<cr>", vim.tbl_extend("force", opts, { desc = "Decrease Terminal Height" }))
+
+	-- Terminal navigation: allow using Ctrl-w commands in terminal mode
+	vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 end
 
 -- Set up autocommands

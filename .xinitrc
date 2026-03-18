@@ -1,6 +1,6 @@
 picom -b &
 touchegg &
-setxkbmap -layout us,ara,fr -option ctrl:nocaps &
+setxkbmap -layout us,ara,fr -option ctrl:nocaps -option ctrl:swap_lalt_lctl &
 dunst &
 
 wallpaper_loop() {
