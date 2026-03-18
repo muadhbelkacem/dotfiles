@@ -1,3 +1,9 @@
+set editing-mode vi
+
+$if mode=vi
+  set keymap vi-insert
+  "\C-_": vi-movement-mode
+$endif
 # Use ls‑style colors when showing completion options
 set colored-stats on
 # Append type indicators (like '/' for dirs)
