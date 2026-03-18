@@ -2,7 +2,7 @@ local M = {}
 
 -- Configuration
 local config = {
-	height = 0.8, -- 80% of the screen height
+	height = 0.6, -- 60% of the screen height
 }
 
 -- Internal state
@@ -56,9 +56,12 @@ end
 --- Toggle the current terminal
 function M.toggle()
 	if state.current_idx == 0 then
-		state.current_idx = 1
-		open_term(state.current_idx)
-		return
+		if #state.terminals > 0 then
+			state.current_idx = 1
+		else
+			M.new_terminal()
+			return
+		end
 	end
 
 	local term = state.terminals[state.current_idx]
@@ -133,11 +136,10 @@ local function setup_keymaps()
 	vim.keymap.set({ "n", "i", "t" }, "<A-r>", M.rename_current, vim.tbl_extend("force", opts, { desc = "Rename Terminal" }))
 
 	-- Resizing terminal height
-	-- Using Alt + k/j for resizing
 	vim.keymap.set({ "n", "t" }, "<A-k>", "<cmd>resize +2<cr>", vim.tbl_extend("force", opts, { desc = "Increase Terminal Height" }))
 	vim.keymap.set({ "n", "t" }, "<A-j>", "<cmd>resize -2<cr>", vim.tbl_extend("force", opts, { desc = "Decrease Terminal Height" }))
 
-	-- Terminal navigation: allow using Ctrl-w commands in terminal mode
+	-- Terminal navigation
 	vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 end
 
@@ -161,6 +163,42 @@ local function setup_autocmds()
 		pattern = "term://*",
 		callback = function()
 			vim.cmd("startinsert")
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("TermClose", {
+		group = group,
+		callback = function(args)
+			local buf = args.buf
+			-- Find and remove from state
+			local idx_to_remove = -1
+			for i, t in ipairs(state.terminals) do
+				if t.buf == buf then
+					idx_to_remove = i
+					break
+				end
+			end
+
+			if idx_to_remove ~= -1 then
+				table.remove(state.terminals, idx_to_remove)
+				-- Update current_idx
+				if idx_to_remove == state.current_idx then
+					if #state.terminals == 0 then
+						state.current_idx = 0
+					else
+						state.current_idx = math.max(1, math.min(state.current_idx, #state.terminals))
+					end
+				elseif idx_to_remove < state.current_idx then
+					state.current_idx = state.current_idx - 1
+				end
+			end
+
+			-- Automatically delete the buffer and close the window
+			vim.schedule(function()
+				if vim.api.nvim_buf_is_valid(buf) then
+					vim.api.nvim_buf_delete(buf, { force = true })
+				end
+			end)
 		end,
 	})
 end

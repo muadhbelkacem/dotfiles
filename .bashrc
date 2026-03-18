@@ -3,7 +3,7 @@
 set -o vi
 
 eval "$(starship init bash)"
-PF_INFO="ascii title os kernel host shell wm uptime pkgs memory palette" pfetch
+# PF_INFO="ascii title os kernel host shell wm uptime pkgs memory palette" pfetch
 
 # optional: always append (don’t overwrite) when writing history
 
