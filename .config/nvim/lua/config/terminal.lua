@@ -2,22 +2,22 @@ local M = {}
 
 -- Configuration
 local config = {
-	height = 0.6, -- 60% of the screen height
+	width = 0.4, -- 40% of the screen width
 }
 
 -- Internal state
 local state = {
 	terminals = {}, -- List of {buf, win, name}
 	current_idx = 0,
-	last_height = nil,
+	last_width = nil,
 }
 
 --- Hide the currently active terminal window if it exists
 local function hide_current()
 	local term = state.terminals[state.current_idx]
 	if term and vim.api.nvim_win_is_valid(term.win) then
-		-- Save current height to state to share it across all terminals
-		state.last_height = vim.api.nvim_win_get_height(term.win)
+		-- Save current width to state to share it across all terminals
+		state.last_width = vim.api.nvim_win_get_width(term.win)
 		vim.api.nvim_win_hide(term.win)
 		term.win = -1
 	end
@@ -34,9 +34,9 @@ local function open_term(idx)
 		state.terminals[idx] = term
 	end
 
-	-- Use saved height if available, otherwise use default 80%
-	local height = state.last_height or math.floor(vim.o.lines * config.height)
-	vim.cmd("botright " .. height .. "split")
+	-- Use saved width if available, otherwise use default 40%
+	local width = state.last_width or math.floor(vim.o.columns * config.width)
+	vim.cmd("botright " .. width .. "vsplit")
 	term.win = vim.api.nvim_get_current_win()
 	vim.api.nvim_win_set_buf(term.win, term.buf)
 
@@ -135,9 +135,9 @@ local function setup_keymaps()
 	end, vim.tbl_extend("force", opts, { desc = "Prev Terminal" }))
 	vim.keymap.set({ "n", "i", "t" }, "<A-r>", M.rename_current, vim.tbl_extend("force", opts, { desc = "Rename Terminal" }))
 
-	-- Resizing terminal height
-	vim.keymap.set({ "n", "t" }, "<A-k>", "<cmd>resize +2<cr>", vim.tbl_extend("force", opts, { desc = "Increase Terminal Height" }))
-	vim.keymap.set({ "n", "t" }, "<A-j>", "<cmd>resize -2<cr>", vim.tbl_extend("force", opts, { desc = "Decrease Terminal Height" }))
+	-- Resizing terminal width
+	vim.keymap.set({ "n", "t" }, "<A-h>", "<cmd>vertical resize +2<cr>", vim.tbl_extend("force", opts, { desc = "Increase Terminal Width" }))
+	vim.keymap.set({ "n", "t" }, "<A-l>", "<cmd>vertical resize -2<cr>", vim.tbl_extend("force", opts, { desc = "Decrease Terminal Width" }))
 
 	-- Terminal navigation
 	vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
