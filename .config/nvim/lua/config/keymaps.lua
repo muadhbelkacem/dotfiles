@@ -28,3 +28,8 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover info" })
 -- Go back and forward in jump list
 vim.keymap.set("n", "gb", "<C-o>", { desc = "Go back" })
 vim.keymap.set("n", "gf", "<C-i>", { desc = "Go forward" })
+
+-- Toggle Arabic support
+vim.keymap.set("n", "<leader>ar", function()
+    vim.opt.arabic = not vim.opt.arabic:get()
+end, { desc = "Toggle Arabic support" })
