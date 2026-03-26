@@ -175,6 +175,58 @@ function M.open_entry()
 	end
 end
 
+function M.create()
+	vim.ui.input({ prompt = "New name (ends with / for dir): " }, function(input)
+		if not input or input == "" then
+			return
+		end
+		local path = state.cwd .. "/" .. input
+		if input:sub(-1) == "/" then
+			vim.fn.mkdir(path, "p")
+		else
+			vim.fn.writefile({}, path)
+		end
+		M.render()
+	end)
+end
+
+function M.rename()
+	local win = state.wins.current
+	local cursor = vim.api.nvim_win_get_cursor(win)
+	local current_files = get_files(state.cwd)
+	local target = current_files[cursor[1]]
+	if not target then
+		return
+	end
+
+	vim.ui.input({ prompt = "Rename to: ", default = target.name }, function(input)
+		if not input or input == "" or input == target.name then
+			return
+		end
+		local old_path = state.cwd .. "/" .. target.name
+		local new_path = state.cwd .. "/" .. input
+		uv.fs_rename(old_path, new_path)
+		M.render()
+	end)
+end
+
+function M.delete()
+	local win = state.wins.current
+	local cursor = vim.api.nvim_win_get_cursor(win)
+	local current_files = get_files(state.cwd)
+	local target = current_files[cursor[1]]
+	if not target then
+		return
+	end
+
+	local confirm = vim.fn.confirm("Delete " .. target.name .. "?", "&Yes\n&No", 2)
+	if confirm == 1 then
+		local path = state.cwd .. "/" .. target.name
+		vim.fn.delete(path, "rf")
+		M.render()
+	end
+end
+
 function M.close()
 	if not state.active then
 		return
@@ -295,6 +347,9 @@ function M.toggle(dir)
 	vim.keymap.set("n", "l", M.nav_l, opts)
 	vim.keymap.set("n", "o", M.open_entry, opts)
 	vim.keymap.set("n", "<CR>", M.open_entry, opts)
+	vim.keymap.set("n", "a", M.create, opts)
+	vim.keymap.set("n", "r", M.rename, opts)
+	vim.keymap.set("n", "d", M.delete, opts)
 	vim.keymap.set("n", "q", M.close, opts)
 	vim.keymap.set("n", "<Esc>", M.close, opts)
 
@@ -313,7 +368,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	group = vim.api.nvim_create_augroup("NetrwReplacement", { clear = true }),
 	callback = function(args)
 		local buf = args.buf or 0
-		if not vim.api.nvim_buf_is_valid(buf) then return end
+		if not vim.api.nvim_buf_is_valid(buf) then
+			return
+		end
 
 		local buf_name = vim.api.nvim_buf_get_name(buf)
 		if vim.fn.isdirectory(buf_name) == 1 then
