@@ -9,13 +9,26 @@ vim.g.loaded_netrwPlugin = 1
 pcall(vim.api.nvim_del_augroup_by_name, "FileExplorer")
 
 local state = {
-	cwd = vim.fn.getcwd(),
+	cwd = nil,
 	selected = nil,
 	wins = { parent = nil, current = nil, preview = nil },
 	bufs = { parent = nil, current = nil, preview = nil },
 	active = false,
 	prev_win = nil,
+	history = {}, -- Store last selected item for each directory
 }
+
+-- Helper to normalize paths
+local function norm(path)
+	if not path or path == "" then
+		return ""
+	end
+	local p = vim.fn.fnamemodify(path, ":p")
+	if p:len() > 1 and p:sub(-1) == "/" then
+		p = p:sub(1, -2)
+	end
+	return p
+end
 
 local function get_files(path)
 	local files = {}
@@ -81,6 +94,7 @@ function M.update_preview()
 	end
 
 	state.selected = target.name
+	state.history[state.cwd] = target.name
 	local path = state.cwd .. "/" .. target.name
 
 	if target.type == "directory" then
@@ -117,7 +131,7 @@ function M.render()
 	local current_idx = fill_buf(state.bufs.current, current_files, state.selected)
 	pcall(vim.api.nvim_win_set_cursor, state.wins.current, { current_idx, 0 })
 
-	local parent_path = vim.fn.fnamemodify(state.cwd, ":h")
+	local parent_path = norm(vim.fn.fnamemodify(state.cwd, ":h"))
 	if parent_path ~= state.cwd then
 		local parent_files = get_files(parent_path)
 		local parent_idx = fill_buf(state.bufs.parent, parent_files, vim.fn.fnamemodify(state.cwd, ":t"))
@@ -130,7 +144,7 @@ function M.render()
 end
 
 function M.nav_h()
-	local parent = vim.fn.fnamemodify(state.cwd, ":h")
+	local parent = norm(vim.fn.fnamemodify(state.cwd, ":h"))
 	if parent == state.cwd then
 		return
 	end
@@ -149,8 +163,9 @@ function M.nav_l()
 	end
 
 	if target.type == "directory" then
-		state.cwd = state.cwd .. "/" .. target.name
-		state.selected = nil
+		state.history[state.cwd] = target.name
+		state.cwd = norm(state.cwd .. "/" .. target.name)
+		state.selected = state.history[state.cwd]
 		M.render()
 	end
 end
@@ -165,8 +180,9 @@ function M.open_entry()
 	end
 
 	if target.type == "directory" then
-		state.cwd = state.cwd .. "/" .. target.name
-		state.selected = nil
+		state.history[state.cwd] = target.name
+		state.cwd = norm(state.cwd .. "/" .. target.name)
+		state.selected = state.history[state.cwd]
 		M.render()
 	else
 		local path = state.cwd .. "/" .. target.name
@@ -259,8 +275,8 @@ function M.toggle(dir)
 	if state.active and win_valid then
 		if dir then
 			-- Just update the directory if one was provided
-			state.cwd = dir
-			state.selected = nil
+			state.cwd = norm(dir)
+			state.selected = state.history[state.cwd]
 			M.render()
 			return
 		else
@@ -280,24 +296,34 @@ function M.toggle(dir)
 
 	-- Determine initial directory
 	if dir then
-		state.cwd = dir
-		state.selected = nil
-	else
+		state.cwd = norm(dir)
+		state.selected = state.history[state.cwd]
+	elseif not state.cwd then
 		local buf_name = vim.api.nvim_buf_get_name(0)
 		if buf_name ~= "" and (vim.fn.filereadable(buf_name) == 1 or vim.fn.isdirectory(buf_name) == 1) then
 			if vim.fn.isdirectory(buf_name) == 1 then
-				state.cwd = vim.fn.fnamemodify(buf_name, ":p")
-				if state.cwd:sub(-1) == "/" then
-					state.cwd = state.cwd:sub(1, -2)
-				end
-				state.selected = nil
+				state.cwd = norm(buf_name)
+				state.selected = state.history[state.cwd]
 			else
-				state.cwd = vim.fn.fnamemodify(buf_name, ":p:h")
+				state.cwd = norm(vim.fn.fnamemodify(buf_name, ":p:h"))
 				state.selected = vim.fn.fnamemodify(buf_name, ":t")
 			end
 		else
-			state.cwd = vim.fn.getcwd()
-			state.selected = nil
+			state.cwd = norm(vim.fn.getcwd())
+			state.selected = state.history[state.cwd]
+		end
+	else
+		-- If we already have a directory, check if current buffer is in it to update selection
+		local buf_name = vim.api.nvim_buf_get_name(0)
+		if buf_name ~= "" and vim.fn.filereadable(buf_name) == 1 then
+			local buf_dir = norm(vim.fn.fnamemodify(buf_name, ":p:h"))
+			if buf_dir == state.cwd then
+				state.selected = vim.fn.fnamemodify(buf_name, ":t")
+			else
+				state.selected = state.history[state.cwd]
+			end
+		else
+			state.selected = state.history[state.cwd]
 		end
 	end
 
@@ -374,10 +400,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 		local buf_name = vim.api.nvim_buf_get_name(buf)
 		if vim.fn.isdirectory(buf_name) == 1 then
-			local dir = vim.fn.fnamemodify(buf_name, ":p")
-			if dir:sub(-1) == "/" then
-				dir = dir:sub(1, -2)
-			end
+			local dir = norm(buf_name)
 
 			vim.schedule(function()
 				-- Re-check state inside schedule to prevent race conditions
