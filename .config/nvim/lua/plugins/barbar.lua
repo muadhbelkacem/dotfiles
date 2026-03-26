@@ -29,7 +29,7 @@ return {
         clickable = true,
         
         -- Excludes buffers from the tabline
-        exclude_ft = {'javascript'},
+        exclude_ft = {'javascript', 'netrw'},
         exclude_name = {'package.json'},
         
         -- A buffer to this direction will be focused (if it exists) when closing the current buffer.
@@ -114,7 +114,7 @@ return {
         -- Set the filetypes which barbar will offset itself for
         sidebar_filetypes = {
           -- Use the default values: {event = 'BufWinLeave', text = '', align = 'left'}
-          NvimTree = true,
+          netrw = {text = 'File Explorer', align = 'right'},
           -- Or, specify the text used for the offset:
           undotree = {
             text = 'undotree',
