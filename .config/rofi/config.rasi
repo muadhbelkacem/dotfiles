@@ -12,16 +12,16 @@ configuration {
 @import "/dev/null"
 
 * {
-    bg0:     #292522;
-    bg1:     #34302c;
-    bg2:     #403a36;
-    bg3:     #524942;
-    bg4:     #6b5d52;
-    fg:      #ece1d7;
-    red:     #c4746e;
-    blue:    #89b3b6;
-    green:   #85b695;
-    yellow:   #ebc06d;
+    bg0:     #1e1e1e;
+    bg1:     #252526;
+    bg2:     #37373d;
+    bg3:     #2a2d2e;
+    bg4:     #3f3f46;
+    fg:      #cccccc;
+    red:     #f44747;
+    blue:    #007acc;
+    green:   #6a9955;
+    yellow:  #dcdcaa;
 
     background-color:            transparent;
     text-color:                  @fg;
@@ -33,9 +33,9 @@ configuration {
 window {
     width:                       600px;
     enabled:                     true;
-    border:                      2px solid;
+    border:                      1px solid;
     border-radius:               0px;
-    border-color:                @yellow;
+    border-color:                @blue;
     background-color:            @bg0;
     cursor:                      "default";
 }
@@ -60,7 +60,7 @@ inputbar {
 prompt {
     enabled:                     false;
     background-color:            transparent;
-    text-color:                  @green;
+    text-color:                  @blue;
 }
 
 entry {
@@ -114,13 +114,13 @@ element normal.urgent {
 }
 
 element normal.active {
-    background-color:            @green;
+    background-color:            @blue;
     text-color:                  @bg0;
 }
 
 element selected.normal {
     background-color:            @bg2;
-    text-color:                  @green;
+    text-color:                  #ffffff;
 }
 
 element selected.urgent {
@@ -130,7 +130,7 @@ element selected.urgent {
 
 element selected.active {
     background-color:            @bg2;
-    text-color:                  @green;
+    text-color:                  #ffffff;
 }
 
 element alternate.normal {
@@ -144,7 +144,7 @@ element alternate.urgent {
 }
 
 element alternate.active {
-    background-color:            @green;
+    background-color:            @blue;
     text-color:                  @bg0;
 }
 
