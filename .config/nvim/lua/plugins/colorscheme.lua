@@ -1,9 +1,9 @@
 return {
 	{
-		"savq/melange-nvim",
+		"tomasiser/vim-code-dark",
 		priority = 1000,
 		config = function()
-			vim.cmd.colorscheme("melange")
+			vim.cmd.colorscheme("codedark")
 		end,
 	},
 }
