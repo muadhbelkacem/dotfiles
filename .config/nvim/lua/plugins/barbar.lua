@@ -154,7 +154,7 @@ return {
       map('n', '<C-0>', '<Cmd>BufferLast<CR>', opts)
       
       -- Close buffer
-      map('n', '<C-c>', '<Cmd>BufferClose<CR>', opts)
+      map('n', '<leader>c', '<Cmd>BufferClose<CR>', opts)
       
       -- Sort automatically by...
       map('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
