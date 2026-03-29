@@ -95,8 +95,8 @@ return {
       map('n', '<leader>n', '<Cmd>BufferNext<CR>', opts)
       
       -- Re-order to previous/next
-      map('n', '<C-<>', '<Cmd>BufferMovePrevious<CR>', opts)
-      map('n', '<C->>', '<Cmd>BufferMoveNext<CR>', opts)
+      map('n', '<leader><', '<Cmd>BufferMovePrevious<CR>', opts)
+      map('n', '<leader>>', '<Cmd>BufferMoveNext<CR>', opts)
       
       -- Goto buffer in position...
       map('n', '<C-0>', '<Cmd>BufferLast<CR>', opts)
