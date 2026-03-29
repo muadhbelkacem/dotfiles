@@ -13,11 +13,15 @@ return {
 					json = { "prettierd", "prettier", stop_after_first = true },
 					graphql = { "prettierd", "prettier", stop_after_first = true },
 				},
-				format_on_save = {
-					timeout_ms = 500,
-					lsp_format = "fallback",
-				},
 			})
+
+			vim.keymap.set({ "n", "v" }, "<leader>f", function()
+				require("conform").format({
+					lsp_fallback = true,
+					async = false,
+					timeout_ms = 500,
+				})
+			end, { desc = "Format file or range (in visual mode)" })
 		end,
 	},
 }
