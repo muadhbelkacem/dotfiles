@@ -125,7 +125,7 @@ end
 -- Set up keymaps
 local function setup_keymaps()
 	local opts = { silent = true }
-	vim.keymap.set({ "n", "t" }, "<C-t>", M.toggle, vim.tbl_extend("force", opts, { desc = "Toggle Terminal" }))
+	vim.keymap.set({ "n", "t" }, "<leader>t", M.toggle, vim.tbl_extend("force", opts, { desc = "Toggle Terminal" }))
 	vim.keymap.set({ "n", "i", "t" }, "<C-S-t>", M.new_terminal, vim.tbl_extend("force", opts, { desc = "New Terminal" }))
 	vim.keymap.set({ "n", "i", "t" }, "<A-n>", function()
 		M.cycle(1)
