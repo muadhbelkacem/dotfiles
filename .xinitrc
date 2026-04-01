@@ -12,4 +12,5 @@ wallpaper_loop() {
 
 wallpaper_loop &
 rofi -show drun &
+/usr/lib/xdg-desktop-portal-gtk &
 exec awesome
