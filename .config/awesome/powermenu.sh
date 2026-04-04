@@ -5,6 +5,7 @@ options="Lock
 Reboot
 Shutdown
 Logout
+Exit
 Cancel"
 
 chosen=$(printf "%s" "$options" | rofi -dmenu -p "Power Menu" -i)
@@ -13,6 +14,7 @@ case "$chosen" in
     "Lock") slock ;;
     "Reboot") systemctl reboot ;;
     "Shutdown") systemctl poweroff ;;
-    "Logout") echo 'awesome.quit()' | awesome-client ;;
+    "Logout") loginctl terminate-user $USER ;;
+    "Exit") echo 'awesome.quit()' | awesome-client ;;
     *) exit 0 ;;
 esac
