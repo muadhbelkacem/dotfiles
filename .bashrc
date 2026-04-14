@@ -58,6 +58,13 @@ alias gr='grep'
 alias hstg='hst | gr'
 alias pv='f=$(fzf) && mpv "$f"'
 
+alias gts="git status"
+alias gtl="git log --oneline"
+alias gtc="git add .; git commit -m "
+alias gtrh="git add .; git reset --hard HEAD"
+alias gtrsh="git add .; git reset --hard "
+alias gtrss="git add .; git reset --soft "
+
 alias wfon='nmcli radio wifi on'
 alias wfoff='nmcli radio wifi off'
 alias wifi='nmcli device wifi'
