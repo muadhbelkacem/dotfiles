@@ -1,0 +1,34 @@
+# Compiled
+*.elc
+
+# Packaging
+elpa/
+
+# Backups and autosave
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+auto-save-list/
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*~.pdf
+
+# Recent files, places, etc.
+recentf
+places
+bookmarks
+history
+projectile.cache
+savehist
+saveplace
+
+# Native compilation cache
+eln-cache/
+
+# IDE files
+.idea/
+*.iml
