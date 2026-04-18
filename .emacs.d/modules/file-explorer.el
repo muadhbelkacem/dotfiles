@@ -6,6 +6,7 @@
 (defvar explorer-current-dir nil)
 (defvar explorer-buffer-names '(" *Exp-Parent*" " *Exp-Main*" " *Exp-Preview*"))
 (defvar explorer-wins nil)
+(defvar explorer-show-dotfiles nil)
 
 (defun explorer-get-items (dir)
   "Get items in DIR as (name is-dir full-path)."
@@ -21,7 +22,9 @@
                               (list name is-dir full-path)))
                           (cl-remove-if (lambda (f)
                                           (let ((n (file-name-nondirectory (car f))))
-                                            (member n '("." ".."))))
+                                            (if explorer-show-dotfiles
+                                                (member n '("." ".."))
+                                              (string-prefix-p "." n))))
                                         files))))
       (sort items (lambda (a b)
                     (let ((dir-a (nth 1 a))
@@ -61,7 +64,11 @@
           (let ((path (expand-file-name name explorer-current-dir)))
             (if (file-directory-p path)
                 (condition-case nil
-                    (let ((items (directory-files path nil "^[^.]")))
+                    (let ((items (cl-remove-if (lambda (f)
+                                                 (if explorer-show-dotfiles
+                                                     (member f '("." ".."))
+                                                   (string-prefix-p "." f)))
+                                               (directory-files path))))
                       (if items
                           (dolist (f items) (insert "  " f "\n"))
                         (insert "  (empty directory)")))
@@ -151,6 +158,12 @@
           (delete-file path t))
         (explorer-render)))))
 
+(defun explorer-toggle-dotfiles ()
+  "Toggle the visibility of dotfiles."
+  (interactive)
+  (setq explorer-show-dotfiles (not explorer-show-dotfiles))
+  (explorer-render))
+
 (defun explorer-quit ()
   "Close the explorer windows."
   (interactive)
@@ -166,6 +179,7 @@
     (define-key map (kbd "f") 'explorer-enter-dir)
     (define-key map (kbd "b") 'explorer-up)
     (define-key map (kbd "o") 'explorer-open-file)
+    (define-key map (kbd ".") 'explorer-toggle-dotfiles)
 
     ;; Common keys
     (define-key map (kbd "RET") 'explorer-open)
