@@ -12,6 +12,10 @@
 ;; Enable column number
 (column-number-mode)
 
+;; Load custom explorer
+(load (expand-file-name "my-explorer.el" user-emacs-directory))
+(global-set-key (kbd "C-c e") #'my-explorer-toggle)
+
 ;; --- Custom Terminal Toggle ---
 (require 'term)
 
