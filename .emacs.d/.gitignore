@@ -26,6 +26,7 @@ history
 projectile.cache
 savehist
 saveplace
+.lsp-session-v1
 
 # Native compilation cache
 eln-cache/
