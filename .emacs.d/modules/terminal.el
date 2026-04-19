@@ -31,9 +31,4 @@
   (define-key term-raw-map (kbd "M-b") #'enlarge-window-horizontally)
   (define-key term-raw-map (kbd "M-f") #'shrink-window-horizontally))
 
-;; Global Bindings
-(global-set-key (kbd "C-c t") #'terminal-toggle)
-(global-set-key (kbd "M-b") #'enlarge-window-horizontally)
-(global-set-key (kbd "M-f") #'shrink-window-horizontally)
-
 (provide 'terminal)

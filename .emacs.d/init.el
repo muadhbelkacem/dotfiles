@@ -6,6 +6,4 @@
 (require 'file-explorer)
 (require 'terminal)
 (require 'welcome)
-
-;; Global Bindings
-(global-set-key (kbd "C-c w") #'welcome-render)
+(require 'global-bindings)

@@ -233,8 +233,4 @@
       (explorer-render)
       (select-window w2))))
 
-
-;; Global Bindings
-(global-set-key (kbd "C-c e") #'explorer-toggle)
-
 (provide 'file-explorer)
