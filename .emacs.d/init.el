@@ -4,6 +4,7 @@
 ;; Load modules
 (require 'packages)
 (require 'ui-settings)
+(require 'theme)
 (require 'file-explorer)
 (require 'terminal)
 (require 'welcome)
