@@ -9,12 +9,6 @@ vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { silent = false })
 vim.keymap.set({ "n", "i", "v" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { silent = false })
 
--- Close currently active buffer
---vim.keymap.set("n", "<C-c>", ":bwipeout<CR>", { silent = false })
-
--- Map Ctrl-E to Escape in all modes
-vim.keymap.set({ "n", "i", "v", "c", "t" }, "<C-/>", "<Esc>")
-
 -- Terminal navigation
 vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], { silent = true })
 vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]], { silent = true })
