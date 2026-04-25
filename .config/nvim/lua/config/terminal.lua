@@ -2,9 +2,22 @@ local M = {}
 
 -- Internal state
 local state = {
-	buf = -1,
+	bufs = {}, -- List of terminal buffers
+	current_idx = 0,
 	win = -1,
 }
+
+--- Update the window title (winbar) to show tab info
+local function update_ui()
+	if vim.api.nvim_win_is_valid(state.win) then
+		if #state.bufs > 0 then
+			local status = string.format(" Terminal %d/%d ", state.current_idx, #state.bufs)
+			vim.wo[state.win].winbar = status
+		else
+			vim.wo[state.win].winbar = ""
+		end
+	end
+end
 
 --- Hide the terminal window if it exists
 local function hide_term()
@@ -14,12 +27,47 @@ local function hide_term()
 	end
 end
 
---- Open or create the terminal
+--- Create a new terminal buffer
+--- @param cwd string|nil
+local function create_term_buf(cwd)
+	local buf = vim.api.nvim_create_buf(false, true)
+
+	-- Initialize terminal in the buffer
+	vim.api.nvim_buf_call(buf, function()
+		if cwd and cwd ~= "" then
+			vim.fn.termopen(vim.o.shell, { cwd = cwd })
+		else
+			-- Passing an empty table {} to termopen often results in "expected dictionary"
+			-- because Vim interprets empty Lua tables as lists.
+			-- Omitting the second argument avoids this.
+			vim.fn.termopen(vim.o.shell)
+		end
+	end)
+
+	vim.bo[buf].buflisted = false
+	return buf
+end
+
+--- Open or create the terminal window
 --- @param cwd string|nil
 local function open_term(cwd)
-	-- Create buffer if it doesn't exist or is invalid
-	if not vim.api.nvim_buf_is_valid(state.buf) then
-		state.buf = vim.api.nvim_create_buf(false, true)
+	-- If no buffers exist, create the first one
+	if #state.bufs == 0 then
+		table.insert(state.bufs, create_term_buf(cwd))
+		state.current_idx = 1
+	end
+
+	-- Validate current buffer
+	local buf = state.bufs[state.current_idx]
+	if not buf or not vim.api.nvim_buf_is_valid(buf) then
+		-- Clean up invalid buffer and retry
+		for i = #state.bufs, 1, -1 do
+			if not vim.api.nvim_buf_is_valid(state.bufs[i]) then
+				table.remove(state.bufs, i)
+			end
+		end
+		state.current_idx = math.max(1, math.min(state.current_idx, #state.bufs))
+		return open_term(cwd)
 	end
 
 	-- Open in a fullscreen floating window
@@ -32,14 +80,8 @@ local function open_term(cwd)
 		style = "minimal",
 		border = "none",
 	}
-	state.win = vim.api.nvim_open_win(state.buf, true, win_opts)
-
-	-- Initialize terminal if not already done
-	if vim.bo[state.buf].buftype ~= "terminal" then
-		vim.fn.termopen(vim.o.shell, { cwd = cwd })
-		vim.bo[state.buf].buflisted = false
-	end
-
+	state.win = vim.api.nvim_open_win(buf, true, win_opts)
+	update_ui()
 	vim.cmd("startinsert")
 end
 
@@ -47,11 +89,9 @@ end
 --- @param cwd string|nil
 function M.toggle(cwd)
 	if vim.api.nvim_win_is_valid(state.win) then
-		-- If we are in the terminal window, hide it
 		if vim.api.nvim_get_current_win() == state.win then
 			hide_term()
 		else
-			-- If we are elsewhere, focus the terminal window
 			vim.api.nvim_set_current_win(state.win)
 			vim.cmd("startinsert")
 		end
@@ -60,15 +100,68 @@ function M.toggle(cwd)
 	end
 end
 
+--- Create a new terminal tab
+function M.new(cwd)
+	local buf = create_term_buf(cwd)
+	table.insert(state.bufs, buf)
+	state.current_idx = #state.bufs
+
+	if vim.api.nvim_win_is_valid(state.win) then
+		vim.api.nvim_win_set_buf(state.win, buf)
+		update_ui()
+		vim.cmd("startinsert")
+	else
+		open_term(cwd)
+	end
+end
+
+--- Switch to the next terminal tab
+function M.next()
+	if #state.bufs <= 1 then return end
+	state.current_idx = (state.current_idx % #state.bufs) + 1
+	if vim.api.nvim_win_is_valid(state.win) then
+		vim.api.nvim_win_set_buf(state.win, state.bufs[state.current_idx])
+		update_ui()
+		vim.cmd("startinsert")
+	end
+end
+
+--- Switch to the previous terminal tab
+function M.prev()
+	if #state.bufs <= 1 then return end
+	state.current_idx = (state.current_idx - 2 + #state.bufs) % #state.bufs + 1
+	if vim.api.nvim_win_is_valid(state.win) then
+		vim.api.nvim_win_set_buf(state.win, state.bufs[state.current_idx])
+		update_ui()
+		vim.cmd("startinsert")
+	end
+end
+
 -- Set up keymaps
 local function setup_keymaps()
 	local opts = { silent = true }
-	vim.keymap.set({ "n", "t" }, "<leader>t", function()
-		M.toggle()
-	end, vim.tbl_extend("force", opts, { desc = "Toggle Terminal" }))
 
-	-- Terminal navigation
+	-- Toggle terminal
+	vim.keymap.set({ "n", "t" }, "<C-t>", function()
+		M.toggle()
+	end, { desc = "Toggle Terminal", silent = true })
+
+	-- New terminal tab
+	vim.keymap.set({ "n", "t" }, "<C-S-t>", function()
+		M.new()
+	end, { desc = "New Terminal Tab", silent = true })
+
+	-- Terminal escape and navigation
 	vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
+
+	-- Tab switching
+	vim.keymap.set("t", "<C-Tab>", function()
+		M.next()
+	end, { desc = "Next Terminal Tab", silent = true })
+
+	vim.keymap.set("t", "<C-S-Tab>", function()
+		M.prev()
+	end, { desc = "Previous Terminal Tab", silent = true })
 end
 
 -- Set up autocommands
@@ -90,6 +183,7 @@ local function setup_autocmds()
 		group = group,
 		pattern = "term://*",
 		callback = function()
+			-- Auto-insert mode when entering a terminal buffer
 			vim.cmd("startinsert")
 		end,
 	})
@@ -98,20 +192,39 @@ local function setup_autocmds()
 		group = group,
 		callback = function(args)
 			vim.schedule(function()
-				-- Close the window if it's still open
-				if state.win ~= -1 and vim.api.nvim_win_is_valid(state.win) then
-					vim.api.nvim_win_close(state.win, true)
-					state.win = -1
+				-- Find and remove buffer from state.bufs
+				local removed = false
+				for i, buf in ipairs(state.bufs) do
+					if buf == args.buf then
+						table.remove(state.bufs, i)
+						removed = true
+						if state.current_idx > #state.bufs then
+							state.current_idx = math.max(1, #state.bufs)
+						end
+						break
+					end
+				end
+
+				if not removed then return end
+
+				-- If no more terminals, close the window
+				if #state.bufs == 0 then
+					if state.win ~= -1 and vim.api.nvim_win_is_valid(state.win) then
+						vim.api.nvim_win_close(state.win, true)
+						state.win = -1
+					end
+				else
+					-- If the closed buffer was active in the window, switch to another
+					if vim.api.nvim_win_is_valid(state.win) and vim.api.nvim_win_get_buf(state.win) == args.buf then
+						vim.api.nvim_win_set_buf(state.win, state.bufs[state.current_idx])
+						update_ui()
+						vim.cmd("startinsert")
+					end
 				end
 
 				-- Delete the buffer
 				if vim.api.nvim_buf_is_valid(args.buf) then
 					vim.api.nvim_buf_delete(args.buf, { force = true })
-				end
-
-				-- Reset state if it was our managed terminal
-				if args.buf == state.buf then
-					state.buf = -1
 				end
 			end)
 		end,
