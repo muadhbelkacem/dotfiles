@@ -93,16 +93,21 @@ local function setup_autocmds()
 	vim.api.nvim_create_autocmd("TermClose", {
 		group = group,
 		callback = function(args)
-			local buf = args.buf
-			if buf == state.buf then
-				state.buf = -1
-				state.win = -1
-			end
-
-			-- Automatically delete the buffer and close the window
 			vim.schedule(function()
-				if vim.api.nvim_buf_is_valid(buf) then
-					vim.api.nvim_buf_delete(buf, { force = true })
+				-- Close the window if it's still open
+				if state.win ~= -1 and vim.api.nvim_win_is_valid(state.win) then
+					vim.api.nvim_win_close(state.win, true)
+					state.win = -1
+				end
+
+				-- Delete the buffer
+				if vim.api.nvim_buf_is_valid(args.buf) then
+					vim.api.nvim_buf_delete(args.buf, { force = true })
+				end
+
+				-- Reset state if it was our managed terminal
+				if args.buf == state.buf then
+					state.buf = -1
 				end
 			end)
 		end,
