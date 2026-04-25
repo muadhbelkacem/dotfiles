@@ -16,6 +16,7 @@ local state = {
 	active = false,
 	prev_win = nil,
 	history = {}, -- Store last selected item for each directory
+	show_hidden = false,
 }
 
 -- Helper to normalize paths
@@ -42,7 +43,9 @@ local function get_files(path)
 			break
 		end
 		if name ~= "." and name ~= ".." then
-			table.insert(files, { name = name, type = type })
+			if state.show_hidden or name:sub(1, 1) ~= "." then
+				table.insert(files, { name = name, type = type })
+			end
 		end
 	end
 	table.sort(files, function(a, b)
@@ -243,6 +246,11 @@ function M.delete()
 	end
 end
 
+function M.toggle_hidden()
+	state.show_hidden = not state.show_hidden
+	M.render()
+end
+
 function M.close()
 	if not state.active then
 		return
@@ -376,6 +384,7 @@ function M.toggle(dir)
 	vim.keymap.set("n", "a", M.create, opts)
 	vim.keymap.set("n", "r", M.rename, opts)
 	vim.keymap.set("n", "d", M.delete, opts)
+	vim.keymap.set("n", ".", M.toggle_hidden, opts)
 	vim.keymap.set("n", "q", M.close, opts)
 	vim.keymap.set("n", "<Esc>", M.close, opts)
 
