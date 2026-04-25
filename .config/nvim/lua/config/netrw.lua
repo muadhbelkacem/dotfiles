@@ -264,7 +264,7 @@ function M.open_terminal()
 	end
 
 	M.close()
-	term.toggle(path)
+	term.new(path)
 end
 
 function M.close()
