@@ -11,4 +11,9 @@
 ;; File Explorer
 (global-set-key (kbd "C-c e") #'explorer-toggle)
 
+;; Buffer Navigation
+(global-set-key (kbd "<C-tab>") #'next-buffer)
+(global-set-key (kbd "<C-S-tab>") #'previous-buffer)
+(global-set-key (kbd "<C-S-iso-lefttab>") #'previous-buffer)
+
 (provide 'global-bindings)
