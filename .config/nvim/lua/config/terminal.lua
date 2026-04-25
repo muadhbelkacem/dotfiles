@@ -15,7 +15,8 @@ local function hide_term()
 end
 
 --- Open or create the terminal
-local function open_term()
+--- @param cwd string|nil
+local function open_term(cwd)
 	-- Create buffer if it doesn't exist or is invalid
 	if not vim.api.nvim_buf_is_valid(state.buf) then
 		state.buf = vim.api.nvim_create_buf(false, true)
@@ -35,7 +36,7 @@ local function open_term()
 
 	-- Initialize terminal if not already done
 	if vim.bo[state.buf].buftype ~= "terminal" then
-		vim.fn.termopen(vim.o.shell)
+		vim.fn.termopen(vim.o.shell, { cwd = cwd })
 		vim.bo[state.buf].buflisted = false
 	end
 
@@ -43,7 +44,8 @@ local function open_term()
 end
 
 --- Toggle the terminal
-function M.toggle()
+--- @param cwd string|nil
+function M.toggle(cwd)
 	if vim.api.nvim_win_is_valid(state.win) then
 		-- If we are in the terminal window, hide it
 		if vim.api.nvim_get_current_win() == state.win then
@@ -54,14 +56,16 @@ function M.toggle()
 			vim.cmd("startinsert")
 		end
 	else
-		open_term()
+		open_term(cwd)
 	end
 end
 
 -- Set up keymaps
 local function setup_keymaps()
 	local opts = { silent = true }
-	vim.keymap.set({ "n", "t" }, "<leader>t", M.toggle, vim.tbl_extend("force", opts, { desc = "Toggle Terminal" }))
+	vim.keymap.set({ "n", "t" }, "<leader>t", function()
+		M.toggle()
+	end, vim.tbl_extend("force", opts, { desc = "Toggle Terminal" }))
 
 	-- Terminal navigation
 	vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)

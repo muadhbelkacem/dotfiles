@@ -251,6 +251,22 @@ function M.toggle_hidden()
 	M.render()
 end
 
+function M.open_terminal()
+	local term = require("config.terminal")
+	local path = state.cwd
+	local win = state.wins.current
+	local cursor = vim.api.nvim_win_get_cursor(win)
+	local current_files = get_files(state.cwd)
+	local target = current_files[cursor[1]]
+
+	if target and target.type == "directory" then
+		path = state.cwd .. "/" .. target.name
+	end
+
+	M.close()
+	term.toggle(path)
+end
+
 function M.close()
 	if not state.active then
 		return
@@ -387,6 +403,7 @@ function M.toggle(dir)
 	vim.keymap.set("n", ".", M.toggle_hidden, opts)
 	vim.keymap.set("n", "q", M.close, opts)
 	vim.keymap.set("n", "<Esc>", M.close, opts)
+	vim.keymap.set("n", "t", M.open_terminal, opts)
 
 	-- Update preview on move
 	vim.api.nvim_create_autocmd("CursorMoved", {
