@@ -59,9 +59,8 @@ alias pv='f=$(fzf) && mpv "$f"'
 alias gts="git status"
 alias gtl="git log --oneline"
 alias gtc="git add .; git commit -m "
-alias gtrh="git add .; git reset --hard HEAD"
-alias gtrsh="git add .; git reset --hard "
-alias gtrss="git add .; git reset --soft "
+alias gtrh='f(){ if [ -z "$1" ]; then echo "Usage: gtrh <N>"; return 1; fi; git add . && git reset --hard HEAD~"$1"; }; f'
+alias gtrs='f(){ if [ -z "$1" ]; then echo "Usage: gtrh <N>"; return 1; fi; git add . && git reset --soft HEAD~"$1"; }; f'
 
 alias wfon='nmcli radio wifi on'
 alias wfoff='nmcli radio wifi off'
