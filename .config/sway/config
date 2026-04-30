@@ -250,22 +250,8 @@ mode "resize" {
 #
 # Status Bar:
 #
-# Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-
-    colors {
-        statusline $fg
-        background $bg0
-        inactive_workspace $bg0 $bg0 $grey
-        focused_workspace  $green $green $bg0
-        active_workspace   $bg3 $bg3 $fg
-        urgent_workspace   $red $red $bg0
-    }
+    swaybar_command waybar
 }
 
 include /etc/sway/config.d/*
