@@ -1,10 +1,10 @@
 /*
  * Modern & Polished Waybar Style
- * Refined Glassmorphism with Depth and Vibrant Accents
+ * Refined Glassmorphism with Vibrant Accents
  */
 
-@define-color bg rgba(26, 27, 28, 0.8);
-@define-color bg-hover rgba(42, 44, 61, 0.9);
+@define-color bg rgba(26, 27, 38, 0.85);
+@define-color bg-hover rgba(44, 46, 64, 0.95);
 @define-color fg #c0caf5;
 @define-color blue #7aa2f7;
 @define-color cyan #7dcfff;
@@ -14,13 +14,13 @@
 @define-color yellow #e0af68;
 @define-color green #9ece6a;
 @define-color teal #1abc9c;
-@define-color border rgba(122, 162, 247, 0.2);
+@define-color border rgba(122, 162, 247, 0.25);
 
 * {
     border: none;
     border-radius: 0;
     font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     min-height: 0;
 }
 
@@ -33,107 +33,74 @@ window#waybar {
 .modules-left, .modules-center, .modules-right {
     background-color: @bg;
     border: 1px solid @border;
-    border-radius: 20px;
-    padding: 2px 12px;
-    margin: 4px 0px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    padding: 1px 6px;
+    margin: 2px 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 /* Workspaces */
 #workspaces {
-    margin-right: 8px;
+    margin: 0 2px;
 }
 
 #workspaces button {
-    padding: 0 10px;
+    padding: 0 8px;
     color: #565f89;
     background: transparent;
-    border-radius: 20px;
-    margin: 4px 2px;
-    transition: all 0.3s cubic-bezier(.55,-0.04,.3,1.44);
+    border-radius: 8px;
+    margin: 2px 1px;
+    transition: all 0.4s cubic-bezier(.55,-0.04,.3,1.44);
 }
 
 #workspaces button:hover {
     color: @blue;
-    background: rgba(122, 162, 247, 0.15);
-    box-shadow: inset 0 0 0 1px @border;
+    background: rgba(122, 162, 247, 0.1);
 }
 
+#workspaces button.focused,
 #workspaces button.active {
-    color: @blue;
-    background: rgba(122, 162, 247, 0.2);
-    min-width: 40px;
+    color: @bg;
+    background: @blue;
+    min-width: 35px;
+    font-weight: 800;
 }
 
 #workspaces button.urgent {
-    color: @red;
-    background: rgba(247, 118, 142, 0.2);
+    color: #ffffff;
+    background: @red;
 }
 
 /* Module Common Styling */
-#clock,
-#tray,
-#cpu,
-#memory,
-#backlight,
-#pulseaudio,
-#network,
-#battery,
-#custom-power,
-#custom-launcher,
-#custom-kill,
-#window {
-    padding: 0 12px;
-    border-radius: 15px;
-    transition: all 0.3s ease;
+#clock, #cpu, #memory, #backlight, #pulseaudio, #network, #battery, #tray,
+#custom-launcher, #custom-kill, #custom-power {
+    padding: 0 8px;
+    margin: 2px 1px;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
 }
 
-/* Hover Effects for Interactivity */
-#clock:hover,
-#cpu:hover,
-#memory:hover,
-#backlight:hover,
-#pulseaudio:hover,
-#network:hover,
-#battery:hover,
-#custom-launcher:hover,
-#custom-kill:hover {
+#clock:hover, #cpu:hover, #memory:hover, #backlight:hover,
+#pulseaudio:hover, #network:hover, #battery:hover {
     background-color: @bg-hover;
 }
 
-/* Launcher */
+/* Specific Accents */
 #custom-launcher {
     color: @blue;
-    font-size: 18px;
-    margin-right: 10px;
+    font-size: 16px;
+    margin-right: 4px;
 }
 
-/* Center Module (Clock) */
-#clock {
-    font-weight: 600;
-    color: @fg;
-}
-
-/* Window Title */
-#window {
-    color: @blue;
-    font-weight: 500;
-    margin-left: 10px;
-}
-
-/* Kill button */
 #custom-kill {
     color: @red;
-    font-size: 18px;
-    margin-left: 10px;
 }
 
-#custom-kill:hover {
-    background-color: @red;
-    color: #ffffff;
+#clock {
+    color: @fg;
+    font-weight: bold;
 }
 
-/* Right Side Modules Styling */
 #cpu { color: @magenta; }
 #memory { color: @yellow; }
 #backlight { color: @cyan; }
@@ -141,51 +108,41 @@ window#waybar {
 #network { color: @teal; }
 #battery { color: @green; }
 
-#battery.warning { color: @yellow; }
+#battery.charging, #battery.plugged {
+    color: @green;
+    background-color: rgba(158, 206, 106, 0.1);
+}
+
 #battery.critical:not(.charging) {
     color: @red;
-    animation: blink 1s infinite alternate;
+    animation: blink 0.8s steps(12) infinite alternate;
 }
 
 @keyframes blink {
     to {
-        background-color: rgba(247, 118, 142, 0.4);
+        background-color: rgba(247, 118, 142, 0.5);
         color: #ffffff;
     }
 }
 
-#tray {
-    margin-right: 4px;
-}
-
-#tray menu {
-    background: @bg;
-    border: 1px solid @border;
-    border-radius: 12px;
-}
-
 #custom-power {
     color: @red;
-    font-size: 18px;
-    margin-left: 8px;
-    padding: 0 14px;
+    font-size: 14px;
+    padding-right: 8px;
 }
 
-#custom-power:hover {
-    background-color: @red;
-    color: #ffffff;
+#tray {
+    padding: 0 8px;
 }
 
-/* Tooltips */
+/* Tooltip Styling */
 tooltip {
-    background: rgba(36, 40, 59, 0.95);
+    background: @bg;
     border: 1px solid @blue;
     border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
 tooltip label {
     color: @fg;
-    padding: 10px;
-    font-size: 13px;
+    padding: 6px;
 }
