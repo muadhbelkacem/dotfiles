@@ -18,32 +18,36 @@ set $term alacritty
 # Your preferred application launcher
 set $menu pkill rofi || rofi -show drun
 
-# Everforest colors
-set $bg0     #272e33
-set $bg1     #2e383c
-set $bg2     #374145
-set $bg3     #414b50
-set $bg4     #495156
-set $bg5     #4f5b58
-set $bg_grey #7a8478
-set $fg      #d3c6aa
-set $red     #e67e80
-set $orange  #e69875
-set $yellow  #dbbc7f
-set $green   #a7c080
-set $blue    #7fbbb3
-set $aqua    #83c092
-set $purple  #d699b6
-set $grey    #859289
+# VS Code Dark+ colors
+set $bg0     #1e1e1e
+set $bg1     #252526
+set $bg2     #2d2d2d
+set $bg3     #37373d
+set $bg4     #3e3e42
+set $bg5     #4e4e4e
+set $bg_grey #808080
+set $fg      #d4d4d4
+set $red     #f44747
+set $orange  #ce9178
+set $yellow  #d7ba7d
+set $green   #6a9955
+set $blue    #569cd6
+set $aqua    #4ec9b0
+set $purple  #c586c0
+set $grey    #808080
 
 # Window decorations
 # target                 border  bg      text    indicator child_border
-client.focused           $green  $green  $bg0    $purple   $green
+client.focused           $blue   $blue   $bg0    $purple   $blue
 client.focused_inactive  $bg3    $bg3    $fg     $bg3      $bg3
 client.unfocused         $bg1    $bg1    $grey   $bg1      $bg1
 client.urgent            $red    $red    $bg0    $red      $red
 client.placeholder       $bg0    $bg0    $fg     $bg0      $bg0
 client.background        $bg0
+
+# Gaps
+gaps outer 0
+gaps inner 10
 
 ### Output configuration
 #
