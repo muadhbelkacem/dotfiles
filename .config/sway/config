@@ -45,6 +45,10 @@ client.urgent            $red    $red    $bg0    $red      $red
 client.placeholder       $bg0    $bg0    $fg     $bg0      $bg0
 client.background        $bg0
 
+# Hide title bars
+default_border pixel 2
+default_floating_border normal
+
 # Gaps
 gaps outer 0
 gaps inner 10
