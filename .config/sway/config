@@ -102,6 +102,7 @@ exec --no-startup-id /usr/libexec/xdg-desktop-portal-wlr
 
 input type:touchpad {
     tap enabled
+    drag_lock disabled
 }
 
 ### Key bindings
