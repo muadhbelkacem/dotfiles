@@ -249,6 +249,11 @@ mode "resize" {
     bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
     bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
+    # Custom volume controls
+    bindsym $mod+i exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+    bindsym $mod+Shift+i exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+
     # Special keys to adjust brightness via brightnessctl
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
