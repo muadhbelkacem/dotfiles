@@ -103,6 +103,10 @@ exec --no-startup-id /usr/libexec/xdg-desktop-portal-wlr
 # You can also configure each device individually.
 # Read `man 5 sway-input` for more information about this section.
 
+input type:keyboard {
+    xkb_layout "us,ara,fr"
+}
+
 input type:touchpad {
     tap enabled
     drag_lock disabled
@@ -219,8 +223,11 @@ input type:touchpad {
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
 
+    # Change keyboard layout
+    bindsym $mod+space input type:keyboard xkb_switch_layout next
+
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    bindsym $mod+Ctrl+space focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
