@@ -18,6 +18,9 @@ set $term alacritty
 # Your preferred application launcher
 set $menu pkill rofi || rofi -show drun
 
+# Scratchpad size (90% of screen)
+set $scratchpad_size 90 ppt
+
 # VS Code Dark+ colors
 set $bg0     #1e1e1e
 set $bg1     #252526
@@ -144,16 +147,6 @@ input type:touchpad {
     bindsym $mod+Up focus up
     bindsym $mod+Right focus right
 
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
 #
 # Workspaces:
 #
@@ -191,7 +184,7 @@ input type:touchpad {
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
+    # bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
 
@@ -212,36 +205,6 @@ input type:touchpad {
     # Sway has a "scratchpad", which is a bag of holding for windows.
     # You can send windows there and get them back later.
 
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
-
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
-#
-# Resizing containers:
-#
-mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
-
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
-
-    # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-#bindsym $mod+r mode "resize"
 #
 # Utilities:
 #
@@ -263,7 +226,7 @@ mode "resize" {
     bindsym $mod+o exec brightnessctl set 5%+
     bindsym $mod+Shift+o exec brightnessctl set 5%-
 
-    # Special key to take a screenshot with grim
+    # Special key to take a screenshot with pointer with grim
     bindsym Print exec grim
 
 #
@@ -274,3 +237,14 @@ bar {
 }
 
 include /etc/sway/config.d/*
+
+### TERMINAL SCRATCHPAD CONFIG
+# Match both app_id (Wayland) and instance (XWayland) to cover Alacritty's --class flag
+# We mark the window so we can reliably target it regardless of its initial properties
+for_window [app_id="scratchpad"] mark scratchpad_term, floating enable, resize set $scratchpad_size $scratchpad_size, move position center, move scratchpad, scratchpad show
+for_window [instance="scratchpad"] mark scratchpad_term, floating enable, resize set $scratchpad_size $scratchpad_size, move position center, move scratchpad, scratchpad show
+
+# Toggle logic for $mod+s:
+# 1. Try to toggle via mark (most reliable way to find our specific scratchpad terminal)
+# 2. If no window with that mark exists, launch a new Alacritty instance with the specified class
+bindsym $mod+s exec swaymsg '[con_mark="scratchpad_term"] scratchpad show' || alacritty --class scratchpad
