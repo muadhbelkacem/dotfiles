@@ -148,6 +148,20 @@ input type:touchpad {
     bindsym $mod+Right focus right
 
 #
+# Resizing:
+#
+    bindsym $mod+Shift+$left resize grow width 10px
+    bindsym $mod+Shift+$down resize shrink height 10px
+    bindsym $mod+Shift+$up resize grow height 10px
+    bindsym $mod+Shift+$right resize shrink width 10px
+
+    # Or use $mod+Shift+[Up|Down|Left|Right]
+    bindsym $mod+Shift+Left resize grow width 10px
+    bindsym $mod+Shift+Down resize shrink height 10px
+    bindsym $mod+Shift+Up resize grow height 10px
+    bindsym $mod+Shift+Right resize shrink width 10px
+
+#
 # Workspaces:
 #
     # Switch to workspace
