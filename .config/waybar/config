@@ -21,6 +21,7 @@
     ],
     "modules-right": [
         "tray",
+        "sway/language",
         "pulseaudio",
         "backlight",
         "network",
@@ -51,6 +52,11 @@
             "9": [],
             "10": []
         }
+    },
+
+    "sway/language": {
+        "format": " {}",
+        "on-click": "swaymsg input type:keyboard xkb_switch_layout next"
     },
 
     "clock": {

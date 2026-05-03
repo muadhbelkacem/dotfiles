@@ -76,12 +76,12 @@ window#waybar {
 }
 
 /* Module Common Styling */
-#clock, #backlight, #pulseaudio, #network, #battery, #tray,
+#clock, #backlight, #pulseaudio, #network, #battery, #tray, #language,
 #custom-launcher, #custom-power {
     padding: 0 12px;
 }
 
-#clock:hover, #backlight:hover,
+#clock:hover, #backlight:hover, #language:hover,
 #pulseaudio:hover, #network:hover, #battery:hover, #custom-launcher:hover {
     background-color: @bg-hover;
 }
@@ -100,6 +100,7 @@ window#waybar {
 #pulseaudio { color: @blue; }
 #network { color: @teal; }
 #battery { color: @green; }
+#language { color: @magenta; }
 
 #battery.critical:not(.charging) {
     color: @red;
