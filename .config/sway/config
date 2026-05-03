@@ -147,6 +147,17 @@ input type:touchpad {
     bindsym $mod+Up focus up
     bindsym $mod+Right focus right
 
+    # Move the focused window around
+    bindsym $mod+Ctrl+$left move left
+    bindsym $mod+Ctrl+$down move down
+    bindsym $mod+Ctrl+$up move up
+    bindsym $mod+Ctrl+$right move right
+    # Or use $mod+Ctrl+[up|down|left|right]
+    bindsym $mod+Ctrl+Left move left
+    bindsym $mod+Ctrl+Down move down
+    bindsym $mod+Ctrl+Up move up
+    bindsym $mod+Ctrl+Right move right
+
 #
 # Resizing:
 #
