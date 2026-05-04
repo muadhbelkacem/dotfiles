@@ -105,6 +105,7 @@ exec --no-startup-id /usr/libexec/xdg-desktop-portal-wlr
 
 input type:keyboard {
     xkb_layout "us,ara,fr"
+    xkb_options caps:escape,altwin:menu_win
 }
 
 input type:touchpad {
