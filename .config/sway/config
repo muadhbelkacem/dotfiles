@@ -75,6 +75,7 @@ exec --no-startup-id /usr/libexec/xdg-desktop-portal
 exec --no-startup-id /usr/libexec/xdg-desktop-portal-gtk
 exec --no-startup-id /usr/libexec/xdg-desktop-portal-wlr
 
+exec mako
 ### Idle configuration
 #
 # Example configuration:
