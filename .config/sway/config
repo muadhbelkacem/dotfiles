@@ -196,7 +196,9 @@ input type:touchpad {
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
 
-    # Switch between last two workspaces
+    # Switch between last two workspaces.
+    # The 'workspace back_and_forth' command handles the toggle.
+    # We initialize history on startup so it defaults to workspace 2 if no history exists.
     bindsym $mod+Tab workspace back_and_forth
 
     # Move focused container to workspace
@@ -291,3 +293,6 @@ for_window [instance="scratchpad"] mark scratchpad_term, floating enable, resize
 # 1. Try to toggle via mark (most reliable way to find our specific scratchpad terminal)
 # 2. If no window with that mark exists, launch a new Alacritty instance with the specified class
 bindsym $mod+s exec swaymsg '[con_mark="scratchpad_term"] scratchpad show' || alacritty --class scratchpad
+
+# Initialize workspace history so $mod+Tab has a "last" workspace (2) to switch to from startup
+exec swaymsg workspace number 2, workspace number 1
