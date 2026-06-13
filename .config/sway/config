@@ -17,6 +17,8 @@ set $right l
 set $term alacritty
 # Your preferred application launcher
 set $menu pkill rofi || rofi -show drun
+# Your preferred web browser
+set $browser brave
 
 # Scratchpad size (90% of screen)
 set $scratchpad_size 90 ppt
@@ -129,6 +131,9 @@ input type:touchpad {
 
     # Start your launcher
     bindsym $mod+r exec $menu
+
+    # Start brave
+    bindsym $mod+b exec $browser
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
