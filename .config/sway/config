@@ -290,4 +290,4 @@ for_window [instance="scratchpad"] mark scratchpad_term, floating enable, resize
 bindsym $mod+s exec swaymsg '[con_mark="scratchpad_term"] scratchpad show' || alacritty --class scratchpad
 
 # Initialize workspace history so $mod+Tab has a "last" workspace (2) to switch to from startup
-exec swaymsg workspace number 2, workspace number 1
+exec swaymsg "workspace number 2; workspace number 1"
