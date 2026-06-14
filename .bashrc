@@ -42,7 +42,7 @@ alias grep='grep --color=auto'
 alias lp='find . -type f \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.webm" -o -iname "*.avi" \)| sed "s|^\./||"| fzf | xargs -r -d "\n" mpv'
 
 alias e='emacsclient -c -a "emacs" -nw'
-alias nv='nvim'
+alias v='nvim'
 alias i='yay -S'
 alias u='yay -Syu'
 alias s='yay -Ss'
