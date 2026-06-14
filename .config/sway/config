@@ -59,7 +59,7 @@ default_floating_border normal
 
 # Gaps
 gaps outer 0
-gaps inner 10
+gaps inner 0
 
 ### Output configuration
 #
