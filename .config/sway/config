@@ -271,6 +271,9 @@ input type:touchpad {
     # Take a screenshot of a selection
     bindsym $mod+Shift+s exec mkdir -p $screenshot_dir && FILE=$screenshot_dir/$(date +%Y-%m-%d_%H-%M-%S).png && grim -g "$(slurp)" "$FILE" && notify-send "Screenshot Captured" "$FILE" -i "$FILE"
 
+    # wleave
+    bindsym $mod+w exec wleave
+
 #
 # Status Bar:
 #
