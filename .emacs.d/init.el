@@ -34,6 +34,7 @@
 (global-display-line-numbers-mode 1)
 (show-paren-mode 1)
 (load-theme 'wombat t)
+(setq scroll-conservatively 101)
 
 ;; Editing Behavior
 (setq-default indent-tabs-mode nil)
