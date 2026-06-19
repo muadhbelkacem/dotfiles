@@ -3,8 +3,13 @@
 
 # Packaging
 elpa/
+# emacs custom-file
+emacs-custom.el
 
 # Backups and autosave
+ido.last
+smex-items
+backups/
 *~
 \#*\#
 /.emacs.desktop
