@@ -2,18 +2,21 @@
  * Simple & Solid Waybar Style
  */
 
-@define-color bg rgba(26, 27, 38, 0.95);
-@define-color bg-hover rgba(44, 46, 64, 0.95);
-@define-color fg #c0caf5;
-@define-color blue #7aa2f7;
-@define-color cyan #7dcfff;
-@define-color magenta #bb9af7;
-@define-color pink #ff75b5;
-@define-color red #f7768e;
-@define-color yellow #e0af68;
-@define-color green #9ece6a;
-@define-color teal #1abc9c;
-@define-color border rgba(122, 162, 247, 0.2);
+@define-color bg #282828;
+@define-color bg-hover #3c3836;
+@define-color fg #ebdbb2;
+@define-color blue #83a598;
+@define-color cyan #8ec07c;
+@define-color magenta #d3869b;
+@define-color pink #d3869b;
+@define-color red #fb4934;
+@define-color yellow #fabd2f;
+@define-color green #b8bb26;
+@define-color teal #8ec07c;
+@define-color orange #fe8019;
+@define-color grey #928374;
+@define-color gruvbox @orange;
+@define-color border @orange;
 
 * {
     border: none;
@@ -25,7 +28,6 @@
 
 window#waybar {
     background-color: @bg;
-    border-bottom: 1px solid @border;
     color: @fg;
     transition-property: background-color;
     transition-duration: .5s;
@@ -46,28 +48,28 @@ window#waybar {
     padding: 0 10px;
     font-size: 12px;
     color: @fg; /* Bright color for occupied workspaces */
-    background: rgba(122, 162, 247, 0.05); /* Very subtle highlight for occupied */
+    background: rgba(254, 128, 25, 0.05); /* Very subtle highlight for occupied */
     transition: all 0.3s ease;
     min-width: 0;
 }
 
 /* State: Workspace is empty (persistent but no windows) */
 #workspaces button.persistent {
-    color: #565f89; /* Dimmed color for empty workspaces */
+    color: @grey; /* Dimmed color for empty workspaces */
     background: transparent;
 }
 
 #workspaces button:hover {
-    color: @blue;
-    background: rgba(122, 162, 247, 0.1);
+    color: @gruvbox;
+    background: rgba(254, 128, 25, 0.1);
 }
 
 /* State: Currently focused workspace */
 #workspaces button.focused,
 #workspaces button.active {
-    color: @blue;
-    background: rgba(122, 162, 247, 0.1);
-    border-bottom: 2px solid @blue;
+    color: @gruvbox;
+    background: rgba(254, 128, 25, 0.1);
+    border-bottom: 2px solid @gruvbox;
     font-weight: bold;
 }
 
@@ -88,7 +90,7 @@ window#waybar {
 
 /* Specific Accents */
 #custom-launcher {
-    color: @blue;
+    color: @gruvbox;
     font-size: 16px;
 }
 
@@ -113,7 +115,7 @@ window#waybar {
 /* Tooltip Styling */
 tooltip {
     background: @bg;
-    border: 1px solid @blue;
+    border: 1px solid @border;
     border-radius: 8px;
 }
 

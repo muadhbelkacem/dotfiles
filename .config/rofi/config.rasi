@@ -12,16 +12,17 @@ configuration {
 @import "/dev/null"
 
 * {
-    bg0:     #1e1e1e;
-    bg1:     #252526;
-    bg2:     #37373d;
-    bg3:     #2a2d2e;
-    bg4:     #3f3f46;
-    fg:      #cccccc;
-    red:     #f44747;
-    blue:    #007acc;
-    green:   #6a9955;
-    yellow:  #dcdcaa;
+    bg0:     #282828;
+    bg1:     #3c3836;
+    bg2:     #504945;
+    bg3:     #665c54;
+    bg4:     #7c6f64;
+    fg:      #ebdbb2;
+    red:     #fb4934;
+    blue:    #83a598;
+    green:   #b8bb26;
+    yellow:  #fabd2f;
+    orange:  #fe8019;
 
     background-color:            transparent;
     text-color:                  @fg;
@@ -33,9 +34,9 @@ configuration {
 window {
     width:                       600px;
     enabled:                     true;
-    border:                      1px solid;
+    border:                      2px solid;
     border-radius:               0px;
-    border-color:                @blue;
+    border-color:                @orange;
     background-color:            @bg0;
     cursor:                      "default";
 }
@@ -120,7 +121,7 @@ element normal.active {
 
 element selected.normal {
     background-color:            @bg2;
-    text-color:                  #ffffff;
+    text-color:                  @fg;
 }
 
 element selected.urgent {
@@ -130,7 +131,7 @@ element selected.urgent {
 
 element selected.active {
     background-color:            @bg2;
-    text-color:                  #ffffff;
+    text-color:                  @fg;
 }
 
 element alternate.normal {
