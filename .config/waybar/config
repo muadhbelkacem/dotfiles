@@ -23,7 +23,9 @@
         "tray",
         "sway/language",
         "pulseaudio",
+        "pulseaudio/slider",
         "backlight",
+        "backlight/slider",
         "network",
         "battery",
         "custom/power"
@@ -81,6 +83,12 @@
         "format-icons": ["󰃞", "󰃟", "󰃠"]
     },
 
+    "backlight/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+
     "battery": {
         "states": {
             "warning": 30,
@@ -102,11 +110,18 @@
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
-        "format-muted": "󰝟",
+        "format-muted": "󰝟 0%",
         "format-icons": {
             "default": ["󰕿", "󰖀", "󰕾"]
         },
-        "on-click": "pavucontrol"
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol"
+    },
+
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
     },
 
     "tray": {
