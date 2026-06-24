@@ -15,5 +15,7 @@ set background=dark
 set cursorline
 
 " coc.nvim
+colorscheme wildcharm
 let g:coc_global_extensions = ['coc-clangd']
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gf <Plug>(coc-format)
