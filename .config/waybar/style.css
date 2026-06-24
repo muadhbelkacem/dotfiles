@@ -2,22 +2,22 @@
  * Simple & Solid Waybar Style
  */
 
-@define-color bg #121212;
-@define-color bg-hover #1c1c1c;
+@define-color bg #000000;
+@define-color bg-hover #303030;
 @define-color fg #d0d0d0;
 @define-color blue #0087d7;
 @define-color cyan #00afaf;
 @define-color magenta #d787d7;
-@define-color pink #d787d7;
+@define-color pink #ff5f87;
 @define-color red #d75f5f;
 @define-color yellow #d78700;
 @define-color green #00af5f;
 @define-color teal #00afaf;
-@define-color orange #d78700;
+@define-color orange #ffa500;
 @define-color purple #875fff;
-@define-color grey #808080;
+@define-color grey #87875f;
 @define-color accent @blue;
-@define-color border @blue;
+@define-color border @bg-hover;
 
 * {
     border: none;
