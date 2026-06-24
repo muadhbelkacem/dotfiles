@@ -12,3 +12,35 @@ bindings = [
   { key = "J", mods = "Control", action = "ScrollLineDown" },
   { key = "K", mods = "Control", action = "ScrollLineUp" },
 ]
+
+[colors.primary]
+background = "#000000"
+foreground = "#d0d0d0"
+
+[colors.normal]
+black = "#000000"
+red = "#d75f5f"
+green = "#00af5f"
+yellow = "#d78700"
+blue = "#0087d7"
+magenta = "#d787d7"
+cyan = "#00afaf"
+white = "#d0d0d0"
+
+[colors.bright]
+black = "#5f5f5f"
+red = "#ff5f87"
+green = "#00d75f"
+yellow = "#ffaf00"
+blue = "#00afff"
+magenta = "#ff87ff"
+cyan = "#00d7d7"
+white = "#ffffff"
+
+[colors.selection]
+text = "CellForeground"
+background = "#303030"
+
+[colors.cursor]
+text = "CellBackground"
+cursor = "#d0d0d0"
