@@ -2,21 +2,22 @@
  * Simple & Solid Waybar Style
  */
 
-@define-color bg #282828;
-@define-color bg-hover #3c3836;
-@define-color fg #ebdbb2;
-@define-color blue #83a598;
-@define-color cyan #8ec07c;
-@define-color magenta #d3869b;
-@define-color pink #d3869b;
-@define-color red #fb4934;
-@define-color yellow #fabd2f;
-@define-color green #b8bb26;
-@define-color teal #8ec07c;
-@define-color orange #fe8019;
-@define-color grey #928374;
-@define-color gruvbox @orange;
-@define-color border @orange;
+@define-color bg #121212;
+@define-color bg-hover #1c1c1c;
+@define-color fg #d0d0d0;
+@define-color blue #0087d7;
+@define-color cyan #00afaf;
+@define-color magenta #d787d7;
+@define-color pink #d787d7;
+@define-color red #d75f5f;
+@define-color yellow #d78700;
+@define-color green #00af5f;
+@define-color teal #00afaf;
+@define-color orange #d78700;
+@define-color purple #875fff;
+@define-color grey #808080;
+@define-color accent @blue;
+@define-color border @blue;
 
 * {
     border: none;
@@ -48,7 +49,7 @@ window#waybar {
     padding: 0 10px;
     font-size: 12px;
     color: @fg; /* Bright color for occupied workspaces */
-    background: rgba(254, 128, 25, 0.05); /* Very subtle highlight for occupied */
+    background: rgba(0, 135, 215, 0.05); /* Very subtle highlight for occupied */
     transition: all 0.3s ease;
     min-width: 0;
 }
@@ -60,16 +61,16 @@ window#waybar {
 }
 
 #workspaces button:hover {
-    color: @gruvbox;
-    background: rgba(254, 128, 25, 0.1);
+    color: @accent;
+    background: rgba(0, 135, 215, 0.1);
 }
 
 /* State: Currently focused workspace */
 #workspaces button.focused,
 #workspaces button.active {
-    color: @gruvbox;
-    background: rgba(254, 128, 25, 0.1);
-    border-bottom: 2px solid @gruvbox;
+    color: @accent;
+    background: rgba(0, 135, 215, 0.1);
+    border-bottom: 2px solid @accent;
     font-weight: bold;
 }
 
@@ -94,7 +95,7 @@ window#waybar {
 
 /* Specific Accents */
 #custom-launcher {
-    color: @gruvbox;
+    color: @accent;
     font-size: 16px;
 }
 
