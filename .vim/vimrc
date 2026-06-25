@@ -1,22 +1,59 @@
-call plug#begin('~/.vim/plugged')
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-call plug#end()
+vim9script
+
+plug#begin('~/.vim/plugged')
+Plug 'neoclide/coc.nvim'
+plug#end()
 
 set number
 set relativenumber
 set clipboard=unnamedplus
 set virtualedit=all
 set textwidth=0
-set formatoptions-=t   
+set formatoptions-=t
 set nowrap
 set sidescrolloff=9999
 set scrolloff=9999
 set background=dark
 set cursorline
 set splitbelow
+set autochdir
+syntax off
 
-" coc.nvim
+g:mapleader = "."
+
+# coc.nvim
 colorscheme wildcharm
-let g:coc_global_extensions = ['coc-clangd']
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gf <Plug>(coc-format)
+g:coc_global_extensions = ['coc-clangd']
+nnoremap <silent> <leader>d <Plug>(coc-definition)
+nnoremap <silent> <leader>f <Plug>(coc-format)
+
+# netrw
+g:netrw_banner = 0
+g:netrw_winsize = 30
+g:netrw_browse_split = 4
+nnoremap <leader>e :Lexplore!<CR>
+
+
+# terminal
+def ToggleTerminal()
+    var term_bufs = term_list()
+    if empty(term_bufs)
+        tab terminal tmux new-session -A
+    else
+        var bnr = term_bufs[0]
+        var winid = bufwinid(bnr)
+        if winid != -1
+            if winid == win_getid()
+                hide
+            else
+                win_gotoid(winid)
+            endif
+        else
+            execute 'tab sbuf ' .. bnr
+        endif
+    endif
+enddef
+
+nnoremap <silent> <C-@> <scriptcmd>ToggleTerminal()<CR>
+tnoremap <silent> <C-@> <scriptcmd>ToggleTerminal()<CR>
+
