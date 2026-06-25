@@ -26,9 +26,8 @@ set $scratchpad_size 90 ppt
 # Screenshot directory
 set $screenshot_dir ~/screenshots
 
-# Emacs Wombat colors
-# Gruvbox colors
-set $bg0     #282828
+# Colors
+set $bg0     #000000
 set $bg1     #3c3836
 set $bg2     #504945
 set $bg3     #665c54
@@ -64,7 +63,7 @@ gaps inner 0
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/wallpapers/3.jpg fill
+output * bg $bg0 solid_color
 #
 # Example configuration:
 #
