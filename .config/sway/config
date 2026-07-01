@@ -110,6 +110,8 @@ exec_always ~/.config/sway/scripts/battery-notify.sh
 # You can also configure each device individually.
 # Read `man 5 sway-input` for more information about this section.
 
+focus_follows_mouse no
+
 input type:keyboard {
     xkb_layout "us,ara,fr"
     xkb_options caps:escape,altwin:menu_win
