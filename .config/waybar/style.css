@@ -3,20 +3,20 @@
  */
 
 @define-color bg #000000;
-@define-color bg-hover #303030;
-@define-color fg #d0d0d0;
-@define-color blue #0087d7;
-@define-color cyan #00afaf;
-@define-color magenta #d787d7;
-@define-color pink #ff5f87;
-@define-color red #d75f5f;
-@define-color yellow #d78700;
-@define-color green #00af5f;
-@define-color teal #00afaf;
-@define-color orange #ffa500;
-@define-color purple #875fff;
-@define-color grey #87875f;
-@define-color accent @blue;
+@define-color bg-hover #3c3836;
+@define-color fg #ebdbb2;
+@define-color blue #83a598;
+@define-color cyan #8ec07c;
+@define-color magenta #d3869b;
+@define-color pink #d3869b;
+@define-color red #fb4934;
+@define-color yellow #fabd2f;
+@define-color green #b8bb26;
+@define-color teal #8ec07c;
+@define-color orange #fe8019;
+@define-color purple #d3869b;
+@define-color grey #928374;
+@define-color accent @orange;
 @define-color border @bg-hover;
 
 * {
@@ -49,7 +49,7 @@ window#waybar {
     padding: 0 10px;
     font-size: 12px;
     color: @fg; /* Bright color for occupied workspaces */
-    background: rgba(0, 135, 215, 0.05); /* Very subtle highlight for occupied */
+    background: rgba(254, 128, 25, 0.05); /* Very subtle highlight for occupied */
     transition: all 0.3s ease;
     min-width: 0;
 }
@@ -62,14 +62,14 @@ window#waybar {
 
 #workspaces button:hover {
     color: @accent;
-    background: rgba(0, 135, 215, 0.1);
+    background: rgba(254, 128, 25, 0.1);
 }
 
 /* State: Currently focused workspace */
 #workspaces button.focused,
 #workspaces button.active {
     color: @accent;
-    background: rgba(0, 135, 215, 0.1);
+    background: rgba(254, 128, 25, 0.1);
     border-bottom: 2px solid @accent;
     font-weight: bold;
 }
@@ -104,7 +104,7 @@ window#waybar {
 }
 
 #backlight { color: @cyan; }
-#pulseaudio { color: @blue; }
+#pulseaudio { color: @purple; }
 #network { color: @teal; }
 #battery { color: @green; }
 #language { color: @magenta; }
@@ -136,7 +136,7 @@ window#waybar {
 #pulseaudio-slider highlight {
     min-height: 5px;
     border-radius: 5px;
-    background-color: @blue;
+    background-color: @purple;
 }
 
 #backlight-slider highlight {
