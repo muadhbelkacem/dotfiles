@@ -7,6 +7,7 @@ configuration {
     drun-display-format:        "{name}";
     font:                       "JetBrainsMono Nerd Font 11";
     icon-theme:                 "Papirus";
+    scroll-method:              1;
 }
 
 @import "/dev/null"
