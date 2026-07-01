@@ -45,9 +45,9 @@ set $grey    #928374
 
 # Window decorations
 # target                 border  bg      text    indicator child_border
-client.focused           $orange $orange $bg0    $purple   $orange
+client.focused           $bg1    $bg1    $bg0    $purple   $bg1
 client.focused_inactive  $bg3    $bg3    $fg     $bg3      $bg3
-client.unfocused         $bg1    $bg1    $grey   $bg1      $bg1
+client.unfocused         $bg0    $bg0    $grey   $bg0      $bg0
 client.urgent            $red    $red    $bg0    $red      $red
 client.placeholder       $bg0    $bg0    $fg     $bg0      $bg0
 client.background        $bg0
