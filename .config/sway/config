@@ -81,6 +81,7 @@ exec mako
 exec_always ~/.config/sway/scripts/layout-notify.sh
 exec_always ~/.config/sway/scripts/battery-notify.sh
 exec_always ~/.config/sway/scripts/scratchpad-autohide.sh
+exec_always ~/.config/sway/scripts/master-stack-layout.sh
 ### Idle configuration
 #
 # Example configuration:
