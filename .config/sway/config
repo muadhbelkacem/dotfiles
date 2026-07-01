@@ -80,6 +80,7 @@ exec --no-startup-id /usr/libexec/xdg-desktop-portal-wlr
 exec mako
 exec_always ~/.config/sway/scripts/layout-notify.sh
 exec_always ~/.config/sway/scripts/battery-notify.sh
+exec_always ~/.config/sway/scripts/scratchpad-autohide.sh
 ### Idle configuration
 #
 # Example configuration:
@@ -295,8 +296,8 @@ for_window [instance="scratchpad"] mark scratchpad_term, floating enable, resize
 
 # Toggle logic for $mod+s:
 # 1. Try to toggle via mark (most reliable way to find our specific scratchpad terminal)
-# 2. If no window with that mark exists, launch a new Alacritty instance with the specified class
-bindsym $mod+s exec swaymsg '[con_mark="scratchpad_term"] scratchpad show' || alacritty --class scratchpad
+# 2. If no window with that mark exists, launch a new terminal instance with the specified class
+bindsym $mod+s exec swaymsg '[con_mark="scratchpad_term"] scratchpad show' || $term --class scratchpad
 
 # Initialize workspace history so $mod+Tab has a "last" workspace (2) to switch to from startup
 exec swaymsg "workspace number 2; workspace number 1"
