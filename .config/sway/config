@@ -55,6 +55,7 @@ client.background        $bg0
 # Hide title bars
 default_border pixel 2
 default_floating_border normal
+smart_borders on
 
 # Gaps
 gaps outer 0
