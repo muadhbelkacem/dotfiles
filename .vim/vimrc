@@ -17,12 +17,11 @@ set background=dark
 set cursorline
 set splitbelow
 set autochdir
-syntax off
 
 g:mapleader = "."
 
 # coc.nvim
-colorscheme wildcharm
+colorscheme habamax
 g:coc_global_extensions = ['coc-clangd']
 nnoremap <silent> <leader>d <Plug>(coc-definition)
 nnoremap <silent> <leader>f <Plug>(coc-format)

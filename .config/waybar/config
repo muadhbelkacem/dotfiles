@@ -69,11 +69,11 @@
             "mode"          : "month",
             "weeks-pos"     : "right",
             "format": {
-                "months":     "<span color='#fab387'><b>{}</b></span>",
-                "days":       "<span color='#cdd6f4'><b>{}</b></span>",
-                "weeks":      "<span color='#89b4fa'><b>W{}</b></span>",
-                "weekdays":   "<span color='#a6e3a1'><b>{}</b></span>",
-                "today":      "<span color='#f38ba8'><b><u>{}</u></b></span>"
+                "months":     "<span color='#d7875f'><b>{}</b></span>",
+                "days":       "<span color='#bcbcbc'><b>{}</b></span>",
+                "weeks":      "<span color='#87afd7'><b>W{}</b></span>",
+                "weekdays":   "<span color='#87af87'><b>{}</b></span>",
+                "today":      "<span color='#d75f5f'><b><u>{}</u></b></span>"
             }
         }
     },
