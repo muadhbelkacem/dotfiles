@@ -1,7 +1,8 @@
 vim9script
 
 plug#begin('~/.vim/plugged')
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'NLKNguyen/papercolor-theme'
 plug#end()
 
 set number
@@ -17,11 +18,12 @@ set background=dark
 set cursorline
 set splitbelow
 set autochdir
+set termguicolors
 
 g:mapleader = "."
 
 # coc.nvim
-colorscheme habamax
+colorscheme PaperColor
 g:coc_global_extensions = ['coc-clangd']
 nnoremap <silent> <leader>d <Plug>(coc-definition)
 nnoremap <silent> <leader>f <Plug>(coc-format)
