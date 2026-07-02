@@ -1,4 +1,4 @@
-# Mako configuration - Gruvbox Theme
+# Mako configuration - Dark Colorscheme Theme
 
 font=JetBrainsMono Nerd Font 11
 width=350
@@ -13,21 +13,21 @@ default-timeout=5000
 ignore-timeout=0
 group-by=summary,body
 
-background-color=#282828
-text-color=#ebdbb2
-border-color=#fe8019
-progress-color=over #8ec07c
+background-color=#181818
+text-color=#e4e4ef
+border-color=#ffdd33
+progress-color=over #73c936
 
 [urgency=low]
-border-color=#3c3836
+border-color=#383838
 default-timeout=2000
 
 [urgency=normal]
-border-color=#fe8019
+border-color=#ffdd33
 default-timeout=5000
 
 [urgency=high]
-border-color=#fb4934
+border-color=#f43841
 default-timeout=0
 
 [grouped]
@@ -35,19 +35,19 @@ format=(%g) <b>%s</b>\n%b
 on-button-left=dismiss-group
 
 [summary="Volume"]
-background-color=#458588
-text-color=#282828
-border-color=#83a598
-progress-color=over #83a598
+background-color=#212121
+text-color=#96a6c8
+border-color=#96a6c8
+progress-color=#181818
 
 [summary="Brightness"]
-background-color=#d79921
-text-color=#282828
-border-color=#fabd2f
-progress-color=over #fabd2f
+background-color=#212121
+text-color=#95a99f
+border-color=#95a99f
+progress-color=#181818
 
 [summary="Battery"]
-background-color=#98971a
-text-color=#282828
-border-color=#b8bb26
-progress-color=over #b8bb26
+background-color=#212121
+text-color=#73c936
+border-color=#73c936
+progress-color=#181818

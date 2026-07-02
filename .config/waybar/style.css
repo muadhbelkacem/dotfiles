@@ -2,20 +2,20 @@
  * Simple & Solid Waybar Style - Habamax Theme
  */
 
-@define-color bg #1c1c1c;
-@define-color bg-hover #303030;
-@define-color fg #bcbcbc;
-@define-color grey #767676;
-@define-color red #d75f5f;
-@define-color orange #d7875f;
-@define-color yellow #afaf87;
-@define-color green #87af87;
-@define-color aqua #87afaf;
-@define-color blue #87afd7;
-@define-color purple #af87af;
+@define-color bg #181818;
+@define-color bg-hover #282828;
+@define-color fg #e4e4ef;
+@define-color grey #383838;
+@define-color red #f43841;
+@define-color orange #cc8c3c;
+@define-color yellow #ffdd33;
+@define-color green #73c936;
+@define-color aqua #95a99f;
+@define-color blue #96a6c8;
+@define-color purple #96a6c8; /* Derived or use blue */
 
 @define-color accent @yellow;
-@define-color border #303030;
+@define-color border #282828;
 
 * {
     border: none;
@@ -47,7 +47,7 @@ window#waybar {
     padding: 0 10px;
     font-size: 12px;
     color: @fg;
-    background: rgba(175, 175, 135, 0.05); /* Subtle @yellow highlight */
+    background: rgba(255, 221, 51, 0.05); /* Subtle @yellow highlight */
     transition: all 0.3s ease;
     min-width: 0;
 }
@@ -60,14 +60,14 @@ window#waybar {
 
 #workspaces button:hover {
     color: @accent;
-    background: rgba(175, 175, 135, 0.1);
+    background: rgba(255, 221, 51, 0.1);
 }
 
 /* State: Currently focused workspace */
 #workspaces button.focused,
 #workspaces button.active {
     color: @accent;
-    background: rgba(175, 175, 135, 0.1);
+    background: rgba(255, 221, 51, 0.1);
     border-bottom: 2px solid @accent;
     font-weight: bold;
 }
@@ -103,8 +103,8 @@ window#waybar {
 
 #backlight { color: @aqua; }
 #pulseaudio { color: @blue; }
-#network { color: @green; }
-#battery { color: @purple; }
+#network { color: @purple; }
+#battery { color: @green; }
 #language { color: @purple; }
 
 #battery.critical:not(.charging) {

@@ -27,18 +27,18 @@ set $scratchpad_size 90 ppt
 set $screenshot_dir ~/screenshots
 
 # Colors
-set $bg0     #1c1c1c
-set $bg1     #303030
-set $fg      #bcbcbc
-set $red     #d75f5f
-set $orange  #d7875f
-set $yellow  #afaf87
-set $green   #87af87
-set $blue    #87afd7
-set $aqua    #87afaf
-set $purple  #af87af
-set $grey    #767676
-set $accent  #afaf87
+set $bg0     #181818
+set $bg1     #282828
+set $fg      #e4e4ef
+set $red     #f43841
+set $orange  #cc8c3c
+set $yellow  #ffdd33
+set $green   #73c936
+set $blue    #96a6c8
+set $aqua    #95a99f
+set $purple  #96a6c8
+set $grey    #383838
+set $accent  #ffdd33
 
 # Window decorations
 # target                 border  bg      text    indicator child_border
