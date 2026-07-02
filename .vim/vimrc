@@ -2,7 +2,6 @@ vim9script
 
 plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'NLKNguyen/papercolor-theme'
 plug#end()
 
 set number
@@ -23,7 +22,7 @@ set termguicolors
 g:mapleader = "."
 
 # coc.nvim
-colorscheme PaperColor
+colorscheme dark-colorscheme
 g:coc_global_extensions = ['coc-clangd']
 nnoremap <silent> <leader>d <Plug>(coc-definition)
 nnoremap <silent> <leader>f <Plug>(coc-format)
