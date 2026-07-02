@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # master-stack-layout.sh
-# Implements a master-stack layout: one master window on the left,
-# and all other windows in a vertical stack on the right.
+# Implements a master-stack layout using a state machine:
+# one master window on the left, and all other windows in a vertical stack on the right.
 
 # Ensure only one instance of this script runs
 for pid in $(pgrep -f "${0##*/}"); do
@@ -12,16 +12,17 @@ done
 
 # --- LOGIC SEGMENTS (JQ Filters) ---
 
-# Segment 1: Event filter to identify new tiling windows
+# Segment 1: Event filter to identify new and moved tiling windows
 EVENT_FILTER="
-    select(.change == \"new\"
+    select((.change == \"new\" or .change == \"move\" or .change == \"focus\")
            and .container.type == \"con\"
            and (.container.floating == \"auto_off\" or .container.floating == \"user_off\")
     ) | .container.id
 "
 
-# Segment 2: Tree analyzer to determine workspace context and window counts
-CONTEXT_ANALYZER="
+# Segment 2: State Analyzer
+# Determines the current workspace topology and suggests a transition state.
+STATE_ANALYZER="
     def is_real_window:
         .type == \"con\" and (.window != null or .shell != null);
 
@@ -34,37 +35,62 @@ CONTEXT_ANALYZER="
       select(.wins | any(.id == (\$id | tonumber)))
     ] | first |
 
-    if . == null then \"error\" else
+    if . == null then \"IGNORE\" else
         (.wins | length) as \$count |
         (.wins | map(.id) | index(\$id | tonumber)) as \$idx |
         (.wins[1].id // \"none\") as \$target_id |
-        \"\\(\$count) \\(\$idx) \\(\$target_id)\"
+        (.ws | recurse(.nodes[]?) | select(.nodes? | any(.id == (\$id | tonumber))) | .layout) as \$layout |
+        (.wins[0].id) as \$first_id |
+        (.ws | recurse(.nodes[]?) | select(.nodes? | any(.id == \$first_id)) | .layout) as \$first_layout |
+
+        if \$count > 0 and \$first_layout == \"splitv\" then
+            \"REPAIR_MASTER \\(\$first_id)\"
+        elif \$count == 2 and \$idx == 1 and \$layout != \"splitv\" then
+            \"INIT_STACK\"
+        elif \$count > 2 and \$idx > 1 and \$layout != \"splitv\" then
+            \"ADD_TO_STACK \\(\$target_id)\"
+        else
+            \"STABLE\"
+        end
     end
 "
 
-# --- MAIN LOOP ---
+# --- MAIN LOOP (State Machine Dispatcher) ---
 
 swaymsg -t subscribe '["window"]' -m | jq --unbuffered -c "$EVENT_FILTER" | while read -r con_id; do
-    # Process tree with the analyzer. Passing con_id as a JQ variable via --arg.
-    result=$(swaymsg -t get_tree | jq -r --arg id "$con_id" "$CONTEXT_ANALYZER" 2>/dev/null)
+    # Analyze the tree and get the transition state
+    result=$(swaymsg -t get_tree | jq -r --arg id "$con_id" "$STATE_ANALYZER" 2>/dev/null)
 
-    if [[ "$result" == "error" || -z "$result" ]]; then
-        continue
-    fi
+    # Dispatch based on the suggested state
+    read -r state data <<< "$result"
 
-    read -r count idx target_id <<< "$result"
+    case "$state" in
+        REPAIR_MASTER)
+            # Master is missing or inside the stack; promote the first window.
+            target_id="$data"
+            swaymsg "[con_id=$target_id] move left"
+            ;;
 
-    # Segment 3: Layout Actions
-    # Use idx to ensure we only move windows that aren't already in the correct position.
-    if (( count == 2 && idx == 1 )); then
-        # Exactly two windows, and this is the second one: move it right to form the stack.
-        swaymsg "[con_id=$con_id] move right; [con_id=$con_id] split vertical"
-    elif (( count > 2 && idx > 1 )); then
-        # More than two windows, and this one isn't the master (0) or the stack top (1).
-        if [[ "$target_id" != "none" ]]; then
+        INIT_STACK)
+            # Two windows exist; move the new one right and initialize vertical split.
+            swaymsg "[con_id=$con_id] move right; [con_id=$con_id] split vertical"
+            ;;
+
+        ADD_TO_STACK)
+            # Three or more windows; move the new window to the existing stack top.
+            target_id="$data"
             mark="tmp_stack_$con_id"
-            cmd="[con_id=$target_id] mark --add $mark; [con_id=$con_id] move container to mark $mark; [con_id=$target_id] unmark $mark; [con_id=$con_id] move up"
-            swaymsg "$cmd"
-        fi
-    fi
+            swaymsg "[con_id=$target_id] mark --add $mark; [con_id=$con_id] move container to mark $mark; [con_id=$target_id] unmark $mark; [con_id=$con_id] move up"
+            ;;
+
+        STABLE | IGNORE)
+            # Layout is already correct or window is not actionable (e.g., master window).
+            continue
+            ;;
+
+        *)
+            # Fallback for unexpected analyzer output or jq errors.
+            continue
+            ;;
+    esac
 done
