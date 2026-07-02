@@ -2,20 +2,19 @@
  * Simple & Solid Waybar Style
  */
 
-@define-color bg #000000;
-@define-color bg-hover #3c3836;
-@define-color fg #ebdbb2;
-@define-color blue #83a598;
-@define-color cyan #8ec07c;
-@define-color magenta #d3869b;
-@define-color pink #d3869b;
-@define-color red #fb4934;
-@define-color yellow #fabd2f;
-@define-color green #b8bb26;
-@define-color teal #8ec07c;
-@define-color orange #fe8019;
-@define-color purple #d3869b;
-@define-color grey #928374;
+@define-color bg #121212;
+@define-color bg-hover #313244;
+@define-color fg #cdd6f4;
+@define-color blue #89b4fa;
+@define-color aqua #89dceb;
+@define-color purple #cba6f7;
+@define-color red #f38ba8;
+@define-color yellow #f9e2af;
+@define-color green #a6e3a1;
+@define-color orange #fab387;
+@define-color grey #6c7086;
+@define-color pink #f5c2e7;
+@define-color teal #94e2d5;
 @define-color accent @orange;
 @define-color border @bg-hover;
 
@@ -49,7 +48,7 @@ window#waybar {
     padding: 0 10px;
     font-size: 12px;
     color: @fg; /* Bright color for occupied workspaces */
-    background: rgba(254, 128, 25, 0.05); /* Very subtle highlight for occupied */
+    background: rgba(250, 179, 135, 0.05); /* Very subtle highlight for occupied */
     transition: all 0.3s ease;
     min-width: 0;
 }
@@ -62,14 +61,14 @@ window#waybar {
 
 #workspaces button:hover {
     color: @accent;
-    background: rgba(254, 128, 25, 0.1);
+    background: rgba(250, 179, 135, 0.1);
 }
 
 /* State: Currently focused workspace */
 #workspaces button.focused,
 #workspaces button.active {
     color: @accent;
-    background: rgba(254, 128, 25, 0.1);
+    background: rgba(250, 179, 135, 0.1);
     border-bottom: 2px solid @accent;
     font-weight: bold;
 }
@@ -103,11 +102,11 @@ window#waybar {
     color: @fg;
 }
 
-#backlight { color: @cyan; }
-#pulseaudio { color: @purple; }
-#network { color: @teal; }
-#battery { color: @green; }
-#language { color: @magenta; }
+#backlight { color: @aqua; }
+#pulseaudio { color: @blue; }
+#network { color: @green; }
+#battery { color: @purple; }
+#language { color: @purple; }
 
 #battery.critical:not(.charging) {
     color: @red;
@@ -136,13 +135,13 @@ window#waybar {
 #pulseaudio-slider highlight {
     min-height: 5px;
     border-radius: 5px;
-    background-color: @purple;
+    background-color: @blue;
 }
 
 #backlight-slider highlight {
     min-height: 5px;
     border-radius: 5px;
-    background-color: @cyan;
+    background-color: @aqua;
 }
 
 #custom-power {

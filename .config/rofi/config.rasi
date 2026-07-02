@@ -13,17 +13,17 @@ configuration {
 @import "/dev/null"
 
 * {
-    bg0:     #000000;
-    bg1:     #121212;
-    bg2:     #303030;
-    bg3:     #5f5f5f;
-    bg4:     #87875f;
-    fg:      #d0d0d0;
-    red:     #d75f5f;
-    blue:    #0087d7;
-    green:   #00af5f;
-    yellow:  #d78700;
-    orange:  #d78700;
+    bg0:     #121212;
+    bg1:     #1e1e2e;
+    bg2:     #313244;
+    bg3:     #45475a;
+    bg4:     #585b70;
+    fg:      #cdd6f4;
+    red:     #f38ba8;
+    blue:    #89b4fa;
+    green:   #a6e3a1;
+    yellow:  #f9e2af;
+    orange:  #fab387;
 
     background-color:            transparent;
     text-color:                  @fg;
