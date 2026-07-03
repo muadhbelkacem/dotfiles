@@ -61,7 +61,7 @@ exec 'hi Function guifg=' .. fg
 exec 'hi Statement guifg=' .. yellow .. ' gui=bold'
 exec 'hi Conditional guifg=' .. yellow .. ' gui=bold'
 exec 'hi Repeat guifg=' .. yellow .. ' gui=bold'
-exec 'hi Label guifg=' .. yellow .. ' gui=bold'
+exec 'hi Label guifg=' .. fg
 exec 'hi Operator guifg=' .. yellow
 exec 'hi Keyword guifg=' .. yellow .. ' gui=bold'
 exec 'hi Exception guifg=' .. yellow .. ' gui=bold'
