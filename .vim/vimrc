@@ -9,11 +9,11 @@ source ~/.vim/config/variables.vim
 # options
 source ~/.vim/config/options.vim
 
-# mappings
-source ~/.vim/config/mappings.vim
-
 # coc.nvim
 colorscheme dark-colorscheme
 
 # terminal
 source ~/.vim/config/terminal.vim
+
+# mappings
+source ~/.vim/config/mappings.vim

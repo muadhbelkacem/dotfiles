@@ -14,3 +14,8 @@ set cursorline
 set splitbelow
 set autochdir
 set termguicolors
+
+# indentation
+set tabstop=4
+set shiftwidth=4
+set expandtab

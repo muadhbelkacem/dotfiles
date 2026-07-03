@@ -1,3 +1,16 @@
 {
-  "inlayHint.enable": false
+  "inlayHint.enable": false,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact",
+    "json",
+    "graphql",
+    "markdown",
+    "css",
+    "scss",
+    "less",
+    "html"
+  ]
 }
