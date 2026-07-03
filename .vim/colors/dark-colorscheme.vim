@@ -10,7 +10,7 @@ endif
 
 g:colors_name = "dark-colorscheme"
 
-var bg = "#181818"
+var bg = "#101010"
 var fg = "#e4e4ef"
 var yellow = "#ffdd33"
 var green = "#73c936"

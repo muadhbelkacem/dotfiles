@@ -13,7 +13,7 @@ configuration {
 @import "/dev/null"
 
 * {
-    bg0:     #181818;
+    bg0:     #101010;
     bg1:     #282828;
     bg2:     #282828;
     bg3:     #383838;

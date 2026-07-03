@@ -13,7 +13,7 @@ default-timeout=5000
 ignore-timeout=0
 group-by=summary,body
 
-background-color=#181818
+background-color=#101010
 text-color=#e4e4ef
 border-color=#ffdd33
 progress-color=over #73c936
@@ -38,16 +38,16 @@ on-button-left=dismiss-group
 background-color=#212121
 text-color=#96a6c8
 border-color=#96a6c8
-progress-color=#181818
+progress-color=#101010
 
 [summary="Brightness"]
 background-color=#212121
 text-color=#95a99f
 border-color=#95a99f
-progress-color=#181818
+progress-color=#101010
 
 [summary="Battery"]
 background-color=#212121
 text-color=#73c936
 border-color=#73c936
-progress-color=#181818
+progress-color=#101010
