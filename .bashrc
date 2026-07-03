@@ -26,9 +26,7 @@ export PHP_INI_SCAN_DIR="/home/muadh/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 # --- Aliases ---
 
 # General
-alias ls='eza --icons'
-alias ll='ls -lah'
-alias c='clear'
+alias ll='eza -lah'
 alias grep='grep --color=auto'
 alias gr='grep'
 alias hst='history'
@@ -51,6 +49,8 @@ alias ro='yay -Yc'
 alias gts="git status"
 alias gtl="git log --oneline"
 alias gtc="git add .; git commit -m "
+alias gtd="git diff"
+alias gtdh='f(){ git diff HEAD~${1:-1} ${2:+HEAD~"$2"}; }; f'
 alias gtrh='f(){ if [ -z "$1" ]; then echo "Usage: gtrh <N>"; return 1; fi; git add . && git reset --hard HEAD~"$1"; }; f'
 alias gtrs='f(){ if [ -z "$1" ]; then echo "Usage: gtrs <N>"; return 1; fi; git add . && git reset --soft HEAD~"$1"; }; f'
 
