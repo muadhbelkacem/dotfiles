@@ -46,6 +46,9 @@ exec 'hi NonText guifg=' .. bg_plus_2
 exec 'hi SpecialKey guifg=' .. bg_plus_2
 exec 'hi Directory guifg=' .. niagara .. ' gui=bold'
 exec 'hi Title guifg=' .. yellow .. ' gui=bold'
+exec 'hi TabLine guibg=' .. bg .. ' guifg=' .. niagara .. ' gui=NONE'
+exec 'hi TabLineSel guibg=' .. bg .. ' guifg=' .. yellow .. ' gui=bold'
+exec 'hi TabLineFill guibg=' .. brown .. ' guifg=' .. bg .. ' gui=NONE'
 
 # Syntax
 exec 'hi Comment guifg=' .. brown .. ' gui=italic'
