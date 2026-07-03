@@ -26,10 +26,10 @@ var bg_minus_1 = "#101010"
 exec 'hi Normal guibg=' .. bg .. ' guifg=' .. fg
 exec 'hi CursorLine guibg=' .. bg_plus_1
 exec 'hi CursorLineNr guifg=' .. yellow .. ' gui=bold'
-exec 'hi LineNr guibg=' .. bg .. ' guifg=' .. bg_plus_2
+exec 'hi LineNr guibg=' .. bg .. ' guifg=' .. niagara
 exec 'hi VertSplit guifg=' .. bg_plus_1 .. ' guibg=NONE'
 exec 'hi StatusLine guibg=' .. bg_plus_1 .. ' guifg=' .. fg .. ' gui=NONE'
-exec 'hi StatusLineNC guibg=' .. bg_minus_1 .. ' guifg=' .. brown .. ' gui=NONE'
+exec 'hi StatusLineNC guibg=' .. bg_minus_1 .. ' guifg=' .. niagara .. ' gui=NONE'
 exec 'hi Visual guibg=' .. fg .. ' guifg=' .. bg
 exec 'hi Search guibg=' .. yellow .. ' guifg=' .. bg
 exec 'hi IncSearch guibg=' .. yellow .. ' guifg=' .. bg
