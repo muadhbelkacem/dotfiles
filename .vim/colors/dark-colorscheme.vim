@@ -104,31 +104,30 @@ exec 'hi DiagnosticWarn guifg=' .. yellow
 exec 'hi DiagnosticInfo guifg=' .. niagara
 exec 'hi DiagnosticHint guifg=' .. quartz
 
-exec 'hi CocErrorSign guifg=' .. red .. ' guibg=' .. bg_minus_1
-exec 'hi CocWarningSign guifg=' .. yellow .. ' guibg=' .. bg_minus_1
-exec 'hi CocInfoSign guifg=' .. niagara .. ' guibg=' .. bg_minus_1
-exec 'hi CocHintSign guifg=' .. quartz .. ' guibg=' .. bg_minus_1
+exec 'hi ErrorSign guifg=' .. red .. ' guibg=' .. bg_minus_1
+exec 'hi WarningSign guifg=' .. yellow .. ' guibg=' .. bg_minus_1
+exec 'hi InfoSign guifg=' .. niagara .. ' guibg=' .. bg_minus_1
+exec 'hi HintSign guifg=' .. quartz .. ' guibg=' .. bg_minus_1
 
-exec 'hi CocErrorVirtualText guifg=' .. red
-exec 'hi CocWarningVirtualText guifg=' .. yellow
-exec 'hi CocInfoVirtualText guifg=' .. niagara
-exec 'hi CocHintVirtualText guifg=' .. quartz
+exec 'hi ErrorVirtualText guifg=' .. red
+exec 'hi WarningVirtualText guifg=' .. yellow
+exec 'hi InfoVirtualText guifg=' .. niagara
+exec 'hi HintVirtualText guifg=' .. quartz
 
-exec 'hi CocErrorHighlight gui=undercurl guisp=' .. red
-exec 'hi CocWarningHighlight gui=undercurl guisp=' .. yellow
-exec 'hi CocInfoHighlight gui=undercurl guisp=' .. niagara
-exec 'hi CocHintHighlight gui=undercurl guisp=' .. quartz
+exec 'hi ErrorHighlight gui=undercurl guisp=' .. red
+exec 'hi WarningHighlight gui=undercurl guisp=' .. yellow
+exec 'hi InfoHighlight gui=undercurl guisp=' .. niagara
+exec 'hi HintHighlight gui=undercurl guisp=' .. quartz
 
-# Coc.nvim
-exec 'hi CocFloating guibg=' .. bg_plus_1
-exec 'hi CocErrorFloat guifg=' .. red .. ' guibg=' .. bg_plus_1
-exec 'hi CocWarningFloat guifg=' .. yellow .. ' guibg=' .. bg_plus_1
-exec 'hi CocInfoFloat guifg=' .. niagara .. ' guibg=' .. bg_plus_1
-exec 'hi CocHintFloat guifg=' .. quartz .. ' guibg=' .. bg_plus_1
+exec 'hi Floating guibg=' .. bg_plus_1
+exec 'hi ErrorFloat guifg=' .. red .. ' guibg=' .. bg_plus_1
+exec 'hi WarningFloat guifg=' .. yellow .. ' guibg=' .. bg_plus_1
+exec 'hi InfoFloat guifg=' .. niagara .. ' guibg=' .. bg_plus_1
+exec 'hi HintFloat guifg=' .. quartz .. ' guibg=' .. bg_plus_1
 
-exec 'hi CocHighlightText guibg=' .. bg_plus_2
-exec 'hi CocFadeOut guifg=' .. bg_plus_2
-exec 'hi CocUnusedHighlight guifg=' .. bg_plus_2
+exec 'hi HighlightText guibg=' .. bg_plus_2
+exec 'hi FadeOut guifg=' .. bg_plus_2
+exec 'hi UnusedHighlight guifg=' .. bg_plus_2
 
 # Markdown
 exec 'hi markdownCode guifg=' .. green
