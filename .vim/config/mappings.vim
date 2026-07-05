@@ -2,9 +2,15 @@ vim9script
 
 import autoload 'lib/netrw.vim'
 import autoload 'lib/terminal.vim'
+import autoload 'lib/fzf.vim'
 
 # netrw
 nnoremap <silent> <leader>e <scriptcmd>netrw.NetrwToggle()<CR>
+
+# fzf
+nnoremap <silent> <leader>p <scriptcmd>fzf.Files()<CR>
+nnoremap <silent> <leader>b <scriptcmd>fzf.Buffers()<CR>
+nnoremap <silent> <leader>g <scriptcmd>fzf.GitFiles()<CR>
 
 # tabs
 nnoremap <leader>j :tabprevious<CR>
