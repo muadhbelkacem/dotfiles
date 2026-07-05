@@ -98,11 +98,45 @@ exec 'hi DiffChange guibg=' .. yellow .. ' guifg=' .. bg
 exec 'hi DiffDelete guibg=' .. red .. ' guifg=' .. bg
 exec 'hi DiffText guibg=' .. fg .. ' guifg=' .. bg .. ' gui=bold'
 
-# Coc.nvim / Diagnostics
+# Diagnostics
+exec 'hi DiagnosticError guifg=' .. red
+exec 'hi DiagnosticWarn guifg=' .. yellow
+exec 'hi DiagnosticInfo guifg=' .. niagara
+exec 'hi DiagnosticHint guifg=' .. quartz
+
 exec 'hi CocErrorSign guifg=' .. red .. ' guibg=' .. bg_minus_1
 exec 'hi CocWarningSign guifg=' .. yellow .. ' guibg=' .. bg_minus_1
 exec 'hi CocInfoSign guifg=' .. niagara .. ' guibg=' .. bg_minus_1
 exec 'hi CocHintSign guifg=' .. quartz .. ' guibg=' .. bg_minus_1
+
+exec 'hi CocErrorVirtualText guifg=' .. red
+exec 'hi CocWarningVirtualText guifg=' .. yellow
+exec 'hi CocInfoVirtualText guifg=' .. niagara
+exec 'hi CocHintVirtualText guifg=' .. quartz
+
+exec 'hi CocErrorHighlight gui=undercurl guisp=' .. red
+exec 'hi CocWarningHighlight gui=undercurl guisp=' .. yellow
+exec 'hi CocInfoHighlight gui=undercurl guisp=' .. niagara
+exec 'hi CocHintHighlight gui=undercurl guisp=' .. quartz
+
+# Coc.nvim
+exec 'hi CocFloating guibg=' .. bg_plus_1
+exec 'hi CocErrorFloat guifg=' .. red .. ' guibg=' .. bg_plus_1
+exec 'hi CocWarningFloat guifg=' .. yellow .. ' guibg=' .. bg_plus_1
+exec 'hi CocInfoFloat guifg=' .. niagara .. ' guibg=' .. bg_plus_1
+exec 'hi CocHintFloat guifg=' .. quartz .. ' guibg=' .. bg_plus_1
+
+exec 'hi CocHighlightText guibg=' .. bg_plus_2
+exec 'hi CocFadeOut guifg=' .. bg_plus_2
+exec 'hi CocUnusedHighlight guifg=' .. bg_plus_2
+
+# Markdown
+exec 'hi markdownCode guifg=' .. green
+exec 'hi markdownCodeBlock guifg=' .. green
+exec 'hi markdownH1 guifg=' .. yellow .. ' gui=bold'
+exec 'hi markdownH2 guifg=' .. yellow .. ' gui=bold'
+exec 'hi markdownLinkText guifg=' .. niagara .. ' gui=underline'
+exec 'hi markdownUrl guifg=' .. niagara .. ' gui=underline'
 
 # Terminal Colors
 g:terminal_ansi_colors = [
