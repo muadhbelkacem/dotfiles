@@ -59,7 +59,10 @@ def CloseSidebar()
     var id = FindNetrwWin()
 
     if id != -1
-        win_execute(id, 'close')
+        # Prevent E444: Cannot close last window
+        if winnr('$') > 1 || tabpagenr('$') > 1
+            win_execute(id, 'close')
+        endif
         netrw_winid = -1
     endif
 enddef

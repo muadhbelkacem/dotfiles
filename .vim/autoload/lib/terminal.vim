@@ -64,5 +64,8 @@ export def ToggleTerminal()
             win_execute(wid, 'hide')
         endif
     endfor
-    hide
+
+    if winnr('$') > 1 || tabpagenr('$') > 1
+        hide
+    endif
 enddef
