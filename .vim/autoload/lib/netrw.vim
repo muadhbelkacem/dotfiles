@@ -1,24 +1,78 @@
 vim9script
 
 var netrw_last_dir = ''
+var netrw_winid = -1
 
-export def NetrwToggle()
-    var netrw_win = -1
+# --- TRACK DIRECTORY SAFELY ---
+augroup NetRWSidebarState
+    autocmd!
+
+    autocmd FileType netrw {
+        netrw_last_dir = get(b:, 'netrw_curdir', getcwd())
+    }
+
+    autocmd BufLeave * {
+        if &filetype ==# 'netrw'
+            netrw_last_dir = get(b:, 'netrw_curdir', getcwd())
+        endif
+    }
+augroup END
+
+
+# --- FIND EXISTING NETRW WINDOW ---
+def FindNetrwWin(): number
     for w in range(1, winnr('$'))
-        if getwinvar(w, '&ft') == 'netrw'
-            netrw_win = w
-            break
+        if getbufvar(winbufnr(w), '&filetype') ==# 'netrw'
+            return win_getid(w)
         endif
     endfor
+    return -1
+enddef
 
-    if netrw_win != -1
-        netrw_last_dir = getbufvar(winbufnr(netrw_win), 'netrw_curdir')
-        execute 'Lexplore!'
+
+# --- OPEN SIDEBAR ---
+def OpenSidebar(dir: string)
+    # Try reuse existing sidebar
+    var id = FindNetrwWin()
+
+    if id != -1
+        win_gotoid(id)
     else
-        if netrw_last_dir != '' && isdirectory(netrw_last_dir)
-            execute 'Lexplore! ' .. netrw_last_dir
-        else
-            execute 'Lexplore!'
-        endif
+        vertical botright split
+        var width = &columns * 30 / 100
+        execute 'vertical resize ' .. width
     endif
+
+    if dir != '' && isdirectory(dir)
+        execute 'Explore ' .. dir
+    else
+        execute 'Explore'
+    endif
+
+    setlocal winfixwidth
+    setlocal nobuflisted
+enddef
+
+
+# --- CLOSE SIDEBAR ---
+def CloseSidebar()
+    var id = FindNetrwWin()
+
+    if id != -1
+        win_execute(id, 'close')
+        netrw_winid = -1
+    endif
+enddef
+
+
+# --- TOGGLE ---
+export def NetrwToggle()
+    var id = FindNetrwWin()
+
+    if id != -1
+        CloseSidebar()
+        return
+    endif
+
+    OpenSidebar(netrw_last_dir)
 enddef
