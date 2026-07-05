@@ -20,6 +20,8 @@ var brown = "#cc8c3c"
 var red = "#f43841"
 var bg_plus_1 = "#282828"
 var bg_plus_2 = "#383838"
+var bg_plus_3 = "#484848"
+var bg_plus_4 = "#585858"
 var bg_minus_1 = "#101010"
 
 # Editor UI
@@ -88,6 +90,9 @@ exec 'hi SpecialComment guifg=' .. brown .. ' gui=italic'
 exec 'hi Debug guifg=' .. red
 
 exec 'hi Underlined guifg=' .. niagara .. ' gui=underline'
+exec 'hi Bold gui=bold'
+exec 'hi Italic gui=italic'
+exec 'hi StrikeThrough gui=strikethrough'
 exec 'hi Ignore guifg=' .. bg
 exec 'hi Error guifg=' .. red .. ' guibg=NONE'
 exec 'hi Todo guifg=' .. yellow .. ' guibg=NONE gui=bold'
@@ -125,17 +130,52 @@ exec 'hi WarningFloat guifg=' .. yellow .. ' guibg=' .. bg_plus_1
 exec 'hi InfoFloat guifg=' .. niagara .. ' guibg=' .. bg_plus_1
 exec 'hi HintFloat guifg=' .. quartz .. ' guibg=' .. bg_plus_1
 
-exec 'hi HighlightText guibg=' .. bg_plus_2
-exec 'hi FadeOut guifg=' .. bg_plus_2
-exec 'hi UnusedHighlight guifg=' .. bg_plus_2
+exec 'hi HighlightText guibg=' .. bg_plus_4
+exec 'hi FadeOut guifg=' .. bg_plus_4
+exec 'hi UnusedHighlight guifg=' .. bg_plus_4
+
+# Coc
+exec 'hi link CocErrorSign ErrorSign'
+exec 'hi link CocWarningSign WarningSign'
+exec 'hi link CocInfoSign InfoSign'
+exec 'hi link CocHintSign HintSign'
+
+exec 'hi link CocErrorVirtualText ErrorVirtualText'
+exec 'hi link CocWarningVirtualText WarningVirtualText'
+exec 'hi link CocInfoVirtualText InfoVirtualText'
+exec 'hi link CocHintVirtualText HintVirtualText'
+
+exec 'hi link CocErrorHighlight ErrorHighlight'
+exec 'hi link CocWarningHighlight WarningHighlight'
+exec 'hi link CocInfoHighlight InfoHighlight'
+exec 'hi link CocHintHighlight HintHighlight'
+
+exec 'hi link CocFadeOut FadeOut'
+exec 'hi link CocUnusedHighlight UnusedHighlight'
+
+exec 'hi link CocFloating Floating'
+exec 'hi link CocErrorFloat ErrorFloat'
+exec 'hi link CocWarningFloat WarningFloat'
+exec 'hi link CocInfoFloat InfoFloat'
+exec 'hi link CocHintFloat HintFloat'
+
+exec 'hi link CocHighlightText HighlightText'
+exec 'hi link CocCodeLens HintVirtualText'
+
+exec 'hi link CocBold Bold'
+exec 'hi link CocItalic Italic'
+exec 'hi link CocUnderline Underlined'
+exec 'hi link CocStrikeThrough StrikeThrough'
 
 # Markdown
-exec 'hi markdownCode guifg=' .. green
-exec 'hi markdownCodeBlock guifg=' .. green
-exec 'hi markdownH1 guifg=' .. yellow .. ' gui=bold'
-exec 'hi markdownH2 guifg=' .. yellow .. ' gui=bold'
-exec 'hi markdownLinkText guifg=' .. niagara .. ' gui=underline'
-exec 'hi markdownUrl guifg=' .. niagara .. ' gui=underline'
+exec 'hi link markdownCode String'
+exec 'hi link markdownCodeBlock String'
+exec 'hi link markdownH1 Title'
+exec 'hi link markdownH2 Title'
+exec 'hi link markdownLinkText Underlined'
+exec 'hi link markdownUrl Underlined'
+exec 'hi link markdownBold Bold'
+exec 'hi link markdownItalic Italic'
 
 # Terminal Colors
 g:terminal_ansi_colors = [
