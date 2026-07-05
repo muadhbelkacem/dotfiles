@@ -12,7 +12,6 @@ set scrolloff=9999
 set background=dark
 set cursorline
 set splitbelow
-set autochdir
 set termguicolors
 
 # indentation

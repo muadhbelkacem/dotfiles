@@ -1,7 +1,10 @@
 vim9script
 
+import autoload 'lib/netrw.vim'
+import autoload 'lib/terminal.vim'
+
 # netrw
-nnoremap <leader>e :Lexplore!<CR>
+nnoremap <silent> <leader>e <scriptcmd>netrw.NetrwToggle()<CR>
 
 # tabs
 nnoremap <leader>j :tabprevious<CR>
@@ -10,10 +13,10 @@ tnoremap <leader>j <C-W>:tabprevious<CR>
 tnoremap <leader>k <C-W>:tabnext<CR>
 
 # terminal
-nnoremap <silent> <leader><Space>    <scriptcmd>g:ToggleTerminal()<CR>
-tnoremap <silent> <leader><Space>    <scriptcmd>g:ToggleTerminal()<CR>
-nnoremap <silent> <leader>n           <scriptcmd>g:NewTerminal()<CR>
-tnoremap <silent> <leader>n           <scriptcmd>g:NewTerminal()<CR>
+nnoremap <silent> <leader><Space>    <scriptcmd>terminal.ToggleTerminal()<CR>
+tnoremap <silent> <leader><Space>    <scriptcmd>terminal.ToggleTerminal()<CR>
+nnoremap <silent> <leader>n           <scriptcmd>terminal.NewTerminal()<CR>
+tnoremap <silent> <leader>n           <scriptcmd>terminal.NewTerminal()<CR>
 
 # coc.nvim
 nnoremap <silent> <leader>d <Plug>(coc-definition)

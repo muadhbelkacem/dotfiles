@@ -12,8 +12,5 @@ source ~/.vim/config/options.vim
 # coc.nvim
 colorscheme dark-colorscheme
 
-# terminal
-source ~/.vim/config/terminal.vim
-
 # mappings
 source ~/.vim/config/mappings.vim

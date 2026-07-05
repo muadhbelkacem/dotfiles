@@ -28,18 +28,18 @@ def ShowTerminals(focus_buf: number = -1)
     endif
 enddef
 
-def g:NewTerminal()
+export def NewTerminal()
     term_count += 1
     tab terminal
     execute 'file term' .. term_count
     ShowTerminals(bufnr())
 enddef
 
-def g:ToggleTerminal()
+export def ToggleTerminal()
     const term_bufs = term_list()
 
     if empty(term_bufs)
-        g:NewTerminal()
+        NewTerminal()
         return
     endif
 
