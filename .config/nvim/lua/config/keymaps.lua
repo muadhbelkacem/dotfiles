@@ -1,7 +1,7 @@
 local keymap = vim.keymap
-local fzf = require("config.lib.fzf")
-local netrw = require("config.lib.netrw")
-local terminal = require("config.lib.terminal")
+local fzf = require("lib.fzf")
+local netrw = require("lib.netrw")
+local terminal = require("lib.terminal")
 
 -- Netrw
 keymap.set("n", "<leader>e", netrw.toggle)
