@@ -12,5 +12,10 @@
     "scss",
     "less",
     "html"
-  ]
+  ],
+  "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.cargo.allFeatures": true,
+  "rust-analyzer.procMacro.enable": true,
+  "rust-analyzer.diagnostics.enable": true,
+  "rust-analyzer.hover.actions.enable": true
 }
