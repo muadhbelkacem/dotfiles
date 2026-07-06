@@ -1,89 +1,41 @@
------------------------------------------------------------
--- General
------------------------------------------------------------
--- Set leader key to space
-vim.g.mapleader = " "
--- Set leader key to space
-vim.g.maplocalleader = " "
+vim.g.mapleader = vim.api.nvim_replace_termcodes("<C-Space>", true, true, true)
+vim.g.maplocalleader = vim.api.nvim_replace_termcodes("<C-Space>", true, true, true)
 
-vim.opt.virtualedit = "all"
--- Sync system clipboard
-vim.opt.clipboard = "unnamedplus"
--- Number of spaces a tab represents
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
+local opt = vim.opt
 
--- Use appropriate when using indent command
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 4
+opt.number = true
+opt.relativenumber = true
+opt.clipboard = "unnamedplus"
+opt.virtualedit = "all"
+opt.textwidth = 0
+opt.formatoptions:remove("t")
+opt.wrap = false
+opt.sidescrolloff = 9999
+opt.scrolloff = 9999
+opt.background = "dark"
+opt.cursorline = true
+opt.splitbelow = true
+opt.termguicolors = true
 
--- Indenting correctly after { etc
-vim.opt.smartindent = true
+-- Indentation
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = true
 
--- Copy indent from current line when starting new line
-vim.opt.autoindent = true
+require("colors.dark-colorscheme").setup()
 
--- Prevent line wrapping
-vim.opt.breakindent = true
+-- Netrw
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 30
+vim.g.netrw_browse_split = 4
+vim.g.netrw_keepdir = 1
 
--- Disable text wrap
-vim.opt.wrap = false
-
--- Speeds up plugin wait time
-vim.opt.updatetime = 50
-
--- Persistant undo file history
-vim.opt.undofile = true
------------------------------------------------------------
--- UI Config
------------------------------------------------------------
--- Enable line numbers
-vim.opt.nu = true
-
--- Enable relative line numbers
-vim.opt.rnu = true
-
--- Disable showing the mode below the statusline
-vim.opt.showmode = false
-
--- Better completion experience
-vim.opt.completeopt = { "menuone", "noselect" }
-
--- Enable 24-bit color
-vim.opt.termguicolors = true
-
--- Enable the sign column to prevent the screen from jumping
-vim.opt.signcolumn = "yes"
-
--- Enable cursor line highlight
-vim.opt.cursorline = true
-
--- Always keep cursor in middle of file
-vim.opt.scrolloff = 9999
-
--- Better splitting
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-
--- Faster scrolling
-vim.opt.lazyredraw = true
-
--- Highlight yank
-vim.api.nvim_create_autocmd("textyankpost", {
-    group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
-    pattern = "*",
-    desc = "highlight selection on yank",
-    callback = function()
-        vim.highlight.on_yank({ timeout = 200, visual = true })
-    end,
-})
-
------------------------------------------------------------
--- Search Config
------------------------------------------------------------
--- Enable highlighting search in progress
-vim.opt.incsearch = true
-
--- Ignore case for searches
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+-- Coc
+vim.g.coc_global_extensions = {
+  "coc-clangd",
+  "coc-tsserver",
+  "coc-eslint",
+  "coc-json",
+  "coc-prettier",
+  "coc-rust-analyzer",
+}

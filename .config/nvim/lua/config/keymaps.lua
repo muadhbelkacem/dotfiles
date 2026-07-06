@@ -1,30 +1,25 @@
--- Disable Space bar since it'll be used as the leader key
-vim.keymap.set("n", "<leader>", "<nop>")
+local keymap = vim.keymap
+local fzf = require("config.lib.fzf")
+local netrw = require("config.lib.netrw")
+local terminal = require("config.lib.terminal")
 
--- Redo remap
-vim.keymap.set("n", "U", "<C-r>")
+-- Netrw
+keymap.set("n", "<leader>e", netrw.toggle)
 
--- Save and quit current file quicker
-vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { silent = false })
-vim.keymap.set({ "n", "i", "v" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
-vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { silent = false })
+-- FZF
+keymap.set("n", "<leader>p", fzf.files)
+keymap.set("n", "<leader>b", fzf.buffers)
+keymap.set("n", "<leader>g", fzf.git_files)
 
--- Terminal navigation
-vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], { silent = true })
-vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]], { silent = true })
-vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]], { silent = true })
-vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]], { silent = true })
+-- Terminal
+keymap.set({ "n", "t" }, "<leader><Space>", terminal.toggle_terminal)
+keymap.set({ "n", "t" }, "<leader>n", terminal.new_terminal)
 
--- LSP Navigation
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
-vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover info" })
+-- Tabs
+keymap.set("n", "<leader>j", ":tabprevious<CR>")
+keymap.set("n", "<leader>k", ":tabnext<CR>")
+keymap.set("t", "<leader>j", [[<C-\><C-n>:tabprevious<CR>]])
+keymap.set("t", "<leader>k", [[<C-\><C-n>:tabnext<CR>]])
 
--- Go back and forward in jump list
-vim.keymap.set("n", "gb", "<C-o>", { desc = "Go back" })
-vim.keymap.set("n", "gf", "<C-i>", { desc = "Go forward" })
-
--- Toggle Arabic support
-vim.keymap.set("n", "<leader>ar", function()
-    vim.opt.arabic = not vim.opt.arabic:get()
-end, { desc = "Toggle Arabic support" })
+-- Terminal escape
+keymap.set("t", "<Esc>", [[<C-\><C-n>]])
