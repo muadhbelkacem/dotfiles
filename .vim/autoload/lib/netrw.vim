@@ -1,6 +1,6 @@
 vim9script
 
-var netrw_last_dir = ''
+var netrw_last_dir = getcwd()
 var netrw_winid = -1
 
 # --- TRACK DIRECTORY SAFELY ---
@@ -46,7 +46,7 @@ def OpenSidebar(dir: string)
     if dir != '' && isdirectory(dir)
         execute 'Explore ' .. dir
     else
-        execute 'Explore'
+        execute 'Explore ' .. getcwd()
     endif
 
     setlocal winfixwidth
