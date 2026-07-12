@@ -10,7 +10,7 @@ function M.setup()
   vim.o.background = "dark"
 
   local palette = {
-    bg = "#101010",
+    bg = "#181818",
     fg = "#e4e4ef",
     yellow = "#ffdd33",
     green = "#73c936",
@@ -18,11 +18,11 @@ function M.setup()
     quartz = "#95a99f",
     brown = "#cc8c3c",
     red = "#f43841",
-    bg_plus_1 = "#282828",
-    bg_plus_2 = "#383838",
-    bg_plus_3 = "#484848",
-    bg_plus_4 = "#585858",
-    bg_minus_1 = "#101010",
+    bg_plus_1 = "#292929",
+    bg_plus_2 = "#3a3a3a",
+    bg_plus_3 = "#4b4b4b",
+    bg_plus_4 = "#5c5c5c",
+    bg_minus_1 = "#111111",
   }
 
   local highlights = {
@@ -37,7 +37,7 @@ function M.setup()
     Visual = { fg = palette.bg, bg = palette.fg },
     Search = { fg = palette.bg, bg = palette.yellow },
     IncSearch = { fg = palette.bg, bg = palette.yellow },
-    MatchParen = { fg = palette.yellow, bg = "#52494e", bold = true },
+    MatchParen = { fg = palette.yellow, bg = palette.bg, bold = true },
     Pmenu = { fg = palette.fg, bg = palette.bg_plus_1 },
     PmenuSel = { fg = palette.bg, bg = palette.yellow },
     PmenuSbar = { bg = palette.bg_plus_1 },

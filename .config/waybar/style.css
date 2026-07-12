@@ -2,32 +2,24 @@
  * Simple & Solid Waybar Style - Habamax Theme
  */
 
-@define-color bg #101010;
-@define-color bg-hover #282828;
-@define-color fg #e4e4ef;
-@define-color grey #383838;
-@define-color red #f43841;
-@define-color orange #cc8c3c;
-@define-color yellow #ffdd33;
-@define-color green #73c936;
-@define-color aqua #95a99f;
-@define-color blue #96a6c8;
-@define-color purple #ae98b3; /* Updated to a distinct purple */
-
-@define-color accent @yellow;
-@define-color border #282828;
+@define-color bg #181818;
+@define-color bg-hover #292929;
+@define-color white #ffffff;
+@define-color grey #7c7c7c;
+@define-color border #292929;
 
 * {
     border: none;
     border-radius: 0;
     font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
     font-size: 13px;
+    min-width: 0;
     min-height: 0;
 }
 
 window#waybar {
     background-color: @bg;
-    color: @fg;
+    color: @white;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -35,123 +27,104 @@ window#waybar {
 /* Remove island styling */
 .modules-left, .modules-center, .modules-right {
     background-color: transparent;
-    border: none;
-    border-radius: 0;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
 }
 
 /* Workspaces */
 #workspaces button {
     padding: 0 10px;
     font-size: 12px;
-    color: @blue;
-    background: alpha(@blue, 0.05);
+    color: @white;
+    background: alpha(@white, 0.05);
     transition: all 0.3s ease;
-    min-width: 0;
 }
 
-/* State: Workspace is empty (persistent but no windows) */
 #workspaces button.persistent {
     color: @grey;
     background: transparent;
 }
 
 #workspaces button:hover {
-    color: @accent;
-    background: alpha(@accent, 0.1);
+    color: @white;
+    background: alpha(@white, 0.1);
 }
 
-/* State: Visible on other monitors but not focused */
 #workspaces button.visible {
-    color: @fg;
-    background: alpha(@fg, 0.05);
+    background: alpha(@white, 0.05);
 }
 
-/* State: Currently focused workspace */
 #workspaces button.focused,
 #workspaces button.active {
-    color: @accent;
-    background: alpha(@accent, 0.15);
-    border-bottom: 2px solid @accent;
+    background: alpha(@white, 0.15);
+    border-bottom: 2px solid @white;
     font-weight: bold;
 }
 
 #workspaces button.urgent {
-    color: @red;
-    background: alpha(@red, 0.1);
+    background: alpha(@white, 0.1);
 }
 
-/* Module Common Styling */
-#clock, #network, #battery, #tray, #language,
-#custom-launcher, #custom-power {
+/* Common Module Styling */
+#clock,
+#network,
+#battery,
+#tray,
+#language,
+#pulseaudio,
+#backlight,
+#custom-launcher,
+#custom-power {
     padding: 0 12px;
+    color: @white;
 }
 
-#pulseaudio, #backlight {
-    padding: 0 6px 0 12px;
+/* Alignment for modules followed by sliders */
+#pulseaudio,
+#backlight {
+    padding-right: 6px;
 }
 
-#clock:hover, #backlight:hover, #language:hover,
-#pulseaudio:hover, #network:hover, #battery:hover, #custom-launcher:hover {
+/* Hover effects */
+#clock:hover,
+#network:hover,
+#battery:hover,
+#language:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#custom-launcher:hover,
+#custom-power:hover {
     background-color: @bg-hover;
 }
 
-/* Specific Accents */
+/* Specific Adjustments */
 #custom-launcher {
-    color: @accent;
     font-size: 16px;
 }
 
-#clock {
-    color: @fg;
+/* Sliders Styling (Pulseaudio & Backlight) */
+#pulseaudio-slider,
+#backlight-slider {
+    padding-right: 12px;
 }
 
-#backlight { color: @aqua; }
-#pulseaudio { color: @blue; }
-#network { color: @purple; }
-#battery { color: @green; }
-#language { color: @purple; }
-
-#battery.critical:not(.charging) {
-    color: @red;
-}
-
-#pulseaudio-slider, #backlight-slider {
-    padding: 0 12px 0 0;
-}
-
-#pulseaudio-slider slider, #backlight-slider slider {
-    min-height: 0px;
-    min-width: 0px;
+#pulseaudio-slider slider,
+#backlight-slider slider {
     opacity: 0;
     background-image: none;
-    border: none;
-    box-shadow: none;
 }
 
-#pulseaudio-slider trough, #backlight-slider trough {
+#pulseaudio-slider trough,
+#backlight-slider trough {
     min-height: 5px;
     min-width: 60px;
     border-radius: 5px;
     background-color: @bg-hover;
 }
 
-#pulseaudio-slider highlight {
-    min-height: 5px;
-    border-radius: 5px;
-    background-color: @blue;
-}
-
+#pulseaudio-slider highlight,
 #backlight-slider highlight {
     min-height: 5px;
     border-radius: 5px;
-    background-color: @aqua;
-}
-
-#custom-power {
-    color: @red;
+    background-color: @white;
 }
 
 /* Tooltip Styling */
@@ -162,6 +135,6 @@ tooltip {
 }
 
 tooltip label {
-    color: @fg;
+    color: @white;
     padding: 6px;
 }

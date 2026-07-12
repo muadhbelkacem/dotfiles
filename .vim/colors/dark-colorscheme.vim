@@ -10,19 +10,19 @@ endif
 
 g:colors_name = "dark-colorscheme"
 
-var bg = "#101010"
+var bg = "#181818"
 var fg = "#e4e4ef"
-var yellow = "#ffdd33"
-var green = "#73c936"
+var yellow = "#FCF75E"
+var green = "#00FF80"
 var niagara = "#96a6c8"
 var quartz = "#95a99f"
 var brown = "#cc8c3c"
 var red = "#f43841"
-var bg_plus_1 = "#282828"
-var bg_plus_2 = "#383838"
-var bg_plus_3 = "#484848"
-var bg_plus_4 = "#585858"
-var bg_minus_1 = "#101010"
+var bg_plus_1 = "#292929"
+var bg_plus_2 = "#3a3a3a"
+var bg_plus_3 = "#4b4b4b"
+var bg_plus_4 = "#5c5c5c"
+var bg_minus_1 = "#111111"
 
 # Editor UI
 exec 'hi Normal guibg=' .. bg .. ' guifg=' .. fg
@@ -35,7 +35,7 @@ exec 'hi StatusLineNC guibg=' .. yellow .. ' guifg=' .. bg .. ' gui=NONE'
 exec 'hi Visual guibg=' .. fg .. ' guifg=' .. bg
 exec 'hi Search guibg=' .. yellow .. ' guifg=' .. bg
 exec 'hi IncSearch guibg=' .. yellow .. ' guifg=' .. bg
-exec 'hi MatchParen guibg=' .. "#52494e" .. ' guifg=' .. yellow .. ' gui=bold'
+exec 'hi MatchParen guibg=' .. bg .. ' guifg=' .. yellow .. ' gui=bold'
 exec 'hi Pmenu guibg=' .. bg_plus_1 .. ' guifg=' .. fg
 exec 'hi PmenuSel guibg=' .. yellow .. ' guifg=' .. bg
 exec 'hi PmenuSbar guibg=' .. bg_plus_1
