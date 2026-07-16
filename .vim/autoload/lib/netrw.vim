@@ -1,13 +1,13 @@
 vim9script
 
 var netrw_last_dir = getcwd()
-var netrw_winid = -1
 
 # --- TRACK DIRECTORY SAFELY ---
-augroup NetRWSidebarState
+augroup NetRWState
     autocmd!
 
     autocmd FileType netrw {
+        setlocal relativenumber
         netrw_last_dir = get(b:, 'netrw_curdir', getcwd())
     }
 
@@ -30,52 +30,41 @@ def FindNetrwWin(): number
 enddef
 
 
-# --- OPEN SIDEBAR ---
-def OpenSidebar(dir: string)
-    # Try reuse existing sidebar
-    var id = FindNetrwWin()
-
-    if id != -1
-        win_gotoid(id)
-    else
-        vertical botright split
-        var width = &columns * 30 / 100
-        execute 'vertical resize ' .. width
-    endif
-
-    if dir != '' && isdirectory(dir)
-        execute 'Explore ' .. dir
-    else
-        execute 'Explore ' .. getcwd()
-    endif
-
-    setlocal winfixwidth
-    setlocal nobuflisted
-enddef
-
-
-# --- CLOSE SIDEBAR ---
-def CloseSidebar()
-    var id = FindNetrwWin()
-
-    if id != -1
-        # Prevent E444: Cannot close last window
-        if winnr('$') > 1 || tabpagenr('$') > 1
-            win_execute(id, 'close')
-        endif
-        netrw_winid = -1
-    endif
-enddef
-
-
 # --- TOGGLE ---
 export def NetrwToggle()
     var id = FindNetrwWin()
 
+    # If netrw is already open
     if id != -1
-        CloseSidebar()
+        if win_getid() == id
+            # If we are currently in the netrw window, toggle it off
+            # Try to return to the specific buffer we came from
+            var prev = get(w:, 'netrw_prev_buf', -1)
+            if prev != -1 && buflisted(prev) && prev != bufnr('%')
+                execute 'buffer ' .. prev
+                # Clean up the variable after returning
+                if has_key(w:, 'netrw_prev_buf')
+                    remove(w:, 'netrw_prev_buf')
+                endif
+            else
+                try
+                    execute 'buffer #'
+                catch
+                    # If no previous buffer, just open a new empty one
+                    execute 'enew'
+                endtry
+            endif
+        else
+            # If netrw is open in another window, jump to it
+            win_gotoid(id)
+        endif
         return
     endif
 
-    OpenSidebar(netrw_last_dir)
+    # If netrw is not open, open it in the current window (fullscreen)
+    # Store current buffer to return to it later when toggling off
+    w:netrw_prev_buf = bufnr('%')
+
+    var dir = (netrw_last_dir != '' && isdirectory(netrw_last_dir)) ? netrw_last_dir : getcwd()
+    execute 'Explore ' .. dir
 enddef

@@ -1,5 +1,19 @@
+require("colors.dark-colorscheme").setup()
 vim.g.mapleader = vim.api.nvim_replace_termcodes("<C-Space>", true, true, true)
 vim.g.maplocalleader = vim.api.nvim_replace_termcodes("<C-Space>", true, true, true)
+
+-- Netrw
+vim.g.netrw_banner = 0
+
+-- Coc
+vim.g.coc_global_extensions = {
+  "coc-clangd",
+  "coc-tsserver",
+  "coc-eslint",
+  "coc-json",
+  "coc-prettier",
+  "coc-rust-analyzer",
+}
 
 local opt = vim.opt
 
@@ -21,21 +35,3 @@ opt.termguicolors = true
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
-
-require("colors.dark-colorscheme").setup()
-
--- Netrw
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 30
-vim.g.netrw_browse_split = 4
-vim.g.netrw_keepdir = 1
-
--- Coc
-vim.g.coc_global_extensions = {
-  "coc-clangd",
-  "coc-tsserver",
-  "coc-eslint",
-  "coc-json",
-  "coc-prettier",
-  "coc-rust-analyzer",
-}

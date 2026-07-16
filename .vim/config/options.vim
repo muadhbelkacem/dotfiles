@@ -1,5 +1,13 @@
 vim9script
 
+g:mapleader = "\<C-@>"
+
+# Netrw
+g:netrw_banner = 0
+
+# coc.nvim
+g:coc_global_extensions = ['coc-clangd', 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-rust-analyzer']
+
 set number
 set relativenumber
 set clipboard=unnamedplus
