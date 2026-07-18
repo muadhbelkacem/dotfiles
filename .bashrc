@@ -46,7 +46,7 @@ alias r='yay -Rns'
 alias ro='yay -Yc'
 
 # Git
-alias gts="git status"
+alias gts='f(){ if [ -z "$1" ]; then git status; else git show --name-only --oneline HEAD~"$1"; fi; }; f'
 alias gtl="git log --oneline"
 alias gtc="git add .; git commit -m "
 alias gtd="git diff"
