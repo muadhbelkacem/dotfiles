@@ -31,6 +31,11 @@ opt.cursorline = true
 opt.splitbelow = true
 opt.termguicolors = true
 
+-- coc.nvim compatibility
+opt.backup = false
+opt.writebackup = false
+opt.autoread = true
+
 -- Indentation
 opt.tabstop = 4
 opt.shiftwidth = 4

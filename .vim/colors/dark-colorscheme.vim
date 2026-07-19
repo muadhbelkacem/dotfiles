@@ -30,8 +30,8 @@ exec 'hi CursorLine guibg=' .. bg_plus_1
 exec 'hi CursorLineNr guifg=' .. yellow .. ' gui=bold'
 exec 'hi LineNr guibg=' .. bg .. ' guifg=' .. niagara
 exec 'hi VertSplit guifg=' .. bg .. ' guibg=NONE'
-exec 'hi StatusLine guibg=' .. yellow .. ' guifg=' .. bg .. ' gui=NONE'
-exec 'hi StatusLineNC guibg=' .. yellow .. ' guifg=' .. bg .. ' gui=NONE'
+exec 'hi StatusLine guibg=' .. bg .. ' guifg=' .. yellow .. ' gui=NONE'
+exec 'hi StatusLineNC guibg=' .. bg .. ' guifg=' .. yellow .. ' gui=NONE'
 exec 'hi Visual guibg=' .. fg .. ' guifg=' .. bg
 exec 'hi Search guibg=' .. yellow .. ' guifg=' .. bg
 exec 'hi IncSearch guibg=' .. yellow .. ' guifg=' .. bg

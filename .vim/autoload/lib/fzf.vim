@@ -49,10 +49,6 @@ export def Files()
     Run($'fzf {PREVIEW}')
 enddef
 
-export def GitFiles()
-    Run($'git ls-files | fzf {PREVIEW}')
-enddef
-
 export def Buffers()
     const bufs = getbufinfo({'buflisted': 1})
         ->mapnew((_, v) => v.name)

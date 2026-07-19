@@ -22,6 +22,11 @@ set cursorline
 set splitbelow
 set termguicolors
 
+# coc.nvim compatibility
+set nobackup
+set nowritebackup
+set autoread
+
 # indentation
 set tabstop=4
 set shiftwidth=4
