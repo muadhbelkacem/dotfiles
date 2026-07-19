@@ -30,6 +30,7 @@ opt.background = "dark"
 opt.cursorline = true
 opt.splitbelow = true
 opt.termguicolors = true
+opt.mouse = "a"
 
 -- coc.nvim compatibility
 opt.backup = false

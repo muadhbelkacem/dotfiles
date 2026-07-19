@@ -21,6 +21,7 @@ set background=dark
 set cursorline
 set splitbelow
 set termguicolors
+set mouse=a
 
 # coc.nvim compatibility
 set nobackup
