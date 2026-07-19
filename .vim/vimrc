@@ -9,5 +9,5 @@ source ~/.vim/config/options.vim
 # coc.nvim
 colorscheme dark-colorscheme
 
-# mappings
-source ~/.vim/config/mappings.vim
+# keymaps
+source ~/.vim/config/keymaps.vim
