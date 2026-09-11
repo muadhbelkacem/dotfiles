@@ -39,7 +39,8 @@ alias e='emacsclient -c -a "emacs" -nw'
 
 # Package Manager (yay)
 alias i='yay -S'
-alias u='yay -Syu'
+alias u='yay -Sy'
+alias ug='yay -Syu'
 alias s='yay -Ss'
 alias r='yay -Rns'
 alias ro='yay -Yc'
